@@ -1,9 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <BrowserRouter>
-      <p>수정~~</p>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+      </Routes>
     </BrowserRouter>
   );
 }
