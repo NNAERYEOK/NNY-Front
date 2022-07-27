@@ -1,11 +1,13 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import HomePage from "./pages/HomePage";
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route path="" element={<HomePage />} />
       </Routes>
     </BrowserRouter>
   );
