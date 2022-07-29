@@ -4,10 +4,7 @@ import train from "../image/train.svg";
 
 import back from "../image/back.svg";
 import TopBar from "../components/TopBar";
-
-import myseat from "../image/myseat.svg";
-import seated from "../image/seated.svg";
-import test from "../image/test.png";
+import Seat from "../components/Seat";
 
 const Background = createGlobalStyle`
   body {
@@ -64,40 +61,6 @@ const Train = styled.div`
   position: relative;
 `;
 
-const Seat = styled.div`
-  position: absolute;
-  left: 95px;
-  top: 54px;
-
-  color: green;
-`;
-
-const OtherSeat = styled.div`
-  background: url(${seated});
-
-  width: 19px;
-  height: 19px;
-`;
-const MySeat = styled.div`
-  position: absolute;
-  left: 95px;
-  top: 54px;
-  background: url(${myseat});
-
-  width: 25px;
-  height: 25px;
-`;
-
-const Test = styled.div`
-  position: absolute;
-  left: 95px;
-  top: 54px;
-  background: url(${test});
-
-  width: 19px;
-  height: 19px;
-`;
-
 const SeatPage = () => {
   return (
     <div>
@@ -111,9 +74,7 @@ const SeatPage = () => {
 
         <Num>2024</Num>
         <Train>
-          <Seat>8</Seat>
-          <OtherSeat>3</OtherSeat>
-          <MySeat>2</MySeat>
+          <Seat />
         </Train>
       </Wrapper>
     </div>
