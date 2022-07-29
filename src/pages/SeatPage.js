@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import train from "../image/train.svg";
 
 import back from "../image/back.svg";
 import TopBar from "../components/TopBar";
 import Seat from "../components/Seat";
+
+import Modal from "../components/Modal";
+
+import BottomModal from "../components/BottomModal";
+
+const SeatPage = () => {
+  const [isOpen, setIsOpen] = useState(true);
+  return (
+    <div>
+      <Background />
+
+      <TopBar />
+      {isOpen && <Modal onClick={() => setIsOpen(!isOpen)} />}
+
+      <Wrapper>
+        <BackIcon />
+        {isOpen || <Text>앉아있는 좌석을 선택해주세요</Text>}
+
+        <Num>2024</Num>
+        <Train>
+          <Seat />
+        </Train>
+      </Wrapper>
+
+      <BottomModal />
+    </div>
+  );
+};
 
 const Background = createGlobalStyle`
   body {
@@ -46,7 +74,7 @@ const Num = styled.div`
 
   color: rgba(79, 224, 182, 0.85);
 
-  margin: 52px auto 0 auto;
+  margin: 17px auto 0 auto;
   display: flex;
   justify-content: center;
 `;
@@ -56,29 +84,9 @@ const Train = styled.div`
   width: 375px;
   height: 758px;
 
-  margin: 21px auto 41px auto;
+  margin: 0 auto 41px auto;
 
   position: relative;
 `;
-
-const SeatPage = () => {
-  return (
-    <div>
-      <Background />
-
-      <TopBar />
-
-      <Wrapper>
-        <BackIcon />
-        <Text>앉아있는 좌석을 선택해주세요</Text>
-
-        <Num>2024</Num>
-        <Train>
-          <Seat />
-        </Train>
-      </Wrapper>
-    </div>
-  );
-};
 
 export default SeatPage;
