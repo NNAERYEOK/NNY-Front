@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 const BackBtn = () => {
   const navigate = useNavigate();
-  const goHomePage = () => {
-    navigate("/");
+  const handleGoBack = () => {
+    navigate(-1);
   };
   return (
-    <BackBtnBlock onClick={goHomePage}>
+    <BackBtnBlock onClick={handleGoBack}>
       <img src="./image/backbtn.svg"></img>
     </BackBtnBlock>
   );

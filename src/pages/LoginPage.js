@@ -29,6 +29,8 @@ const LoginPage = () => {
   );
 };
 
+export default LoginPage;
+
 const GlobalStyle = createGlobalStyle`
   body{
     background:#212226;
@@ -79,19 +81,17 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-size: 13px;
   }
-  .idInput{
+  .idInput:placeholder-shown{
     margin-top: 124px;
     margin-bottom:5%;
     background-image:url('./image/login.svg'); 
     background-repeat: no-repeat;
     background-position: right;
   }
-  .pwInput{
+  .pwInput:placeholder-shown{
     background-image:url('./image/pw.svg'); 
     margin-top: 33px;
     background-repeat: no-repeat;
     background-position: right;
   }
 `;
-
-export default LoginPage;
