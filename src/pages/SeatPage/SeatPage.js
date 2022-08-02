@@ -3,33 +3,47 @@ import styled, { createGlobalStyle } from "styled-components";
 import train from "../../image/train.svg";
 
 import back from "../../image/back.svg";
-import TopBar from "../../components/TopBar";
-import Seat from "../../components/Seat";
+import TopBar from "../../components/seatpage/TopBar";
+import Seat from "../../components/seatpage/Seat";
 
-import Modal from "../../components/Modal";
+import Modal from "../../components/seatpage/Modal";
 
-import BottomModal from "../../components/BottomModal";
+import BottomModal from "../../components/seatpage/BottomModal";
 
 import { seatinfo } from "./seatInfo";
+import { subway } from "./subway";
 
 const SeatPage = () => {
+  // 전체 좌석 정보
+  const [seats, setSeats] = useState(seatinfo);
   // 버튼 모달
   const [isOpen, setIsOpen] = useState(true);
   // 바텀 모달
   const [bottomModal, setBottomModal] = useState(false);
+  // 좌석 선택하기 버튼
+  const [share, setShare] = useState(false);
+
   // 선택된 좌석 id
   const [selectedId, setSelectedId] = useState(null);
-  // 전체 좌석 정보
-  const [seats, setSeats] = useState(seatinfo);
+  // 선택된 좌석의 내릴역 id
+  const [getOffStation, setGetOffStation] = useState(null);
 
-  const des = 10;
+  const des = 10; // 목적지
 
-  const handleModal = () => {
+  const Share = () => {
+    // 내릴역 공유하기
     setIsOpen(false);
+    setShare(true);
   };
 
+  const LookUp = () => {
+    // 조회하기
+    setIsOpen(false);
+    setShare(false);
+  };
+
+  // 빈자리 클릭하기
   const SelectSeat = id => {
-    console.log("좌석 선택", seats[id - 1]);
     setSeats(
       seats.map(seat =>
         id === seat.id ? { ...seat, mine: true } : { ...seat, mine: false },
@@ -37,46 +51,39 @@ const SeatPage = () => {
     );
 
     setSelectedId(id);
-
     setBottomModal(true);
   };
+
+  // 내 자리와 내릴역 post하는 api
+  const PostMySeat = () => {
+    console.log("내 자리: ", selectedId, "내릴 역", getOffStation);
+  };
+
   return (
     <div>
       <Background />
 
       <TopBar />
-      {isOpen && <Modal onClick={() => handleModal()} />}
+      {isOpen && <Modal LookUp={() => LookUp()} Share={() => Share()} />}
 
       <Wrapper>
         <BackIcon />
-        {isOpen || <Text>앉아있는 좌석을 선택해주세요</Text>}
+        {share && <Text>앉아있는 좌석을 선택해주세요</Text>}
 
         <Num>2024</Num>
         <Train>
           {seats.map(seat => {
             if (seat.mine) {
               // 내 자리
-              console.log("내자리");
+
               return (
-                <Seat
-                  onClick={() => SelectSeat(seat.id)}
-                  key={seat.id}
-                  left={seat.left}
-                  top={seat.top}
-                  myseat
-                />
+                <Seat key={seat.id} left={seat.left} top={seat.top} myseat />
               );
             } else {
               if (seat.seated) {
                 // 누가 앉음
                 return (
-                  <Seat
-                    onClick={() => SelectSeat(seat.id)}
-                    key={seat.id}
-                    left={seat.left}
-                    top={seat.top}
-                    seated
-                  >
+                  <Seat key={seat.id} left={seat.left} top={seat.top} seated>
                     {des - seat.station}
                   </Seat>
                 );
@@ -94,7 +101,12 @@ const SeatPage = () => {
         </Train>
       </Wrapper>
 
-      <BottomModal isOpen={bottomModal} setBottomModal={setBottomModal} />
+      <BottomModal
+        isOpen={bottomModal}
+        setBottomModal={setBottomModal}
+        setGetOffStation={setGetOffStation}
+        PostMySeat={PostMySeat}
+      />
     </div>
   );
 };
