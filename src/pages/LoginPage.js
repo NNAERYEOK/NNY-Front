@@ -41,6 +41,15 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-size: 20px;
   }
+  .formField{
+    background: #FFFFFF;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 11px;
+    width:78%;
+    margin: 0 auto;
+    padding: 6%;
+    height: 610px;
+  }
   .btn{
     margin: 10px auto;
     width:75%;
@@ -61,15 +70,7 @@ const GlobalStyle = createGlobalStyle`
   .find{
     float:right;
   }
-  .formField{
-    background: #FFFFFF;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 11px;
-    width:78%;
-    margin: 0 auto;
-    padding: 6%;
-    height: 610px;
-  }
+  
   input{
     display: block;
     margin: 0 auto;
