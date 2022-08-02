@@ -3,8 +3,11 @@ import React, { useEffect, useState } from "react";
 
 import TopBar from "../components/TopBar";
 import BackBtn from "../components/BackBtn";
+import RealtimeModal from "../components/RealtimeModal";
 
 const Line2Page = () => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [realtimeModal, setRealtimeModal] = useState(true);
   const [stations, setStations] = useState([
     { id: 1, name: "시청" },
     { id: 2, name: "충정로" },
@@ -91,13 +94,17 @@ const Line2Page = () => {
             ))}
           </List3>
           <List4>
-            {stationList3.map(station => (
+            {stationList4.map(station => (
               <div>{station.name}</div>
             ))}
           </List4>
         </StationName>
         <SubImg src="./image/sub2.svg" />
       </Wrapper>
+      <RealtimeModal
+        isOpen={realtimeModal}
+        setRealtimeModal={setRealtimeModal}
+      />
     </>
   );
 };
