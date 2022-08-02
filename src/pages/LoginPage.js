@@ -77,9 +77,10 @@ const GlobalStyle = createGlobalStyle`
     border-bottom: 1px solid #4FE0B6;
     width:75%;
     max-width: 300px;
-    height:50px;
+    height:30px;
     font-weight: 400;
     font-size: 13px;
+    text-indent: 10px;;
   }
   .idInput{
     margin-top: 124px;

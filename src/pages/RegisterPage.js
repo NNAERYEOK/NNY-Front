@@ -72,7 +72,8 @@ const GlobalStyle = createGlobalStyle`
     width:100%;
     height:30px;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 10px;
+    text-indent: 5px;;
   }
   #idInput:placeholder-shown{
     background-image:url('./image/login.svg'); 
