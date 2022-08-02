@@ -25,7 +25,6 @@ const RegisterPage = () => {
           <p>본인인증</p>
           <button>인증하기</button>
         </div>
-
         <Button>가입하기</Button>
       </div>
     </>
