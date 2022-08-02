@@ -75,18 +75,18 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-size: 13px;
   }
-  #idInput{
+  #idInput:placeholder-shown{
     background-image:url('./image/login.svg'); 
     background-repeat: no-repeat;
     background-position: right;
   }
-  #pwInput{
+  #pwInput:placeholder-shown{
     background-image:url('./image/pw.svg'); 
     background-repeat: no-repeat;
     background-position: right;
   }
-  #RepwInput{
-    background:red; 
+  #RepwInput:placeholder-shown{
+    background-image:url('./image/repw.svg');
     background-repeat: no-repeat;
     background-position: right;
 
