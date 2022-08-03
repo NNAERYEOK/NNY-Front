@@ -111,8 +111,10 @@ const StationInfo = styled.div`
   margin-top: 40px;
   margin: 0 auto;
   img {
+    display: inline;
+    margin-left: 3px;
     cursor: pointer;
-    margin-top: 7px;
+    margin-top: 5px;
   }
 `;
 const Left = styled.div`
@@ -143,7 +145,7 @@ const Right = styled.div`
     font-size: 10px;
     color: #ffffff;
     margin-left: 50px;
-    background-color: red;
+    margin-right: 10px;
   }
 `;
 const Center = styled.div`
