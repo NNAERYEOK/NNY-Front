@@ -3,10 +3,6 @@ import styled from "styled-components";
 import X from "../image/X.svg";
 
 const RealtimeModal = ({ isOpen, setRealtimeModal }) => {
-  const SelectSeat = async () => {
-    setRealtimeModal(false); // 모달 닫기
-  };
-
   return (
     <div>
       <Modal>
@@ -18,11 +14,15 @@ const RealtimeModal = ({ isOpen, setRealtimeModal }) => {
             </Menu>
             <StationInfo>
               <Left>
-                <img src="./image/leftBtn.svg"></img>
+                <img src="./image/leftBtn.svg" />
+                <p>아현</p>
               </Left>
-              <Center></Center>
+              <Center>
+                <p>이대</p>
+              </Center>
               <Right>
-                <img src="./image/rightBtn.svg"></img>
+                <p>신촌</p>
+                <img src="./image/rightBtn.svg" />
               </Right>
             </StationInfo>
             <Time>
@@ -71,7 +71,7 @@ const Modal = styled.div`
     flex-direction: column;
   }
   .container.modal-open .modal {
-    top: 500px;
+    top: 550px;
   }
   p {
     color: #3f3f3f;
@@ -109,23 +109,40 @@ const Refresh = styled.div`
 const StationInfo = styled.div`
   display: flex;
   margin-top: 40px;
+  margin: 0 auto;
+  img {
+    cursor: pointer;
+    margin-top: 7px;
+  }
 `;
 const Left = styled.div`
-  width: 168px;
+  width: 100px;
   height: 26px;
   background: rgba(51, 162, 61, 0.77);
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 7px 0 0 7px;
-  margin-top: 10px;
+  margin-top: 13px;
+  p {
+    display: inline;
+    font-weight: 700;
+    font-size: 10px;
+    color: #ffffff;
+    margin-top: 5px;
+  }
 `;
 const Right = styled.div`
-  width: 168px;
+  width: 100px;
   height: 26px;
   background: rgba(51, 162, 61, 0.77);
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0 7px 7px 0;
-  margin-top: 10px;
-  img {
+  margin-top: 13px;
+  p {
+    display: inline;
+    font-weight: 700;
+    font-size: 10px;
+    color: #ffffff;
+    margin-left: 50px;
     background-color: red;
   }
 `;
@@ -136,20 +153,32 @@ const Center = styled.div`
   border: 3px solid #33a23d;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 17px;
+  p {
+    font-weight: 700;
+    font-size: 13px;
+    text-align: center;
+    margin: 13px auto;
+  }
 `;
 const Time = styled.div`
   display: flex;
-  margin-top: 25px;
+  margin: 25px auto;
 `;
 const LeftTime = styled.div`
   width: 140px;
   height: 26px;
   margin-right: 28px;
+  img {
+    cursor: pointer;
+  }
 `;
 const RightTime = styled.div`
   width: 148px;
   height: 26px;
   margin-left: 28px;
+  img {
+    cursor: pointer;
+  }
 `;
 const CenterTime = styled.div`
   width: 2px;

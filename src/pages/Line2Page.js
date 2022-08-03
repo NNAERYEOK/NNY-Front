@@ -6,8 +6,7 @@ import BackBtn from "../components/BackBtn";
 import RealtimeModal from "../components/RealtimeModal";
 
 const Line2Page = () => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [realtimeModal, setRealtimeModal] = useState(true);
+  const [realtimeModal, setRealtimeModal] = useState(false);
   const [stations, setStations] = useState([
     { id: 1, name: "시청" },
     { id: 2, name: "충정로" },
@@ -71,6 +70,7 @@ const Line2Page = () => {
     station => station.id >= 54 && station.id < 59,
   );
   let stationList4 = stations.filter(station => station.id >= 59);
+
   return (
     <>
       <Background />
@@ -80,22 +80,22 @@ const Line2Page = () => {
         <StationName>
           <List1>
             {stationList.map(station => (
-              <div>{station.name}</div>
+              <div onClick={() => setRealtimeModal(true)}>{station.name}</div>
             ))}
           </List1>
           <List2>
             {stationList2.map(station => (
-              <div>{station.name}</div>
+              <div onClick={() => setRealtimeModal(true)}>{station.name}</div>
             ))}
           </List2>
           <List3>
             {stationList3.map(station => (
-              <div>{station.name}</div>
+              <div onClick={() => setRealtimeModal(true)}>{station.name}</div>
             ))}
           </List3>
           <List4>
             {stationList4.map(station => (
-              <div>{station.name}</div>
+              <div onClick={() => setRealtimeModal(true)}>{station.name}</div>
             ))}
           </List4>
         </StationName>
@@ -138,6 +138,7 @@ const List1 = styled.div`
     height: 27px;
     padding-top: 6px;
   }
+  cursor: pointer;
 `;
 const List2 = styled.div`
   display: inline-block;
@@ -147,6 +148,7 @@ const List2 = styled.div`
     height: 27px;
     padding-top: 6px;
   }
+  cursor: pointer;
 `;
 const List3 = styled.div`
   display: inline-block;
@@ -156,6 +158,7 @@ const List3 = styled.div`
     height: 27px;
     padding-top: 6px;
   }
+  cursor: pointer;
 `;
 const List4 = styled.div`
   margin-top: 157px;
@@ -164,4 +167,5 @@ const List4 = styled.div`
     height: 27px;
     padding-top: 6px;
   }
+  cursor: pointer;
 `;
