@@ -99,7 +99,16 @@ const Line2Page = () => {
             ))}
           </List4>
         </StationName>
+        <UpSub>
+          <img src="./image/upsub.svg" />
+          <img src="./image/upsub.svg" />
+        </UpSub>
+
         <SubImg src="./image/sub2.svg" />
+        <DownSub>
+          <img src="./image/downsub.svg" />
+          <img src="./image/downsub.svg" />
+        </DownSub>
       </Wrapper>
       <RealtimeModal
         isOpen={realtimeModal}
@@ -123,13 +132,28 @@ const Wrapper = styled.div`
   display: flex;
 `;
 const SubImg = styled.img`
-  margin-left: 100px;
+  margin-left: 30px;
 `;
 const Background = createGlobalStyle`
   body {
   background-color: var( --background-black);
   }
 `;
+const UpSub = styled.div`
+  margin-left: 40px;
+  img {
+    display: block;
+  }
+  cursor: pointer;
+`;
+const DownSub = styled.div`
+  margin-left: 30px;
+  img {
+    display: block;
+  }
+  cursor: pointer;
+`;
+
 const List1 = styled.div`
   display: inline-block;
   margin-bottom: 22px;
@@ -161,7 +185,7 @@ const List3 = styled.div`
   cursor: pointer;
 `;
 const List4 = styled.div`
-  margin-top: 157px;
+  margin-top: 160px;
   div {
     margin-bottom: 58px;
     height: 27px;
