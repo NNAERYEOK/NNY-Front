@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import whiteeye from "../image/whiteeye.svg";
+import whiteeye from "../../image/whiteeye.svg";
 
-const Modal = ({ onClick }) => {
+const Modal = ({ LookUp, Share }) => {
   useEffect(() => {
     document.body.style.cssText = `
           position: fixed;
@@ -18,7 +18,7 @@ const Modal = ({ onClick }) => {
 
   return (
     <ModalBackground>
-      <CustomModal onClick={onClick}>
+      <CustomModal onClick={Share}>
         <p className="text">내리는 역 공유하기</p>
         <div
           style={{
@@ -31,7 +31,7 @@ const Modal = ({ onClick }) => {
           <Eye />
         </div>
       </CustomModal>
-      <CustomModal onClick={onClick}>
+      <CustomModal onClick={LookUp}>
         <p className="text">좌석 현황 조회하기</p>
         <div
           style={{
