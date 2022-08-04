@@ -7,6 +7,8 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import LinePage from "./pages/LinePage";
+import ChargingPage from "./pages/ChargingPage";
+import PayingPage from "./pages/PayingPage";
 
 import "./style/common.scss";
 
@@ -19,6 +21,8 @@ function App() {
         <Route exact path="/register" element={<RegisterPage />} />
         <Route exact path="/line" element={<LinePage />} />
         <Route exact path="/seat" element={<SeatPage />} />
+        <Route exact path="/charging" element={<ChargingPage />} />
+        <Route exact path="/paying" element={<PayingPage />} />
       </Routes>
     </BrowserRouter>
   );
