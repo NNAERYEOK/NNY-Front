@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import X from "../image/X.svg";
-import whiteeye from "../image/whiteeye.svg";
+import X from "../../image/X.svg";
+import whiteeye from "../../image/whiteeye.svg";
+import SelectBox from "./SelectBox";
 
-const BottomModal = ({ isOpen, setBottomModal }) => {
+const BottomModal = ({
+  isOpen,
+  setBottomModal,
+  setGetOffStation,
+  PostMySeat,
+}) => {
+  const [isSelected, setIsSelected] = useState(false); // 내릴역 선택 여부
+
   const SelectSeat = async () => {
-    console.log("좌석 선택 완료"); // 내 좌석 선택 post api
     setBottomModal(false); // 모달 닫기
+    isSelected && PostMySeat(); // 내릴역 선택 해야 api 실행
   };
 
   return (
@@ -18,20 +26,10 @@ const BottomModal = ({ isOpen, setBottomModal }) => {
             <BigText>선택한 좌석에 앉아 있습니다.</BigText>
             <SmallText>하차할 역을 선택해 주세요.</SmallText>
 
-            <Station name="station">
-              <option value="ㄹ" disabled selected>
-                역 선택
-              </option>
-              <option value="신촌">신촌</option>
-              <option value="이대">이대</option>
-              <option value="아현">아현</option>
-              <option value="dd">신촌</option>
-              <option value="22">이대</option>
-              <option value="dd">아현</option>
-              <option value="4">신촌</option>
-              <option value="df">이대</option>
-              <option value="d">아현</option>
-            </Station>
+            <SelectBox
+              setGetOffStation={setGetOffStation}
+              setIsSelected={setIsSelected}
+            />
 
             <Button onClick={() => SelectSeat()}>
               <p className="text">자리 선택 완료 +1 </p>
@@ -72,21 +70,13 @@ const Button = styled.button`
     font-style: normal;
     font-weight: 800;
     font-size: 12px;
-    line-height: 14px;
+    line-height: 13px;
     display: flex;
     align-items: center;
     text-align: center;
 
     color: #ffffff;
   }
-`;
-
-const Station = styled.select`
-  margin: 20px auto 0 auto;
-  width: 219px;
-  height: 18px;
-  border: 0.3px solid #aeaeae;
-  border-radius: 2px;
 `;
 
 const Modal = styled.div`
