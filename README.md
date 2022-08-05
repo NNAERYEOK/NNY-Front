@@ -1,8 +1,8 @@
-## 🎉 2022 이화여대 대동제 사이트
+## 🚇 너낼역 
 
 - 미정
 
-## 🎉 프론트엔드 팀원 소개
+## 🚇 프론트엔드 팀원 소개
 
 <table border="" cellspacing="0" cellpadding="0" width="100%">
     <tr width="100%">
@@ -26,7 +26,7 @@
    </tr>
 </table>
 
-## 🎉 기술 스택
+## 🚇 기술 스택
 
 - Frontend : <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white">
 - Package Manager : <img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white">
@@ -35,11 +35,11 @@
 
 </br>
 
-## 🎉 라이브러리
+## 🚇 라이브러리
 
 - 미정
 
-## 🎉 프로젝트 구조
+## 🚇 프로젝트 구조
 
 ### 설명
 
