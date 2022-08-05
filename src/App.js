@@ -1,11 +1,17 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import SeatPage from "./pages/SeatPage/SeatPage";
+
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+
 import SelectLinePage from "./pages/SelectLinePage";
-import Line2Page from "./pages/Line2Page";
 import SeatPage from "./pages/SeatPage";
+import LinePage from "./pages/LinePage";
+
+
 import "./style/common.scss";
 
 function App() {
