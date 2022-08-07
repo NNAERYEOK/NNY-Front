@@ -3,15 +3,14 @@ import styled, { createGlobalStyle } from "styled-components";
 import train from "../../image/train.svg";
 
 import back from "../../image/back.svg";
-import TopBar from "../../components/seatpage/TopBar";
+import TopBar from "../../components/TopBar";
 import Seat from "../../components/seatpage/Seat";
-
 import Modal from "../../components/seatpage/Modal";
-
 import BottomModal from "../../components/seatpage/BottomModal";
 
-import { seatinfo } from "./seatInfo";
-import { subway } from "./subway";
+import { seatinfo } from "../../data/seatInfo";
+import { subway } from "../../data/subway";
+import BackBtn from "../../components/BackBtn";
 
 const SeatPage = () => {
   // 전체 좌석 정보
@@ -23,21 +22,27 @@ const SeatPage = () => {
   // 좌석 선택하기 버튼
   const [share, setShare] = useState(false);
 
-  // 선택된 좌석 id
+  // 선택된 좌석의 id
   const [selectedId, setSelectedId] = useState(null);
   // 선택된 좌석의 내릴역 id
   const [getOffStation, setGetOffStation] = useState(null);
 
   const des = 10; // 목적지
 
+  // ** 좌석 정보 get api**
+
+  // ** 좌석 정보 patch api **
+
+  // ** 유저 eye 정보 get api**
+
+  // 내릴역 공유하기
   const Share = () => {
-    // 내릴역 공유하기
     setIsOpen(false);
     setShare(true);
   };
 
+  // 조회하기
   const LookUp = () => {
-    // 조회하기
     setIsOpen(false);
     setShare(false);
   };
@@ -49,7 +54,6 @@ const SeatPage = () => {
         id === seat.id ? { ...seat, mine: true } : { ...seat, mine: false },
       ),
     );
-
     setSelectedId(id);
     setBottomModal(true);
   };
@@ -67,36 +71,54 @@ const SeatPage = () => {
       {isOpen && <Modal LookUp={() => LookUp()} Share={() => Share()} />}
 
       <Wrapper>
-        <BackIcon />
+        <BackBtn />
         {share && <Text>앉아있는 좌석을 선택해주세요</Text>}
 
         <Num>2024</Num>
         <Train>
           {seats.map(seat => {
-            if (seat.mine) {
-              // 내 자리
-
+            if (share) {
+              // 내 자리 공유 할 떄
+              if (seat.mine) {
+                return (
+                  <Seat key={seat.id} left={seat.left} top={seat.top} myseat />
+                );
+              } else {
+                if (seat.seated) {
+                  // 누가 앉음
+                  return (
+                    <Seat key={seat.id} left={seat.left} top={seat.top} seated>
+                      {des - seat.station}
+                    </Seat>
+                  );
+                }
+              }
               return (
-                <Seat key={seat.id} left={seat.left} top={seat.top} myseat />
+                <Seat
+                  onClick={() => SelectSeat(seat.id)}
+                  key={seat.id}
+                  left={seat.left}
+                  top={seat.top}
+                />
               );
             } else {
-              if (seat.seated) {
-                // 누가 앉음
+              //조회만 할 때
+              if (seat.mine) {
                 return (
-                  <Seat key={seat.id} left={seat.left} top={seat.top} seated>
-                    {des - seat.station}
-                  </Seat>
+                  <Seat key={seat.id} left={seat.left} top={seat.top} myseat />
                 );
+              } else {
+                if (seat.seated) {
+                  // 누가 앉음
+                  return (
+                    <Seat key={seat.id} left={seat.left} top={seat.top} seated>
+                      {des - seat.station}
+                    </Seat>
+                  );
+                }
               }
+              return <Seat key={seat.id} left={seat.left} top={seat.top} />;
             }
-            return (
-              <Seat
-                onClick={() => SelectSeat(seat.id)}
-                key={seat.id}
-                left={seat.left}
-                top={seat.top}
-              />
-            );
           })}
         </Train>
       </Wrapper>
