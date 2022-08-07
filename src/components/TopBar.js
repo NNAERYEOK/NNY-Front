@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import warning from "../../image/warning.svg";
-import eye from "../../image/eye.svg";
-import menu from "../../image/menu.svg";
+import warning from "../image/warning.svg";
+import eye from "../image/eye.svg";
+import menu from "../image/menu.svg";
 
 const TopBar = () => {
   return (

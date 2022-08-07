@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Button from "../components/Button";
-import BackBtn from "../components/BackBtn";
+import Button from "../../components/Button";
+import BackBtn from "../../components/BackBtn";
 const RegisterPage = () => {
   return (
     <>
