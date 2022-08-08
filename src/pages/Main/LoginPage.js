@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button";
-import BackBtn from "../components/BackBtn";
+import Button from "../../components/Button";
+import BackBtn from "../../components/BackBtn";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -35,44 +35,6 @@ const Background = createGlobalStyle`
   body {
   background-color: var( --background-black);
   }
-<<<<<<< Updated upstream:src/pages/LoginPage.js
-  h3{
-    color:white;
-    margin-left:8%;
-    font-weight: 400;
-    font-size: 20px;
-  }
-  .btn{
-    margin: 10px auto;
-    width:75%;
-    max-width: 300px;
-    background-color: red;
-  }
-  p{
-    display: inline-block;
-    color:rgba(33, 34, 38, 0.7);
-    font-family: 'NanumSquareOTF';
-    cursor: pointer;
-    font-weight: 400;
-    font-size: 8px;
-  }
-  .member{
-  float:left;
-  }
-  .find{
-    float:right;
-  }
-  .formField{
-    background: #FFFFFF;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 11px;
-    width:78%;
-    margin: 0 auto;
-    padding: 6%;
-    height: 610px;
-  }
-  input{
-=======
 `;
 const Title = styled.p`
   color: white;
@@ -89,7 +51,6 @@ const FormField = styled.div`
   padding: 6%;
   height: 610px;
   input {
->>>>>>> Stashed changes:src/pages/Main/LoginPage.js
     display: block;
     margin: 0 auto;
     border: none;
