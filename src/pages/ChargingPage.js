@@ -1,16 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-import App from "../App";
-import Paying from "./PayingPage";
 import BackBtn from "../components/BackBtn";
 import EyeIcon from "../image/eyeicon.svg";
 
-// const PriceBtnClick = () => {
-//   document.location.href("/paying");
-// };
-
-const Charging = () => {
+export const Charging = () => {
   return (
     <>
       <GlobalStyle />
@@ -73,11 +67,10 @@ const Charging = () => {
 
 export const Title = styled.div`
   font-family: "NanumSquare";
-  font-size: 16pt;
+  font-size: 24px;
   font-weight: 800;
   margin-top: 20px;
   margin-left: 60px;
-  margin-bottom: 100px;
 `;
 
 const Catalogue = styled.div`
@@ -89,13 +82,16 @@ const Catalogue = styled.div`
 `;
 
 const PriceBtn = styled.button`
-  padding: 5px 10px;
+  width: 65px;
+  height: 23px;
+  padding: 2px 10px;
   margin-right: 4px;
+  margin-top: 8px;
   border: none;
   border-radius: 10px;
   background-color: #4fe0b6;
   opacity: 74%;
-  font-size: 12pt;
+  font-size: 12px;
   font-weight: 800;
 `;
 
@@ -105,7 +101,7 @@ const GlobalStyle = createGlobalStyle`
   height: 38px;
   background-color: #EFEFEF;
   border-radius: 6px;
-  margin: 80px auto 40px;
+  margin: 100px auto 40px;
   padding-left: 4px;
   box-sizing: border-box;
 }
@@ -132,19 +128,19 @@ span{
 
 .eyeIcon{
   display: inline;
-  margin: 4px 0 8px 4px;
+  margin: 8px 0 8px 4px;
 }
 
 .havingEye{
-  margin: 10px 8px 8px 8px;
-  font-size: 12pt;
+  margin: 12px 8px 8px 8px;
+  font-size: 14px;
   white-space: nowrap;
   margin-left: 10px;
 }
 
 .countEye{
-  margin: 10px 15px;
-  font-size: 12pt;
+  margin: 12px 15px;
+  font-size: 14px;
   font-weight: 700;
   color: #4FE0B6;
   white-space: nowrap;
@@ -153,8 +149,8 @@ span{
 
 .explainEye{
   display: block;
-  margin: 13px;
-  font-size: 8pt;
+  margin: 14px;
+  font-size: 8px;
   text-decoration: none;
   font-weight: 100;
   color: #000000;
@@ -163,9 +159,9 @@ span{
 
 .eyeList{
   font-family: 'NanumSquare';
-  font-size: 10pt;
+  font-size: 10px;
   font-weight: 800;
-  margin: 8px;
+  margin: 15px 0;
   margin-left: 20px;
 
 }
