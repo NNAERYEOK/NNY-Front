@@ -2,6 +2,8 @@ import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+import Logo from "../../image/logo.svg";
+
 const HomePage = () => {
   const navigate = useNavigate();
   const goLoginPage = () => {
@@ -12,8 +14,8 @@ const HomePage = () => {
   };
   return (
     <>
-      <GlobalStyle />
-      <img src="./image/logo.svg" />
+      <Background />
+      <LogoIcon src={Logo} />
       <button className="loginbtn" onClick={goLoginPage}>
         로그인
       </button>
@@ -25,14 +27,14 @@ const HomePage = () => {
 };
 export default HomePage;
 
-const GlobalStyle = createGlobalStyle`
-  body{
-    background:#212226;
-  }
-  img{
-    display: block;
-    margin:200px auto 100px;
-    
+const LogoIcon = styled.img`
+  display: block;
+  margin: 200px auto 80px;
+`;
+
+const Background = createGlobalStyle`
+  body {
+  background-color: var( --background-black);
   }
   button{
     display: block;
@@ -46,7 +48,6 @@ const GlobalStyle = createGlobalStyle`
     background: rgba(6, 6, 6, 0.34);
     border-radius: 16px;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-    //&:active,&:hover{color:#4FE0B6;}
   }
   .loginbtn{
     color:#4FE0B6;
