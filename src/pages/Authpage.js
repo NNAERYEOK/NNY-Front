@@ -32,9 +32,7 @@ const Authpage = () => {
         이름과 이메일 : {nickname}, {email}
       </h3>
       <button onClick={() => setUserInfo()}>변경</button>
-      <button onClick={async () => setTimeout(() => purge(), 1000)}>
-        로그아웃
-      </button>
+      <button onClick={async () => purge()}>로그아웃</button>
     </div>
   );
 };
