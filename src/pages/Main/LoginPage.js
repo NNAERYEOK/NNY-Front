@@ -1,8 +1,12 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
+
 import Button from "../../components/Button";
 import BackBtn from "../../components/BackBtn";
+
+import loginImage from "../../image/login.svg";
+import pwImage from "../../image/pw.svg";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -18,19 +22,18 @@ const LoginPage = () => {
         <input className="idInput" placeholder="아이디" type="login" />
         <input className="pwInput" placeholder="비밀번호" type="password" />
         <Button>로그인</Button>
-        <NavBtn>
+        <NavDiv>
           <p className="member" onClick={goRegister}>
             회원가입
           </p>
           <p className="find">비밀번호/아이디 찾기</p>
-        </NavBtn>
+        </NavDiv>
       </FormField>
     </>
   );
 };
 
 export default LoginPage;
-
 const Background = createGlobalStyle`
   body {
   background-color: var( --background-black);
@@ -42,6 +45,27 @@ const Title = styled.p`
   font-weight: 400;
   font-size: 20px;
 `;
+const NavDiv = styled.div`
+  margin: 10px auto;
+  width: 75%;
+  max-width: 300px;
+  background-color: red;
+  p {
+    display: inline-block;
+    color: rgba(33, 34, 38, 0.7);
+    font-family: "NanumSquareOTF";
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 8px;
+  }
+  .member {
+    float: left;
+  }
+  .find {
+    float: right;
+  }
+`;
+
 const FormField = styled.div`
   background: #ffffff;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -69,7 +93,7 @@ const FormField = styled.div`
   .idInput:placeholder-shown {
     margin-top: 124px;
     margin-bottom: 5%;
-    background-image: url("./image/login.svg");
+    background-image: url(${loginImage});
     background-repeat: no-repeat;
     background-position: right;
   }
@@ -77,28 +101,9 @@ const FormField = styled.div`
     margin-top: 33px;
   }
   .pwInput:placeholder-shown {
-    background-image: url("./image/pw.svg");
+    background-image: url(${pwImage});
     margin-top: 33px;
     background-repeat: no-repeat;
     background-position: right;
-  }
-`;
-const NavBtn = styled.div`
-  margin: 10px auto;
-  width: 75%;
-  max-width: 300px;
-  .member {
-    float: left;
-  }
-  .find {
-    float: right;
-  }
-  p {
-    display: inline-block;
-    color: rgba(33, 34, 38, 0.7);
-    font-family: "NanumSquareOTF";
-    cursor: pointer;
-    font-weight: 400;
-    font-size: 8px;
   }
 `;

@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Button from "../../components/Button";
 import BackBtn from "../../components/BackBtn";
+
+import loginImage from "../../image/login.svg";
+import pwImage from "../../image/pw.svg";
+import pwCImage from "../../image/repw.svg";
+
 const RegisterPage = () => {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const onNameHandler = event => {
+    setName(event.currentTarget.value);
+  };
+  const onPasswordHandler = event => {
+    setPassword(event.currentTarget.value);
+  };
+
+  const onConfirmPasswordHandler = event => {
+    setConfirmPassword(event.currentTarget.value);
+  };
+
+  const onSubmit = event => {
+    event.preventDefault();
+    if (password !== confirmPassword) {
+      return alert("비밀번호와 비밀번호확인은 같아야 합니다.");
+    }
+  };
   return (
     <>
       <Background />
@@ -25,7 +51,7 @@ const RegisterPage = () => {
           <Label>본인인증</Label>
           <button id="self">인증하기</button>
         </div>
-        <Button>가입하기</Button>
+        <Button onClick={onSubmit}>가입하기</Button>
       </FormField>
     </>
   );
@@ -76,17 +102,17 @@ const FormField = styled.div`
     text-indent: 5px;
   }
   #idInput:placeholder-shown {
-    background-image: url("./image/login.svg");
+    background-image: url(${loginImage});
     background-repeat: no-repeat;
     background-position: right;
   }
   #pwInput:placeholder-shown {
-    background-image: url("./image/pw.svg");
+    background-image: url(${pwImage});
     background-repeat: no-repeat;
     background-position: right;
   }
   #RepwInput:placeholder-shown {
-    background-image: url("./image/repw.svg");
+    background-image: url(${pwCImage});
     background-repeat: no-repeat;
     background-position: right;
   }
