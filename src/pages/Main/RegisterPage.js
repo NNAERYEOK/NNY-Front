@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Button from "../components/Button";
-import BackBtn from "../components/BackBtn";
+import Button from "../../components/Button";
+import BackBtn from "../../components/BackBtn";
 const RegisterPage = () => {
   return (
     <>
@@ -36,7 +36,12 @@ const GlobalStyle = createGlobalStyle`
   body{
     background:#212226;
   }
-
+  h3{
+    color:white;
+    margin-left:8%;
+    font-weight: 400;
+    font-size: 20px;
+  }
   .formField{
     background: #FFFFFF;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -52,12 +57,7 @@ const GlobalStyle = createGlobalStyle`
     margin:auto;
     margin-bottom: 50px;
   }
-  h3{
-    color:white;
-    margin-left:8%;
-    font-weight: 400;
-    font-size: 20px;
-  }
+  
   p{
     font-weight: 400;
     font-size: 11px;
@@ -89,7 +89,6 @@ const GlobalStyle = createGlobalStyle`
     background-image:url('./image/repw.svg');
     background-repeat: no-repeat;
     background-position: right;
-
   }
   button{
     width: 82px;

@@ -15,11 +15,12 @@ const BackBtn = () => {
 };
 
 const BackBtnBlock = styled.button`
+  display: block;
   background: none;
   border: none;
   cursor: pointer;
-  margin-left: 3%;
-  margin-top: 50px;
+  margin-left: 23px;
+  margin-top: 25px;
 `;
 
 export default BackBtn;
