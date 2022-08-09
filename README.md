@@ -2,6 +2,13 @@
 
 - 미정
 
+## 🚇 개발 일정
+
+- 기획 : 2022 ~
+- 개발 : 2022 ~
+- 배포 : 2022 ~
+- 유지보수 : 2022 ~
+
 ## 🚇 프론트엔드 팀원 소개
 
 <table border="" cellspacing="0" cellpadding="0" width="100%">
@@ -24,9 +31,11 @@
    </tr>
 </table>
 
+
+
 ## 🚇 기술 스택
 
-- Frontend : <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white">
+- Frontend : <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/styled_components-DB7093?style=flat-square&logo=styled-components&logoColor=white">  
 - Package Manager : <img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white">
 - Code Formmater : <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=React&logoColor=white">
 - Depoly : <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=Vercel&logoColor=white">
