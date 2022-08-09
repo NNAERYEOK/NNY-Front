@@ -12,11 +12,13 @@ import SelectLinePage from "./pages/SelectLinePage";
 import Line2Page from "./pages/Line2Page";
 
 import "./style/common.scss";
+import Authpage from "./pages/Authpage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route exact path="/test" element={<Authpage />} />
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/login" element={<LoginPage />} />
         <Route exact path="/register" element={<RegisterPage />} />
