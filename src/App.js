@@ -8,8 +8,9 @@ import LoginPage from "./pages/Main/LoginPage";
 import RegisterPage from "./pages/Main/RegisterPage";
 import ChargingPage from "./pages/ChargingPage";
 import PayingPage from "./pages/PayingPage";
-import EyeHistory from "./pages/EyeHistoryPage/EyeHistoryPage";
+import EyeHistoryPage from "./pages/EyeHistoryPage/EyeHistoryPage";
 import SelectLinePage from "./pages/SelectLinePage";
+import SelectCarPage from "./pages/SelectCarPage";
 
 import Line2Page from "./pages/Line2Page";
 
@@ -17,7 +18,7 @@ import "./style/common.scss";
 
 import Authpage from "./pages/Authpage";
 
-import Warning from "./pages/WarningHistoryPage";
+import WarningPage from "./pages/WarningHistoryPage";
 
 function App() {
   return (
@@ -29,11 +30,12 @@ function App() {
         <Route exact path="/register" element={<RegisterPage />} />
         <Route exact path="/selectline" element={<SelectLinePage />} />
         <Route exact path="/line2" element={<Line2Page />} />
+        <Route exact path="/selectcar" element={<SelectCarPage />} />
         <Route exact path="/seat" element={<SeatPage />} />
         <Route exact path="/charging" element={<ChargingPage />} />
         <Route exact path="/paying" element={<PayingPage />} />
-        <Route exact path="/eyehistory" element={<EyeHistory />} />
-        <Route exact path="/warninghistory" element={<Warning />} />
+        <Route exact path="/eyehistory" element={<EyeHistoryPage />} />
+        <Route exact path="/warninghistory" element={<WarningPage />} />
       </Routes>
     </BrowserRouter>
   );
