@@ -5,6 +5,10 @@ import TopBar from "../components/TopBar";
 import BackBtn from "../components/BackBtn";
 import RealtimeModal from "../components/RealtimeModal";
 
+import sub2 from "../image/sub2.svg";
+import upsub from "../image/upsub.svg";
+import downsub from "../image/downsub.svg";
+
 const Line2Page = () => {
   const [realtimeModal, setRealtimeModal] = useState(false);
   const [stations, setStations] = useState([
@@ -100,14 +104,14 @@ const Line2Page = () => {
           </List4>
         </StationName>
         <UpSub>
-          <img src="./image/upsub.svg" />
-          <img src="./image/upsub.svg" />
+          <img src={upsub} />
+          <img src={upsub} />
         </UpSub>
 
-        <SubImg src="./image/sub2.svg" />
+        <SubImg src={sub2} />
         <DownSub>
-          <img src="./image/downsub.svg" />
-          <img src="./image/downsub.svg" />
+          <img src={downsub} />
+          <img src={downsub} />
         </DownSub>
       </Wrapper>
       <RealtimeModal
@@ -148,6 +152,7 @@ const UpSub = styled.div`
 `;
 const DownSub = styled.div`
   margin-left: 30px;
+  margin-right: 13px;
   img {
     display: block;
   }

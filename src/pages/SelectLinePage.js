@@ -5,6 +5,16 @@ import styled, { createGlobalStyle } from "styled-components";
 import TopBar from "../components/TopBar";
 import BackBtn from "../components/BackBtn";
 
+import line1 from "../image/line1.svg";
+import line2 from "../image/line2.svg";
+import line3 from "../image/line3.svg";
+import line4 from "../image/line4.svg";
+import line5 from "../image/line5.svg";
+import line6 from "../image/line6.svg";
+import line7 from "../image/line7.svg";
+import line8 from "../image/line8.svg";
+import line9 from "../image/line9.svg";
+
 const LinePage = () => {
   const user = "허윤";
   const navigate = useNavigate();
@@ -24,15 +34,15 @@ const LinePage = () => {
       </Question>
 
       <LineSelect>
-        <img src="./image/line1.svg" />
-        <img src="./image/line2.svg" onClick={goLinePage} />
-        <img src="./image/line3.svg" />
-        <img src="./image/line4.svg" />
-        <img src="./image/line5.svg" />
-        <img src="./image/line6.svg" />
-        <img src="./image/line7.svg" />
-        <img src="./image/line8.svg" />
-        <img src="./image/line9.svg" />
+        <img src={line1} />
+        <img src={line2} onClick={goLinePage} />
+        <img src={line3} />
+        <img src={line4} />
+        <img src={line5} />
+        <img src={line6} />
+        <img src={line7} />
+        <img src={line8} />
+        <img src={line9} />
       </LineSelect>
     </>
   );
