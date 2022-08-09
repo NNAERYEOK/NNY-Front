@@ -1,8 +1,12 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
+
 import Button from "../../components/Button";
 import BackBtn from "../../components/BackBtn";
+
+import loginImage from "../../image/login.svg";
+import pwImage from "../../image/pw.svg";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -90,7 +94,7 @@ const FormField = styled.div`
   .idInput:placeholder-shown {
     margin-top: 124px;
     margin-bottom: 5%;
-    background-image: url("./image/login.svg");
+    background-image: url(${loginImage});
     background-repeat: no-repeat;
     background-position: right;
   }
@@ -98,7 +102,7 @@ const FormField = styled.div`
     margin-top: 33px;
   }
   .pwInput:placeholder-shown {
-    background-image: url("./image/pw.svg");
+    background-image: url(${pwImage});
     margin-top: 33px;
     background-repeat: no-repeat;
     background-position: right;

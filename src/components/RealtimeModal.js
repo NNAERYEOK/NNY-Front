@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+
+import leftBtn from "../image/leftBtn.svg";
+import rightBtn from "../image/rightBtn.svg";
 import X from "../image/X.svg";
 
 const RealtimeModal = ({ isOpen, setRealtimeModal }) => {
@@ -14,7 +17,7 @@ const RealtimeModal = ({ isOpen, setRealtimeModal }) => {
             </Menu>
             <StationInfo>
               <Left>
-                <img src="./image/leftBtn.svg" />
+                <img src={leftBtn} />
                 <p>아현</p>
               </Left>
               <Center>
@@ -22,7 +25,7 @@ const RealtimeModal = ({ isOpen, setRealtimeModal }) => {
               </Center>
               <Right>
                 <p>신촌</p>
-                <img src="./image/rightBtn.svg" />
+                <img src={rightBtn} />
               </Right>
             </StationInfo>
             <Time>
