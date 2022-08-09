@@ -16,7 +16,9 @@
         <td  align="center"><img src = "" width="80%"/></td>
     </tr>
     <tr width="100%">
-       <td  align="center">미정</td>
+       <td  align="center">
+       <p> 좌석 선택 페이지</p>
+        <p> 로그인&로그아웃 기능 구현</p></td>
       <td  align="center">미정</td>
       <td  align="center">미정</td>
    </tr>
