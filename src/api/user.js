@@ -9,6 +9,15 @@ export const GetUser = async (id, password) => {
   }
 };
 
+export const PostUser = async (id, password, username) => {
+  try {
+    const response = await UserService.postUser(id, password, username);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error, "회원가입 실패");
+  }
+};
+
 export const GetWarningHistory = async user => {
   try {
     const response = await UserService.getWarningHistory(user);
