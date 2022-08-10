@@ -1,4 +1,4 @@
-import SeatService from "../services/seatservice";
+import SeatService from "./services/seatservice";
 
 export const GetSeat = async train => {
   try {
