@@ -1,6 +1,6 @@
 import UserService from "./services/userservice";
 
-export const GetUser = async user => {
+export const GetUser = async (id, password) => {
   try {
     const response = await UserService.getUser(user);
     return Promise.resolve(response.data);
