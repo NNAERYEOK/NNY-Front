@@ -224,7 +224,7 @@ const Direction = styled.div`
   margin: 0 8% 0 16%;
   img {
     display: block;
-    margin: 120px 0px;
+    margin: 130px 0px;
   }
 `;
 
@@ -258,16 +258,16 @@ const LeftBox = styled.div`
 const RightBox = styled.div`
   float: right;
   display: flex;
-  margin: 0 auto;
+  margin: 0 15%;
 `;
 const EyeBox = styled.div`
   margin: 0 auto;
   img {
-    margin: 100% 20px 0 0;
+    margin: 25px 10px 0 0;
   }
   p {
     display: block;
-    margin: 0 5%;
+    margin: 0 2.5px;
     font-family: "NanumSquare";
     font-size: 13px;
     font-weight: 400;
@@ -276,13 +276,12 @@ const EyeBox = styled.div`
 `;
 const SeatBox = styled.div`
   margin: 0 auto;
-
   img {
-    margin: 100% 20px 0 0;
+    margin: 25px 0 0 0;
   }
   p {
     display: block;
-    margin: 0% 15%;
+    margin: 0 7px;
     font-family: "NanumSquare";
     font-size: 13px;
     font-weight: 400;
