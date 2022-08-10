@@ -2,6 +2,8 @@ import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+import logo from "../../image/logo.svg";
+
 const HomePage = () => {
   const navigate = useNavigate();
   const goLoginPage = () => {
@@ -13,7 +15,7 @@ const HomePage = () => {
   return (
     <>
       <GlobalStyle />
-      <img src="./image/logo.svg" />
+      <img src={logo} />
       <button className="loginbtn" onClick={goLoginPage}>
         로그인
       </button>
