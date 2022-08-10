@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,36 @@ import BackBtn from "../../components/BackBtn";
 import loginImage from "../../image/login.svg";
 import pwImage from "../../image/pw.svg";
 
+// 유저 정보 관련
+import { useAppDispatch } from "../../store/index";
+import { setUser } from "../../store/features/userSlice";
+import { GetUser } from "../../api/user";
+
 const LoginPage = () => {
+  const [id, setId] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  // 유저 리덕스
+  const dispatch = useAppDispatch();
+
+  // 로그인 함수 (미완성)
+  const Login = () => {
+    console.log("로그인 시도", id, password);
+
+    GetUser(id, password)
+      .then(
+        dispatch(
+          setUser({
+            id: 3,
+            username: "테스트",
+            email: "example@gmail.com",
+            eye: 10,
+          }),
+        ),
+      )
+      .catch(err => console.log("로그인 실패", err));
+  };
+
   const navigate = useNavigate();
   const goRegister = () => {
     navigate("/register");
@@ -18,10 +47,22 @@ const LoginPage = () => {
       <Background />
       <BackBtn />
       <Title>로그인</Title>
-      <FormField>
-        <input className="idInput" placeholder="아이디" type="login" />
-        <input className="pwInput" placeholder="비밀번호" type="password" />
-        <Button>로그인</Button>
+      <FormField onSubmit={Login}>
+        <input
+          value={id}
+          onChange={e => setId(e.target.value)}
+          className="idInput"
+          placeholder="아이디"
+          type="login"
+        />
+        <input
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          className="pwInput"
+          placeholder="비밀번호"
+          type="password"
+        />
+        <Button type="submit">로그인</Button>
         <NavDiv>
           <p className="member" onClick={goRegister}>
             회원가입
@@ -66,7 +107,7 @@ const NavDiv = styled.div`
   }
 `;
 
-const FormField = styled.div`
+const FormField = styled.form`
   background: #ffffff;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 11px;
