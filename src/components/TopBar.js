@@ -4,14 +4,14 @@ import warning from "../image/warning.svg";
 import eye from "../image/eye.svg";
 import menu from "../image/menu.svg";
 
-const TopBar = () => {
+const TopBar = ({ eye }) => {
   return (
     <>
       <Navbar>
         <Menu />
         <Icons>
           <EyeBar>
-            <p>3</p>
+            <p>{eye}</p>
           </EyeBar>
 
           <WarningBar>
