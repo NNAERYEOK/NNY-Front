@@ -44,8 +44,10 @@ const EyeBar = styled.div`
   height: 50px;
 
   p {
-    margin-left: 54px;
-    margin-top: 21px;
+    margin: 21px auto 0 14px;
+
+    align-items: center;
+    text-align: center;
 
     font-family: "Inter";
     font-style: normal;
