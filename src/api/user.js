@@ -1,6 +1,6 @@
-import UserService from "../services/userservice";
+import UserService from "./services/userservice";
 
-export const getUser = async user => {
+export const GetUser = async user => {
   try {
     const response = await UserService.getUser(user);
     return Promise.resolve(response.data);
