@@ -34,14 +34,17 @@ const LoginPage = () => {
             eye: 10,
           }),
         ),
+        navigate("/"),
       )
       .catch(err => console.log("로그인 실패", err));
   };
 
   const navigate = useNavigate();
+
   const goRegister = () => {
     navigate("/register");
   };
+
   return (
     <>
       <Background />
