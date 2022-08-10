@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import Button from "../../components/Button";
 import BackBtn from "../../components/BackBtn";
@@ -6,11 +7,22 @@ import BackBtn from "../../components/BackBtn";
 import loginImage from "../../image/login.svg";
 import pwImage from "../../image/pw.svg";
 import pwCImage from "../../image/repw.svg";
+// 유저 api
+import { PostUser } from "../../api/user";
+// 리덕스
+import { useAppDispatch } from "../../store/index";
+import { setUser } from "../../store/features/userSlice";
 
 const RegisterPage = () => {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // 유저 리덕스
+  const dispatch = useAppDispatch();
+
+  const nav = useNavigate();
+
+  const [id, setId] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(null);
+  const [username, setUsername] = useState("");
 
   const onNameHandler = event => {
     setName(event.currentTarget.value);
@@ -23,35 +35,61 @@ const RegisterPage = () => {
     setConfirmPassword(event.currentTarget.value);
   };
 
+  // 회원가입
   const onSubmit = event => {
     event.preventDefault();
     if (password !== confirmPassword) {
       return alert("비밀번호와 비밀번호확인은 같아야 합니다.");
     }
+
+    PostUser(id, password, username)
+      .then(data => dispatch(setUser(data)))
+      .catch(err => console.log("회원 가입 실패"));
+
+    nav("/");
   };
+
   return (
     <>
       <Background />
       <BackBtn />
       <Title>회원가입</Title>
-      <FormField>
+      <FormField onSubmit={onSubmit}>
         <div>
           <Label>아이디</Label>
-          <input id="idInput" placeholder="아이디" type="login" />
+          <input
+            value={id}
+            onChange={e => setId(e.target.value)}
+            id="idInput"
+            placeholder="아이디"
+            type="login"
+          />
         </div>
         <div>
           <Label>비밀번호</Label>
-          <input id="pwInput" placeholder="비밀번호" type="password" />
+          <input
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            id="pwInput"
+            placeholder="비밀번호"
+            type="password"
+          />
         </div>
         <div>
           <Label>비밀번호 확인</Label>
-          <input id="RepwInput" placeholder="비밀번호 확인" type="password" />
+          <input
+            value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
+            id="RepwInput"
+            placeholder="비밀번호 확인"
+            type="password"
+          />
         </div>
         <div>
           <Label>본인인증</Label>
           <button id="self">인증하기</button>
         </div>
-        <Button onClick={onSubmit}>가입하기</Button>
+        <Button type="submit">가입하기</Button>
       </FormField>
     </>
   );
@@ -76,7 +114,7 @@ const Label = styled.p`
   margin-bottom: 10px;
 `;
 
-const FormField = styled.div`
+const FormField = styled.form`
   background: #ffffff;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 11px;
