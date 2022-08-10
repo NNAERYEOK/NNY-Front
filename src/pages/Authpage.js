@@ -7,16 +7,21 @@ import { persistor } from "../";
 import { setUser } from "../store/features/userSlice";
 
 const Authpage = () => {
-  const { nickname, email } = useAppSelector(state => state.user);
-
-  console.log(nickname, email);
+  const { id, username, email, eye } = useAppSelector(state => state.user);
 
   const dispatch = useAppDispatch();
   // 기본값
   //dispatch(initUser());
 
   const setUserInfo = () => {
-    dispatch(setUser({ nickname: "이름", email: "이메일" }));
+    dispatch(
+      setUser({
+        id: 11,
+        username: "마루",
+        email: "maru@gmail.com",
+        eye: 1,
+      }),
+    );
   };
 
   // 로그아웃에 사용
@@ -29,7 +34,7 @@ const Authpage = () => {
   return (
     <div>
       <h3>
-        이름과 이메일 : {nickname}, {email}
+        {id}, {username},{email},{eye}
       </h3>
       <button onClick={() => setUserInfo()}>변경</button>
       <button onClick={async () => purge()}>로그아웃</button>

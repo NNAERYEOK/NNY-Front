@@ -5,8 +5,10 @@ import { PURGE } from "redux-persist";
 const name = "UserSlice";
 
 const initialState = {
-  nickname: "기본값",
-  email: "기본값",
+  id: 3,
+  username: "다윤",
+  email: "example@gmail.com",
+  eye: 10,
 };
 
 export const userSlice = createSlice({
@@ -14,12 +16,16 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.nickname = action.payload.nickname;
+      state.id = action.payload.id;
+      state.username = action.payload.username;
       state.email = action.payload.email;
+      state.eye = action.payload.eye;
     },
     initUser: state => {
-      state.nickname = initialState.nickname;
+      state.id = initialState.id;
+      state.username = initialState.username;
       state.email = initialState.email;
+      state.eye = initialState.eye;
     },
   },
   extraReducers: builder => {
