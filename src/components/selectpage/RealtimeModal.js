@@ -1,28 +1,25 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import X from "../image/X.svg";
-import leftBtn from "../image/leftBtn.svg";
-import rightBtn from "../image/rightBtn.svg";
+import X from "../../image/X.svg";
+import leftBtn from "../../image/leftBtn.svg";
+import rightBtn from "../../image/rightBtn.svg";
 
-import { subway } from "../data/subway";
+import { subway } from "../../data/subway";
+("");
 
 import Time from "./Time";
 
 const RealtimeModal = ({ selectSubwayId, isOpen, setRealtimeModal }) => {
-  console.log(selectSubwayId);
   if (selectSubwayId == 0) {
     var leftSub = "";
     var rightSub = subway[selectSubwayId + 1].station;
-    console.log("if");
   } else if (selectSubwayId < 52) {
     leftSub = subway[selectSubwayId - 1].station;
     rightSub = subway[selectSubwayId + 1].station;
-    console.log("else if");
   } else {
     leftSub = subway[51].station;
     rightSub = "";
-    console.log("else");
   }
   return (
     <div>
@@ -75,20 +72,6 @@ const Modal = styled.div`
   }
   .container.modal-open .modal {
     top: 60%;
-  }
-  p {
-    color: #3f3f3f;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 10px;
-    margin-top: 20px;
-    margin-left: 15px;
-  }
-  span {
-    font-weight: 400;
-    font-size: 10px;
-    color: #ff0000;
-    margin-left: 10px;
   }
 `;
 const Menu = styled.div`

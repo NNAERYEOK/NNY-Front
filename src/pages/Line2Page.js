@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import TopBar from "../components/TopBar";
 import BackBtn from "../components/BackBtn";
-import RealtimeModal from "../components/RealtimeModal";
+import RealtimeModal from "../components/selectpage/RealtimeModal";
 import { subway } from "../data/subway";
 
 import sub2 from "../image/sub2.svg";
