@@ -41,85 +41,65 @@ const RegisterPage = () => {
       <Background />
       <BackBtn />
       <Title>회원가입</Title>
-
-      {success ? (
-        <SignupModal>
-          <h2>회원가입이 완료되었습니다!</h2>
-          <LogoIcon src={Logo} />
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            <Button>로그인하러가기</Button>
-          </Link>
-        </SignupModal>
-      ) : (
-        <FormField onSubmit={handleSubmit}>
-          <div>
-            <Label>아이디</Label>
-            <input
-              id="idInput"
-              placeholder="아이디"
-              type="text"
-              autoComplete="off"
-              onChange={e => setId(e.target.value)}
-              value={id}
-              required
-            />
-          </div>
-          <div>
-            <Label>비밀번호</Label>
-            <input
-              type="password"
-              placeholder="비밀번호"
-              id="password"
-              onChange={e => setPwd(e.target.value)}
-              value={pwd}
-              required
-            />
-          </div>
-          <div className="matchPwDiv">
-            <Label>비밀번호 확인</Label>
-            <input
-              type="password"
-              placeholder="비밀번호 확인"
-              id="confirm_pwd"
-              onChange={e => setMatchPwd(e.target.value)}
-              value={matchPwd}
-              required
-            />
-            <p id="confirmnote">{checkPassword}&nbsp;</p>
-          </div>
-          <div>
-            <Label>이름</Label>
-            <input
-              type="text"
-              placeholder="이름"
-              id="name"
-              onChange={e => setName(e.target.value)}
-              value={name}
-              required
-            />
-          </div>
-          <div>
-            <Label>본인인증</Label>
-            <button id="self">인증하기</button>
-          </div>
+      <FormField onSubmit={handleSubmit}>
+        <div>
+          <Label>아이디</Label>
+          <input
+            id="idInput"
+            placeholder="아이디"
+            type="text"
+            autoComplete="off"
+            onChange={e => setId(e.target.value)}
+            value={id}
+            required
+          />
+        </div>
+        <div>
+          <Label>비밀번호</Label>
+          <input
+            type="password"
+            placeholder="비밀번호"
+            id="password"
+            onChange={e => setPwd(e.target.value)}
+            value={pwd}
+            required
+          />
+        </div>
+        <div className="matchPwDiv">
+          <Label>비밀번호 확인</Label>
+          <input
+            type="password"
+            placeholder="비밀번호 확인"
+            id="confirm_pwd"
+            onChange={e => setMatchPwd(e.target.value)}
+            value={matchPwd}
+            required
+          />
+          <p id="confirmnote">{checkPassword}&nbsp;</p>
+        </div>
+        <div>
+          <Label>이름</Label>
+          <input
+            type="text"
+            placeholder="이름"
+            id="name"
+            onChange={e => setName(e.target.value)}
+            value={name}
+            required
+          />
+        </div>
+        <div>
+          <Label>본인인증</Label>
+          <button id="self">인증하기</button>
+        </div>
+        <Link to="/selectline" style={{ textDecoration: "none" }}>
           <Button>가입하기</Button>
-        </FormField>
-      )}
+        </Link>
+      </FormField>
     </>
   );
 };
 export default RegisterPage;
-
-const SignupModal = styled.div`
-  background: #ffffff;
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 11px;
-  width: 78%;
-  margin: 0 auto;
-  padding: 6%;
-  height: 610px;
-  text-align: center;
-`;
 
 const Background = createGlobalStyle`
   body {

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import TopBar from "../components/TopBar";
 import BackBtn from "../components/BackBtn";
 import RealtimeModal from "../components/RealtimeModal";
+import { subway } from "../data/subway";
 
 import sub2 from "../image/sub2.svg";
 import upsub from "../image/upsub.svg";
@@ -11,69 +12,24 @@ import downsub from "../image/downsub.svg";
 
 const Line2Page = () => {
   const [realtimeModal, setRealtimeModal] = useState(false);
-  const [stations, setStations] = useState([
-    { id: 1, name: "시청" },
-    { id: 2, name: "충정로" },
-    { id: 3, name: "아현" },
-    { id: 4, name: "이대" },
-    { id: 5, name: "신촌" },
-    { id: 6, name: "홍대입구" },
-    { id: 7, name: "합정" },
-    { id: 8, name: "당산" },
-    { id: 9, name: "영등포구청" },
-    { id: 10, name: "문래" },
-    { id: 11, name: "신도림" },
-    { id: 12, name: "대림" },
-    { id: 13, name: "구로디지털단지" },
-    { id: 14, name: "신대방" },
-    { id: 15, name: "신림" },
-    { id: 16, name: "봉천" },
-    { id: 17, name: "서울대입구" },
-    { id: 18, name: "낙성대" },
-    { id: 19, name: "사당" },
-    { id: 20, name: "방배" },
-    { id: 21, name: "서초" },
-    { id: 22, name: "교대" },
-    { id: 23, name: "강남" },
-    { id: 24, name: "역삼" },
-    { id: 25, name: "선릉" },
-    { id: 26, name: "삼성" },
-    { id: 27, name: "종합운동장" },
-    { id: 28, name: "잠실새내" },
-    { id: 29, name: "잠실" },
-    { id: 30, name: "잠실나루" },
-    { id: 41, name: "강변" },
-    { id: 42, name: "구의" },
-    { id: 43, name: "건대입구" },
-    { id: 44, name: "성수" },
-    { id: 45, name: "뚝섬" },
-    { id: 46, name: "한양대" },
-    { id: 47, name: "왕십리" },
-    { id: 48, name: "상왕십리" },
-    { id: 49, name: "신당" },
-    { id: 50, name: "동대문역사문화공원" },
-    { id: 51, name: "을지로4가" },
-    { id: 52, name: "을지로3가" },
-    { id: 53, name: "을지로입구" },
-    { id: 54, name: "신도림" },
-    { id: 55, name: "도림천" },
-    { id: 56, name: "양천구청" },
-    { id: 57, name: "신정네거리" },
-    { id: 58, name: "까치산" },
-    { id: 59, name: "성수" },
-    { id: 60, name: "용답" },
-    { id: 61, name: "신답" },
-    { id: 62, name: "용두" },
-    { id: 63, name: "신설동" },
-  ]);
-  let stationList = stations.filter(station => station.id < 45);
-  let stationList2 = stations.filter(
-    station => station.id >= 45 && station.id < 54,
+
+  // 선택된 역의 id
+  const [selectedId, setSelectedId] = useState(null);
+
+  // 역 클릭하기
+  const SelectSubway = id => {
+    setSelectedId(id);
+    setRealtimeModal(true);
+  };
+
+  let stationList = subway.filter(asubway => asubway.id < 45);
+  let stationList2 = subway.filter(
+    asubway => asubway.id >= 45 && asubway.id < 54,
   );
-  let stationList3 = stations.filter(
-    station => station.id >= 54 && station.id < 59,
+  let stationList3 = subway.filter(
+    asubway => asubway.id >= 54 && asubway.id < 59,
   );
-  let stationList4 = stations.filter(station => station.id >= 59);
+  let stationList4 = subway.filter(asubway => asubway.id >= 59);
 
   return (
     <>
@@ -83,23 +39,31 @@ const Line2Page = () => {
       <Wrapper>
         <StationName>
           <List1>
-            {stationList.map(station => (
-              <div onClick={() => setRealtimeModal(true)}>{station.name}</div>
+            {stationList.map(asubway => (
+              <div onClick={() => SelectSubway(asubway.id)}>
+                {asubway.station}
+              </div>
             ))}
           </List1>
           <List2>
-            {stationList2.map(station => (
-              <div onClick={() => setRealtimeModal(true)}>{station.name}</div>
+            {stationList2.map(asubway => (
+              <div onClick={() => SelectSubway(asubway.id)}>
+                {asubway.station}
+              </div>
             ))}
           </List2>
           <List3>
-            {stationList3.map(station => (
-              <div onClick={() => setRealtimeModal(true)}>{station.name}</div>
+            {stationList3.map(asubway => (
+              <div onClick={() => SelectSubway(asubway.id)}>
+                {asubway.station}
+              </div>
             ))}
           </List3>
           <List4>
-            {stationList4.map(station => (
-              <div onClick={() => setRealtimeModal(true)}>{station.name}</div>
+            {stationList4.map(asubway => (
+              <div onClick={() => SelectSubway(asubway.id)}>
+                {asubway.station}
+              </div>
             ))}
           </List4>
         </StationName>
@@ -107,7 +71,6 @@ const Line2Page = () => {
           <img src={upsub} />
           <img src={upsub} />
         </UpSub>
-
         <SubImg src={sub2} />
         <DownSub>
           <img src={downsub} />
@@ -115,6 +78,7 @@ const Line2Page = () => {
         </DownSub>
       </Wrapper>
       <RealtimeModal
+        selectSubwayId={selectedId}
         isOpen={realtimeModal}
         setRealtimeModal={setRealtimeModal}
       />
