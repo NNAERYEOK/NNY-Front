@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
+import React, { useRef,useEffect, useState } from "react";
+import { useNavigate,Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
+
 import Button from "../../components/Button";
 import BackBtn from "../../components/BackBtn";
-
 import loginImage from "../../image/login.svg";
 import pwImage from "../../image/pw.svg";
 import pwCImage from "../../image/repw.svg";
+
 // 유저 api
 import { PostUser } from "../../api/user";
 // 리덕스
@@ -19,21 +21,30 @@ const RegisterPage = () => {
 
   const nav = useNavigate();
 
-  const [id, setId] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState(null);
-  const [username, setUsername] = useState("");
+  //const [id, setId] = useState(null);
+  //const [password, setPassword] = useState(null);
+  //const [confirmPassword, setConfirmPassword] = useState(null);
+  //const [username, setUsername] = useState("");
 
-  const onNameHandler = event => {
-    setName(event.currentTarget.value);
-  };
-  const onPasswordHandler = event => {
-    setPassword(event.currentTarget.value);
-  };
+import Logo from "../../image/logo.svg";
 
-  const onConfirmPasswordHandler = event => {
-    setConfirmPassword(event.currentTarget.value);
-  };
+const RegisterPage = () => {
+  //이름, 비밀번호, 비밀번호확인, 이름
+  const [id, setId] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [matchPwd, setMatchPwd] = useState("");
+  const [name, setName] = useState("");
+
+  //비밀번호 확인
+  if (pwd !== matchPwd) {
+    var checkPassword = "비밀번호가 일치하지 않습니다.";
+  } else {
+    checkPassword = "";
+  }
+
+  //회원가입 성공
+  const [success, setSuccess] = useState(false);
+
 
   // 회원가입
   const onSubmit = event => {
@@ -47,6 +58,16 @@ const RegisterPage = () => {
       .catch(err => console.log("회원 가입 실패"));
 
     nav("/");
+    }
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (matchPwd != pwd) {
+      return;
+    }
+    console.log(id, pwd, name);
+    setSuccess(true);
+
   };
 
   return (
@@ -54,7 +75,8 @@ const RegisterPage = () => {
       <Background />
       <BackBtn />
       <Title>회원가입</Title>
-      <FormField onSubmit={onSubmit}>
+
+      {*<FormField onSubmit={onSubmit}>
         <div>
           <Label>아이디</Label>
           <input
@@ -62,34 +84,82 @@ const RegisterPage = () => {
             onChange={e => setId(e.target.value)}
             id="idInput"
             placeholder="아이디"
-            type="login"
+            type="login"*}
+
+      <FormField onSubmit={handleSubmit}>
+        <div>
+          <Label>아이디</Label>
+          <input
+            id="idInput"
+            placeholder="아이디"
+            type="text"
+            autoComplete="off"
+            onChange={e => setId(e.target.value)}
+            value={id}
+            required
+
           />
         </div>
         <div>
           <Label>비밀번호</Label>
           <input
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+
+            //value={password}
+            //onChange={e => setPassword(e.target.value)}
             id="pwInput"
             placeholder="비밀번호"
             type="password"
+
+            type="password"
+            placeholder="비밀번호"
+            id="password"
+            onChange={e => setPwd(e.target.value)}
+            value={pwd}
+            required
           />
         </div>
-        <div>
+        <div className="matchPwDiv">
           <Label>비밀번호 확인</Label>
           <input
-            value={confirmPassword}
-            onChange={e => setConfirmPassword(e.target.value)}
+
+           // value={confirmPassword}
+           // onChange={e => setConfirmPassword(e.target.value)}
             id="RepwInput"
             placeholder="비밀번호 확인"
+           // type="password"
+
             type="password"
+            placeholder="비밀번호 확인"
+            id="confirm_pwd"
+            onChange={e => setMatchPwd(e.target.value)}
+            value={matchPwd}
+            required
+          />
+          <p id="confirmnote">{checkPassword}&nbsp;</p>
+        </div>
+        <div>
+          <Label>이름</Label>
+          <input
+            type="text"
+            placeholder="이름"
+            id="name"
+            onChange={e => setName(e.target.value)}
+            value={name}
+            required
+
           />
         </div>
         <div>
           <Label>본인인증</Label>
           <button id="self">인증하기</button>
         </div>
-        <Button type="submit">가입하기</Button>
+
+       {* <Button type="submit">가입하기</Button>*}
+
+        <Link to="/selectline" style={{ textDecoration: "none" }}>
+          <Button>가입하기</Button>
+        </Link>
+
       </FormField>
     </>
   );
@@ -126,7 +196,10 @@ const FormField = styled.form`
     width: 75%;
     max-width: 300px;
     margin: auto;
-    margin-bottom: 50px;
+    margin-bottom: 45px;
+  }
+  .matchPwDiv {
+    margin-bottom: 30px;
   }
   input {
     display: block;
@@ -139,17 +212,18 @@ const FormField = styled.form`
     font-size: 10px;
     text-indent: 5px;
   }
+
   #idInput:placeholder-shown {
     background-image: url(${loginImage});
     background-repeat: no-repeat;
     background-position: right;
   }
-  #pwInput:placeholder-shown {
+  #password:placeholder-shown {
     background-image: url(${pwImage});
     background-repeat: no-repeat;
     background-position: right;
   }
-  #RepwInput:placeholder-shown {
+  #confirm_pwd:placeholder-shown {
     background-image: url(${pwCImage});
     background-repeat: no-repeat;
     background-position: right;
@@ -163,4 +237,12 @@ const FormField = styled.form`
     font-size: 9px;
     cursor: pointer;
   }
+  #confirmnote {
+    color: red;
+    font-size: 12px;
+  }
+`;
+const LogoIcon = styled.img`
+  display: block;
+  margin: 40px auto 0px;
 `;
