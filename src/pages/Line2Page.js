@@ -14,22 +14,22 @@ const Line2Page = () => {
   const [realtimeModal, setRealtimeModal] = useState(false);
 
   // 선택된 역의 id
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedId, setSelectedId] = useState(0);
 
   // 역 클릭하기
   const SelectSubway = id => {
-    setSelectedId(id);
     setRealtimeModal(true);
+    setSelectedId(id - 1);
   };
 
-  let stationList = subway.filter(asubway => asubway.id < 45);
+  let stationList = subway.filter(asubway => asubway.id < 35);
   let stationList2 = subway.filter(
-    asubway => asubway.id >= 45 && asubway.id < 54,
+    asubway => asubway.id >= 35 && asubway.id < 44,
   );
   let stationList3 = subway.filter(
-    asubway => asubway.id >= 54 && asubway.id < 59,
+    asubway => asubway.id >= 44 && asubway.id < 49,
   );
-  let stationList4 = subway.filter(asubway => asubway.id >= 59);
+  let stationList4 = subway.filter(asubway => asubway.id >= 49);
 
   return (
     <>
