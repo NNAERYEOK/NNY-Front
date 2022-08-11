@@ -1,18 +1,27 @@
 import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+//컴포넌트
+import Seats from "../../components/seatpage/Seats";
 import train from "../../image/train.svg";
-
 import back from "../../image/back.svg";
 import TopBar from "../../components/TopBar";
-import Seat from "../../components/seatpage/Seat";
 import Modal from "../../components/seatpage/Modal";
 import BottomModal from "../../components/seatpage/BottomModal";
-
-import { seatinfo } from "../../data/seatInfo";
-import { subway } from "../../data/subway";
 import BackBtn from "../../components/BackBtn";
+//데이터
+import { seatinfo } from "../../data/seatInfo";
+import { temp } from "../../data/temp";
+// api
+import { GetSeat, PatchStation } from "../../api/seat";
+import { GetUser } from "../../api/user";
+// redux
+import { useAppSelector } from "../../store";
 
 const SeatPage = () => {
+  // 유저 아이디
+  const { id, eye } = useAppSelector(state => state.user);
+  console.log("유저 아이디", id, eye);
+
   // 전체 좌석 정보
   const [seats, setSeats] = useState(seatinfo);
   // 버튼 모달
@@ -27,14 +36,6 @@ const SeatPage = () => {
   // 선택된 좌석의 내릴역 id
   const [getOffStation, setGetOffStation] = useState(null);
 
-  const des = 10; // 목적지
-
-  // ** 좌석 정보 get api**
-
-  // ** 좌석 정보 patch api **
-
-  // ** 유저 eye 정보 get api**
-
   // 내릴역 공유하기
   const Share = () => {
     setIsOpen(false);
@@ -45,6 +46,7 @@ const SeatPage = () => {
   const LookUp = () => {
     setIsOpen(false);
     setShare(false);
+    getSeats();
   };
 
   // 빈자리 클릭하기
@@ -58,16 +60,28 @@ const SeatPage = () => {
     setBottomModal(true);
   };
 
-  // 내 자리와 내릴역 post하는 api
+  // ** 내 자리 + 내릴역 공유하는 api **
   const PostMySeat = () => {
-    console.log("내 자리: ", selectedId, "내릴 역", getOffStation);
+    PatchStation();
+    getSeats();
   };
+
+  // ** 좌석 정보 get api**
+  const getSeats = () => {
+    GetSeat()
+      .then(data => setSeats(temp))
+      .catch(err => setSeats(temp));
+  };
+
+  // ** 유저 eye 정보 get api**
+  useEffect(() => {}, []);
 
   return (
     <div>
       <Background />
 
-      <TopBar />
+      <TopBar eye={eye} />
+
       {isOpen && <Modal LookUp={() => LookUp()} Share={() => Share()} />}
 
       <Wrapper>
@@ -76,50 +90,7 @@ const SeatPage = () => {
 
         <Num>2024</Num>
         <Train>
-          {seats.map(seat => {
-            if (share) {
-              // 내 자리 공유 할 떄
-              if (seat.mine) {
-                return (
-                  <Seat key={seat.id} left={seat.left} top={seat.top} myseat />
-                );
-              } else {
-                if (seat.seated) {
-                  // 누가 앉음
-                  return (
-                    <Seat key={seat.id} left={seat.left} top={seat.top} seated>
-                      {des - seat.station}
-                    </Seat>
-                  );
-                }
-              }
-              return (
-                <Seat
-                  onClick={() => SelectSeat(seat.id)}
-                  key={seat.id}
-                  left={seat.left}
-                  top={seat.top}
-                />
-              );
-            } else {
-              //조회만 할 때
-              if (seat.mine) {
-                return (
-                  <Seat key={seat.id} left={seat.left} top={seat.top} myseat />
-                );
-              } else {
-                if (seat.seated) {
-                  // 누가 앉음
-                  return (
-                    <Seat key={seat.id} left={seat.left} top={seat.top} seated>
-                      {des - seat.station}
-                    </Seat>
-                  );
-                }
-              }
-              return <Seat key={seat.id} left={seat.left} top={seat.top} />;
-            }
-          })}
+          <Seats seats={seats} share={share} SelectSeat={SelectSeat} />
         </Train>
       </Wrapper>
 

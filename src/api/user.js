@@ -1,11 +1,20 @@
-import UserService from "../services/userservice";
+import UserService from "./services/userservice";
 
-export const getUser = async user => {
+export const GetUser = async (id, password) => {
   try {
     const response = await UserService.getUser(user);
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "유저 정보 조회 실패");
+  }
+};
+
+export const PostUser = async (id, password, username) => {
+  try {
+    const response = await UserService.postUser(id, password, username);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error, "회원가입 실패");
   }
 };
 
