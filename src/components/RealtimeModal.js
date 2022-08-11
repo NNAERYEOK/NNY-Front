@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import X from "../image/X.svg";
+import leftBtn from "../image/leftBtn.svg";
+import rightBtn from "../image/rightBtn.svg";
 
-const RealtimeModal = ({ isOpen, setRealtimeModal }) => {
+import { subway } from "../data/subway";
+
+const RealtimeModal = ({ selectSubwayId, isOpen, setRealtimeModal }) => {
+  console.log(selectSubwayId);
   return (
     <div>
       <Modal>
@@ -14,15 +19,15 @@ const RealtimeModal = ({ isOpen, setRealtimeModal }) => {
             </Menu>
             <StationInfo>
               <Left>
-                <img src="./image/leftBtn.svg" />
-                <p>아현</p>
+                <img src={leftBtn} />
+                <p>{selectSubwayId - 1}</p>
               </Left>
               <Center>
-                <p>이대</p>
+                <p>{selectSubwayId}</p>
               </Center>
               <Right>
-                <p>신촌</p>
-                <img src="./image/rightBtn.svg" />
+                <p>{selectSubwayId + 1}</p>
+                <img src={rightBtn} />
               </Right>
             </StationInfo>
             <Time>
@@ -71,7 +76,7 @@ const Modal = styled.div`
     flex-direction: column;
   }
   .container.modal-open .modal {
-    top: 550px;
+    top: 60%;
   }
   p {
     color: #3f3f3f;
@@ -144,7 +149,7 @@ const Right = styled.div`
     font-weight: 700;
     font-size: 10px;
     color: #ffffff;
-    margin-left: 50px;
+    margin-left: 65px;
     margin-right: 10px;
   }
 `;
