@@ -1,14 +1,12 @@
-
-import React, { useRef,useEffect, useState } from "react";
-import { useNavigate,Link } from "react-router-dom";
+import React, { useRef, useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-
+// 컴포넌트
 import Button from "../../components/Button";
 import BackBtn from "../../components/BackBtn";
 import loginImage from "../../image/login.svg";
 import pwImage from "../../image/pw.svg";
 import pwCImage from "../../image/repw.svg";
-
 // 유저 api
 import { PostUser } from "../../api/user";
 // 리덕스
@@ -16,24 +14,15 @@ import { useAppDispatch } from "../../store/index";
 import { setUser } from "../../store/features/userSlice";
 
 const RegisterPage = () => {
-  // 유저 리덕스
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch(); // 리덕스
 
   const nav = useNavigate();
 
-  //const [id, setId] = useState(null);
-  //const [password, setPassword] = useState(null);
-  //const [confirmPassword, setConfirmPassword] = useState(null);
-  //const [username, setUsername] = useState("");
-
-import Logo from "../../image/logo.svg";
-
-const RegisterPage = () => {
   //이름, 비밀번호, 비밀번호확인, 이름
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
   const [matchPwd, setMatchPwd] = useState("");
-  const [name, setName] = useState("");
+  const [username, setUserName] = useState("");
 
   //비밀번호 확인
   if (pwd !== matchPwd) {
@@ -45,12 +34,16 @@ const RegisterPage = () => {
   //회원가입 성공
   const [success, setSuccess] = useState(false);
 
-
   // 회원가입
-  const onSubmit = event => {
+  const handleSubmit = async e => {
+    console.log("회원가입 시도");
+
     event.preventDefault();
-    if (password !== confirmPassword) {
+
+    if (matchPwd !== pwd) {
       return alert("비밀번호와 비밀번호확인은 같아야 합니다.");
+    } else {
+      setSuccess(true);
     }
 
     PostUser(id, password, username)
@@ -58,16 +51,6 @@ const RegisterPage = () => {
       .catch(err => console.log("회원 가입 실패"));
 
     nav("/");
-    }
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-    if (matchPwd != pwd) {
-      return;
-    }
-    console.log(id, pwd, name);
-    setSuccess(true);
-
   };
 
   return (
@@ -75,16 +58,6 @@ const RegisterPage = () => {
       <Background />
       <BackBtn />
       <Title>회원가입</Title>
-
-      {*<FormField onSubmit={onSubmit}>
-        <div>
-          <Label>아이디</Label>
-          <input
-            value={id}
-            onChange={e => setId(e.target.value)}
-            id="idInput"
-            placeholder="아이디"
-            type="login"*}
 
       <FormField onSubmit={handleSubmit}>
         <div>
@@ -97,42 +70,27 @@ const RegisterPage = () => {
             onChange={e => setId(e.target.value)}
             value={id}
             required
-
           />
         </div>
         <div>
           <Label>비밀번호</Label>
           <input
-
-            //value={password}
-            //onChange={e => setPassword(e.target.value)}
+            value={pwd}
+            onChange={e => setPwd(e.target.value)}
             id="pwInput"
             placeholder="비밀번호"
             type="password"
-
-            type="password"
-            placeholder="비밀번호"
-            id="password"
-            onChange={e => setPwd(e.target.value)}
-            value={pwd}
             required
           />
         </div>
         <div className="matchPwDiv">
           <Label>비밀번호 확인</Label>
           <input
-
-           // value={confirmPassword}
-           // onChange={e => setConfirmPassword(e.target.value)}
-            id="RepwInput"
-            placeholder="비밀번호 확인"
-           // type="password"
-
+            value={matchPwd}
+            onChange={e => setMatchPwd(e.target.value)}
+            id="confirm_pwd"
             type="password"
             placeholder="비밀번호 확인"
-            id="confirm_pwd"
-            onChange={e => setMatchPwd(e.target.value)}
-            value={matchPwd}
             required
           />
           <p id="confirmnote">{checkPassword}&nbsp;</p>
@@ -143,10 +101,9 @@ const RegisterPage = () => {
             type="text"
             placeholder="이름"
             id="name"
-            onChange={e => setName(e.target.value)}
-            value={name}
+            onChange={e => setUserName(e.target.value)}
+            value={username}
             required
-
           />
         </div>
         <div>
@@ -154,12 +111,7 @@ const RegisterPage = () => {
           <button id="self">인증하기</button>
         </div>
 
-       {* <Button type="submit">가입하기</Button>*}
-
-        <Link to="/selectline" style={{ textDecoration: "none" }}>
-          <Button>가입하기</Button>
-        </Link>
-
+        <Button type="submit">가입하기</Button>
       </FormField>
     </>
   );
