@@ -8,6 +8,7 @@ import RegisterPage from "./pages/Main/RegisterPage";
 //Train
 import SelectLinePage from "./pages/SelectLinePage";
 import Line2Page from "./pages/Line2Page";
+import SelectCarPage from "./pages/SelectCarPage";
 // SeatPage
 import SeatPage from "./pages/SeatPage/SeatPage";
 // MyPage
