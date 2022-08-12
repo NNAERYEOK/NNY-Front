@@ -12,11 +12,11 @@ import SelectCarPage from "./pages/SelectCarPage";
 // SeatPage
 import SeatPage from "./pages/SeatPage/SeatPage";
 // MyPage
-import Warning from "./pages/WarningHistoryPage";
+import WarningPage from "./pages/WarningHistoryPage";
 import ChargingPage from "./pages/ChargingPage";
 import PayingPage from "./pages/PayingPage";
 // EyeHistoryPage
-import EyeHistory from "./pages/EyeHistoryPage/EyeHistoryPage";
+import EyeHistoryPage from "./pages/EyeHistoryPage/EyeHistoryPage";
 // Auth
 import Authpage from "./pages/Authpage";
 
