@@ -1,24 +1,23 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import SeatPage from "./pages/SeatPage/SeatPage";
-
+import "./style/common.scss";
+// Main
 import HomePage from "./pages/Main/HomePage";
 import LoginPage from "./pages/Main/LoginPage";
 import RegisterPage from "./pages/Main/RegisterPage";
+//Train
+import SelectLinePage from "./pages/SelectLinePage";
+import Line2Page from "./pages/Line2Page";
+// SeatPage
+import SeatPage from "./pages/SeatPage/SeatPage";
+// MyPage
+import Warning from "./pages/WarningHistoryPage";
 import ChargingPage from "./pages/ChargingPage";
 import PayingPage from "./pages/PayingPage";
-import EyeHistoryPage from "./pages/EyeHistoryPage/EyeHistoryPage";
-import SelectLinePage from "./pages/SelectLinePage";
-import SelectCarPage from "./pages/SelectCarPage";
-
-import Line2Page from "./pages/Line2Page";
-
-import "./style/common.scss";
-
+// EyeHistoryPage
+import EyeHistory from "./pages/EyeHistoryPage/EyeHistoryPage";
+// Auth
 import Authpage from "./pages/Authpage";
-
-import WarningPage from "./pages/WarningHistoryPage";
 
 function App() {
   return (

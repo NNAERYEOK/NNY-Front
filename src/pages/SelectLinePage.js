@@ -64,6 +64,7 @@ const LineSelect = styled.div`
     margin-bottom: 35px;
     display: block;
     cursor: pointer;
+    width: 80%;
   }
 `;
 const Question = styled.div`
@@ -73,6 +74,6 @@ const Question = styled.div`
   p {
     color: white;
     font-weight: 800;
-    font-size: 20px;
+    font-size: 5vw;
   }
 `;

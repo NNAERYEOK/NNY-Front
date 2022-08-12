@@ -1,57 +1,117 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
+// 컴포넌트
 import Button from "../../components/Button";
 import BackBtn from "../../components/BackBtn";
-
 import loginImage from "../../image/login.svg";
 import pwImage from "../../image/pw.svg";
 import pwCImage from "../../image/repw.svg";
+// 유저 api
+import { PostUser } from "../../api/user";
+// 리덕스
+import { useAppDispatch } from "../../store/index";
+import { setUser } from "../../store/features/userSlice";
 
 const RegisterPage = () => {
+  const dispatch = useAppDispatch(); // 리덕스
+
+  const nav = useNavigate();
+
+  //이름, 비밀번호, 비밀번호확인, 이름
   const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [matchPwd, setMatchPwd] = useState("");
+  const [username, setUserName] = useState("");
 
-  const onNameHandler = event => {
-    setName(event.currentTarget.value);
-  };
-  const onPasswordHandler = event => {
-    setPassword(event.currentTarget.value);
-  };
+  //비밀번호 확인
+  if (pwd !== matchPwd) {
+    var checkPassword = "비밀번호가 일치하지 않습니다.";
+  } else {
+    checkPassword = "";
+  }
 
-  const onConfirmPasswordHandler = event => {
-    setConfirmPassword(event.currentTarget.value);
-  };
+  //회원가입 성공
+  const [success, setSuccess] = useState(false);
 
-  const onSubmit = event => {
+  // 회원가입
+  const handleSubmit = async e => {
+    console.log("회원가입 시도");
+
     event.preventDefault();
-    if (password !== confirmPassword) {
+
+    if (matchPwd !== pwd) {
       return alert("비밀번호와 비밀번호확인은 같아야 합니다.");
+    } else {
+      setSuccess(true);
     }
+
+    PostUser(id, password, username)
+      .then(data => dispatch(setUser(data)))
+      .catch(err => console.log("회원 가입 실패"));
+
+    nav("/");
   };
+
   return (
     <>
       <Background />
       <BackBtn />
       <Title>회원가입</Title>
-      <FormField>
+
+      <FormField onSubmit={handleSubmit}>
         <div>
           <Label>아이디</Label>
-          <input id="idInput" placeholder="아이디" type="login" />
+          <input
+            id="idInput"
+            placeholder="아이디"
+            type="text"
+            autoComplete="off"
+            onChange={e => setId(e.target.value)}
+            value={id}
+            required
+          />
         </div>
         <div>
           <Label>비밀번호</Label>
-          <input id="pwInput" placeholder="비밀번호" type="password" />
+          <input
+            value={pwd}
+            onChange={e => setPwd(e.target.value)}
+            id="pwInput"
+            placeholder="비밀번호"
+            type="password"
+            required
+          />
+        </div>
+        <div className="matchPwDiv">
+          <Label>비밀번호 확인</Label>
+          <input
+            value={matchPwd}
+            onChange={e => setMatchPwd(e.target.value)}
+            id="confirm_pwd"
+            type="password"
+            placeholder="비밀번호 확인"
+            required
+          />
+          <p id="confirmnote">{checkPassword}&nbsp;</p>
         </div>
         <div>
-          <Label>비밀번호 확인</Label>
-          <input id="RepwInput" placeholder="비밀번호 확인" type="password" />
+          <Label>이름</Label>
+          <input
+            type="text"
+            placeholder="이름"
+            id="name"
+            onChange={e => setUserName(e.target.value)}
+            value={username}
+            required
+          />
         </div>
         <div>
           <Label>본인인증</Label>
           <button id="self">인증하기</button>
         </div>
-        <Button onClick={onSubmit}>가입하기</Button>
+
+        <Button type="submit">가입하기</Button>
       </FormField>
     </>
   );
@@ -76,7 +136,7 @@ const Label = styled.p`
   margin-bottom: 10px;
 `;
 
-const FormField = styled.div`
+const FormField = styled.form`
   background: #ffffff;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 11px;
@@ -88,7 +148,10 @@ const FormField = styled.div`
     width: 75%;
     max-width: 300px;
     margin: auto;
-    margin-bottom: 50px;
+    margin-bottom: 45px;
+  }
+  .matchPwDiv {
+    margin-bottom: 30px;
   }
   input {
     display: block;
@@ -101,17 +164,18 @@ const FormField = styled.div`
     font-size: 10px;
     text-indent: 5px;
   }
+
   #idInput:placeholder-shown {
     background-image: url(${loginImage});
     background-repeat: no-repeat;
     background-position: right;
   }
-  #pwInput:placeholder-shown {
+  #password:placeholder-shown {
     background-image: url(${pwImage});
     background-repeat: no-repeat;
     background-position: right;
   }
-  #RepwInput:placeholder-shown {
+  #confirm_pwd:placeholder-shown {
     background-image: url(${pwCImage});
     background-repeat: no-repeat;
     background-position: right;
@@ -125,4 +189,12 @@ const FormField = styled.div`
     font-size: 9px;
     cursor: pointer;
   }
+  #confirmnote {
+    color: red;
+    font-size: 12px;
+  }
+`;
+const LogoIcon = styled.img`
+  display: block;
+  margin: 40px auto 0px;
 `;

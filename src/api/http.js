@@ -1,14 +1,5 @@
 import axios from "axios";
 
-const token = JSON.parse(localStorage.getItem("token"));
+const http = axios.create({ baseURL: "http://localhost:3000/" });
 
-export default http
-  ? axios.create({
-      baseURL: "~~~~",
-      headers: {
-        "X-AUTH-TOKEN": token,
-      },
-    })
-  : axios.create({
-      baseURL: "~~~~",
-    });
+export default http;

@@ -4,14 +4,14 @@ import warning from "../image/warning.svg";
 import eye from "../image/eye.svg";
 import menu from "../image/menu.svg";
 
-const TopBar = () => {
+const TopBar = ({ eye }) => {
   return (
     <>
       <Navbar>
         <Menu />
         <Icons>
           <EyeBar>
-            <p>3</p>
+            <p>{eye}</p>
           </EyeBar>
 
           <WarningBar>
@@ -43,9 +43,14 @@ const EyeBar = styled.div`
   width: 100px;
   height: 50px;
 
-  p {
+
+
+    margin: 21px auto 0 14px;
     margin-left: 54px;
     margin-top: 23px;
+
+    align-items: center;
+    text-align: center;
 
     font-family: "Inter";
     font-style: normal;

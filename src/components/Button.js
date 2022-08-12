@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = ({ children }) => {
-  return <ButtonBlock>{children} </ButtonBlock>;
+  return <ButtonBlock type="submit">{children}</ButtonBlock>;
 };
 
 const ButtonBlock = styled.button`

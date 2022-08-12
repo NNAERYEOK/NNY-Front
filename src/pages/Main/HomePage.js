@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 import Logo from "../../image/logo.svg";
 
 const HomePage = () => {
@@ -16,6 +15,7 @@ const HomePage = () => {
     <>
       <Background />
       <LogoIcon src={Logo} />
+
       <button className="loginbtn" onClick={goLoginPage}>
         로그인
       </button>
