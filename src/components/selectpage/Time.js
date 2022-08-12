@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Time = () => {
-  const [minutes, setMinutes] = useState(0);
-  const [minutes2, setMinutes2] = useState(3);
-  const [minutes3, setMinutes3] = useState(2);
+  const [minutes, setMinutes] = useState(1);
+  const [minutes2, setMinutes2] = useState(2);
+  const [minutes3, setMinutes3] = useState(3);
   const [seconds, setSeconds] = useState(45);
   const [seconds2, setSeconds2] = useState(27);
-
+  const [seconds3, setSeconds3] = useState(11);
   useEffect(() => {
     const countdown = setInterval(() => {
       if (parseInt(seconds) === 0 && parseInt(minutes) === 0) {
@@ -28,30 +28,12 @@ const Time = () => {
     }, 1000);
     return () => clearInterval(countdown);
   }, [minutes, seconds]);
-  useEffect(() => {
-    const countdown = setInterval(() => {
-      if (parseInt(seconds) === 0 && parseInt(minutes3) === 0) {
-        setMinutes3("곧");
-        setSeconds("도착");
-      }
-      if (parseInt(seconds) > 0) {
-        setSeconds(parseInt(seconds) - 1);
-      }
-      if (parseInt(seconds) === 0) {
-        if (parseInt(minutes3) === 0) {
-          clearInterval(countdown);
-        } else {
-          setMinutes(parseInt(minutes3) - 1);
-          setSeconds(59);
-        }
-      }
-    }, 1000);
-    return () => clearInterval(countdown);
-  }, [minutes3, seconds]);
+
   useEffect(() => {
     const countdown = setInterval(() => {
       if (parseInt(seconds2) === 0 && parseInt(minutes2) === 0) {
-        setSeconds2("곧 도착");
+        setMinutes2("곧");
+        setSeconds2("도착");
       }
       if (parseInt(seconds2) > 0) {
         setSeconds2(parseInt(seconds2) - 1);
@@ -60,13 +42,34 @@ const Time = () => {
         if (parseInt(minutes2) === 0) {
           clearInterval(countdown);
         } else {
-          setMinutes2(parseInt(minutes) - 1);
+          setMinutes(parseInt(minutes2) - 1);
           setSeconds2(59);
         }
       }
     }, 1000);
     return () => clearInterval(countdown);
   }, [minutes2, seconds2]);
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      if (parseInt(seconds3) === 0 && parseInt(minutes3) === 0) {
+        setMinutes3("곧");
+        setSeconds3("도착");
+      }
+      if (parseInt(seconds3) > 0) {
+        setSeconds3(parseInt(seconds3) - 1);
+      }
+      if (parseInt(seconds3) === 0) {
+        if (parseInt(minutes3) === 0) {
+          clearInterval(countdown);
+        } else {
+          setMinutes3(parseInt(minutes3) - 1);
+          setSeconds3(59);
+        }
+      }
+    }, 1000);
+    return () => clearInterval(countdown);
+  }, [minutes3, seconds3]);
 
   return (
     <TimeBlock>
@@ -87,13 +90,13 @@ const Time = () => {
         <P>
           성수(내선)행
           <Span>
-            {minutes3}:{seconds < 10 ? `0${seconds}` : seconds}
+            {minutes2}:{seconds2 < 10 ? `0${seconds2}` : seconds2}
           </Span>
         </P>
         <P>
           성수(내선)행
           <Span>
-            {minutes2}:{seconds2 < 10 ? `0${seconds2}` : seconds2}
+            {minutes3}:{seconds3 < 10 ? `0${seconds3}` : seconds3}
           </Span>
         </P>
       </RightTime>
