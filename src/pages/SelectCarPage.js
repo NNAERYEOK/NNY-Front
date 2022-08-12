@@ -230,7 +230,7 @@ const Direction = styled.div`
 
 const CarContainer = styled.div`
   margin: 0 auto;
-  margin-top: 4%;
+  margin-top: 2%;
   height: 540px;
   width: 100%;
   overflow: scroll;
