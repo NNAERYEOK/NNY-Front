@@ -65,7 +65,7 @@ const LineSelect = styled.div`
     display: block;
     cursor: pointer;
     width: 80%;
-    max-width: 650px;
+    max-width: 651px;
   }
 `;
 const Question = styled.div`
