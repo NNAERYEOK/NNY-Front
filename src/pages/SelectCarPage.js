@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import TopBar from "../components/TopBar";
 import BackBtn from "../components/BackBtn";
@@ -21,6 +22,11 @@ import eye from "../image/whiteeyeS.svg";
 import seat from "../image/seaticon.svg";
 
 export function SelectCarPage() {
+  const navigate = useNavigate();
+  const goSeatPage = () => {
+    navigate("/seat");
+  };
+
   return (
     <>
       <Background />
@@ -36,7 +42,7 @@ export function SelectCarPage() {
         <CarContainer>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car1} />
+              <img className="car" src={car1} onClick={goSeatPage} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -52,7 +58,7 @@ export function SelectCarPage() {
           </CarBox>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car2} />
+              <img className="car" src={car2} onClick={goSeatPage} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -68,7 +74,7 @@ export function SelectCarPage() {
           </CarBox>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car3} />
+              <img className="car" src={car3} onClick={goSeatPage} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -84,7 +90,7 @@ export function SelectCarPage() {
           </CarBox>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car4} />
+              <img className="car" src={car4} onClick={goSeatPage} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -100,7 +106,7 @@ export function SelectCarPage() {
           </CarBox>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car5} />
+              <img className="car" src={car5} onClick={goSeatPage} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -116,7 +122,7 @@ export function SelectCarPage() {
           </CarBox>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car6} />
+              <img className="car" src={car6} onClick={goSeatPage} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -132,7 +138,7 @@ export function SelectCarPage() {
           </CarBox>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car7} />
+              <img className="car" src={car7} onClick={goSeatPage} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -148,7 +154,7 @@ export function SelectCarPage() {
           </CarBox>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car8} />
+              <img className="car" src={car8} onClick={goSeatPage} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -164,7 +170,7 @@ export function SelectCarPage() {
           </CarBox>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car9} />
+              <img className="car" src={car9} onClick={goSeatPage} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -180,7 +186,7 @@ export function SelectCarPage() {
           </CarBox>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car10} />
+              <img className="car" src={car10} onClick={goSeatPage} />
             </LeftBox>
             <RightBox>
               <EyeBox>
@@ -218,6 +224,7 @@ const P = styled.p`
 const Container = styled.div`
   display: flex;
   margin: 0 auto;
+  position: relative;
 `;
 
 const Direction = styled.div`
