@@ -69,6 +69,7 @@ const Modal = styled.div`
     border-radius: 27px;
     display: flex;
     flex-direction: column;
+    z-index: 10;
   }
   .container.modal-open .modal {
     top: 60%;
