@@ -23,6 +23,8 @@ const UserService = {
       password: password,
     }),
 
+  // 로그인 api /nny/login/
+
   // 회원가입 api
   postUser: (id, password) =>
     http.post("/nny/signup/", {
