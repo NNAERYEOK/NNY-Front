@@ -5,7 +5,7 @@ import { EyeHistoryBox } from "./EyeHistoryPage/chargedEyeHistory";
 import { createGlobalStyle } from "styled-components";
 import WarnIcon from "../image/warnicon.svg";
 
-export function Warning() {
+export function WarningPage() {
   const [warnedDate, setWarnedDate] = useState("2022-07-08");
   const [warnedReason, setWarnedReason] = useState("2호선 이대역 미정차");
 
@@ -61,4 +61,4 @@ const GlobalStyle = createGlobalStyle`
 }
 `;
 
-export default Warning;
+export default WarningPage;
