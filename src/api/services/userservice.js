@@ -5,29 +5,31 @@ const UserService = {
   getUser: user => http.get("~/user"),
 
   // 유저 경고 기록 조회
-  getWarningHistory: user => http.get("~/warning/user"),
+  getWarningHistory: user => http.get("/nny/warning/<int:pk>"),
 
   // eye 수 업데이트 (조회, 공유, 구매)
   patchEye: (user, eye) => http.patch("~", { user: user }),
 
-  // 총 6개면? 다시 보낼 때 5개로
-
-  // api 따로 (디비가 3종류)
+  // 사용한 eye
+  // 충전한 eye
 
   // 유저 경고 주기
   postWarning: (user, station) =>
     http.post("~", { user: user, station: station }),
 
-  // 회원 정보 수정
-  patchUserInfo: (id, password, name) =>
-    http.patch("~/user", {
-      user: user,
-      id: id,
+  // 비번 수정
+  patchUserInfo: password =>
+    http.patch("/nny/password_change", {
       password: password,
-      name: name,
     }),
 
-  // 회원가입 api (post api ???? )
+  // 회원가입 api
+  postUser: (id, password) =>
+    http.post("/nny/signup/", {
+      id: id,
+      password: password,
+      username: username,
+    }),
 };
 
 export default UserService;
