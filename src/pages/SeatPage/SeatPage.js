@@ -18,10 +18,9 @@ import { GetUser } from "../../api/user";
 import { useAppSelector } from "../../store";
 
 const SeatPage = () => {
-  // 유저 아이디
+  // 유저 아이디 가져오기 redux
   const { id, eye } = useAppSelector(state => state.user);
   console.log("유저 아이디", id, eye);
-
   // 전체 좌석 정보
   const [seats, setSeats] = useState(seatinfo);
   // 버튼 모달
@@ -30,13 +29,12 @@ const SeatPage = () => {
   const [bottomModal, setBottomModal] = useState(false);
   // 좌석 선택하기 버튼
   const [share, setShare] = useState(false);
-
   // 선택된 좌석의 id
   const [selectedId, setSelectedId] = useState(null);
   // 선택된 좌석의 내릴역 id
   const [getOffStation, setGetOffStation] = useState(null);
 
-  // 내릴역 공유하기
+  // 내릴역 공유 버튼
   const Share = () => {
     setIsOpen(false);
     setShare(true);
@@ -46,7 +44,7 @@ const SeatPage = () => {
   const LookUp = () => {
     setIsOpen(false);
     setShare(false);
-    getSeats();
+    getSeats(train_id);
   };
 
   // 빈자리 클릭하기
@@ -61,20 +59,18 @@ const SeatPage = () => {
   };
 
   // ** 내 자리 + 내릴역 공유하는 api **
-  const PostMySeat = () => {
-    PatchStation();
-    getSeats();
+  const PostMySeat = (selectedId, id, getOffStation) => {
+    PatchStation(selectedId, id, getOffStation)
+      .then(res => location.reload())
+      .catch(err => console.log("좌석 업데이트 실패", err));
   };
 
   // ** 좌석 정보 get api**
-  const getSeats = () => {
-    GetSeat()
-      .then(data => setSeats(temp))
-      .catch(err => setSeats(temp));
+  const getSeats = train_id => {
+    GetSeat(train_id)
+      .then(data => setSeats(data))
+      .catch(err => console.log("좌석 정보 가져오기 실패"));
   };
-
-  // ** 유저 eye 정보 get api**
-  useEffect(() => {}, []);
 
   return (
     <div>
