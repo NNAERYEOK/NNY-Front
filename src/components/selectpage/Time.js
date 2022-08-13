@@ -63,7 +63,7 @@ const Time = () => {
         if (parseInt(minutes3) === 0) {
           clearInterval(countdown);
         } else {
-          setMinutes3(parseInt(minutes3) - 1);
+          setMinutes(parseInt(minutes3) - 1);
           setSeconds3(59);
         }
       }
