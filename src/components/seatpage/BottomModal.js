@@ -8,13 +8,13 @@ const BottomModal = ({
   isOpen,
   setBottomModal,
   setGetOffStation,
-  PostMySeat,
+  postMySeat,
 }) => {
   const [isSelected, setIsSelected] = useState(false); // 내릴역 선택 여부
 
   const SelectSeat = async () => {
     setBottomModal(false); // 모달 닫기
-    isSelected && PostMySeat(); // 내릴역 선택 해야 api 실행
+    isSelected && postMySeat(); // 내릴역 선택 해야 api 실행
   };
 
   return (
@@ -34,7 +34,7 @@ const BottomModal = ({
             <Button onClick={() => SelectSeat()}>
               <p className="text">자리 선택 완료 +1 </p>
 
-              <Eye />
+              <Eye src={whiteeye} />
             </Button>
           </div>
         </div>
@@ -45,8 +45,7 @@ const BottomModal = ({
 
 export default BottomModal;
 
-const Eye = styled.p`
-  background-image: url(${whiteeye});
+const Eye = styled.img`
   width: 17px;
   height: 13px;
 `;
