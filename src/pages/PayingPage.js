@@ -5,6 +5,22 @@ import { Title } from "./ChargingPage";
 import BackBtn from "../components/BackBtn";
 import EyeBox from "../image/eyebox.svg";
 
+// export const SelectBox = ({ setIsSelected }) => {
+//   const [selected, setSelected] = useState("default");
+
+//   const onChange = e => {
+//     setSelected(e.target.value);
+//   };
+
+//   useEffect(() => {
+//     if (selected !== "default") {
+//       setIsSelected(true);
+//     } else {
+//       setIsSelected(false);
+//     }
+//   }, [selected]);
+// };
+
 const Paying = () => {
   return (
     <>
@@ -25,30 +41,18 @@ const Paying = () => {
       <div className="payMethod">
         <span className="payMethodTitle">결제수단</span>
         <div style={{ margin: "0 auto", width: "75%" }}>
-          <button className="payMethodBtn" id="selected">
-            신용카드
-          </button>
+          <button className="payMethodBtn">신용카드</button>
           <button className="payMethodBtn">휴대폰</button>
           <button className="payMethodBtn">무통장 입금</button>
           <SelectBox>
             <option value="1">카드 선택</option>
             <option value="2">우리 카드</option>
             <option value="3">현대 카드</option>
-            <option value="4">KB국민 카드</option>
-            <option value="5">BC 카드</option>
-            <option value="6">삼성 카드</option>
-            <option value="7">신한 카드</option>
-            <option value="8">롯데 카드</option>
-            <option value="9">NH농협 카드</option>
-            <option value="10">하나 카드</option>
           </SelectBox>
           <SelectBox>
             <option value="1">할부 선택</option>
             <option value="2">일시불</option>
             <option value="3">1개월</option>
-            <option value="4">3개월</option>
-            <option value="5">6개월</option>
-            <option value="6">12개월</option>
           </SelectBox>
         </div>
       </div>
@@ -182,12 +186,6 @@ span{
   font-size: 10px;
   font-family: "NanumSquare";
   margin: 0 2.5% 20px;
-}
-
-#selected {
-  background-color: #4FE0B6;
-  font-weight: 800;
-  color: #FFFFFF;
 }
 
 .payDetail{

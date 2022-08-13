@@ -43,11 +43,8 @@ const EyeBar = styled.div`
   width: 100px;
   height: 50px;
 
-
-
+  p {
     margin: 21px auto 0 14px;
-    margin-left: 54px;
-    margin-top: 23px;
 
     align-items: center;
     text-align: center;
@@ -68,7 +65,7 @@ const WarningBar = styled.div`
 
   p {
     margin-left: 44px;
-    margin-top: 17px;
+    margin-top: 15px;
 
     font-family: "Inter";
     font-style: normal;
