@@ -1,6 +1,6 @@
 import Seat from "./Seat";
-const Seats = ({ seats, share, SelectSeat }) => {
-  const des = 10; // 목적지
+const Seats = ({ seats, share, SelectSeat, clickWarning }) => {
+  const now = 2; // 현 위치
   return (
     <div>
       {seats.map(seat => {
@@ -14,8 +14,14 @@ const Seats = ({ seats, share, SelectSeat }) => {
             if (seat.seated) {
               // 누가 앉음
               return (
-                <Seat key={seat.id} left={seat.left} top={seat.top} seated>
-                  {des - seat.station}
+                <Seat
+                  key={seat.id}
+                  left={seat.left}
+                  top={seat.top}
+                  onClick={() => clickWarning(seat.id, seat.station)}
+                  seated
+                >
+                  {now - seat.station}
                 </Seat>
               );
             }
@@ -38,8 +44,14 @@ const Seats = ({ seats, share, SelectSeat }) => {
             if (seat.seated) {
               // 누가 앉음
               return (
-                <Seat key={seat.id} left={seat.left} top={seat.top} seated>
-                  {des - seat.station}
+                <Seat
+                  key={seat.id}
+                  left={seat.left}
+                  top={seat.top}
+                  onClick={() => clickWarning(seat.id, seat.station)}
+                  seated
+                >
+                  {now - seat.station}
                 </Seat>
               );
             }
