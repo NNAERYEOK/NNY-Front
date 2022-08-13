@@ -58,6 +58,7 @@ const UpSubBlock = styled.div`
     animation: boxFade 30s 1s infinite linear;
     animation-timing-function: ease;
   }
+  .item2,
   .item5,
   .item8,
   .item12,

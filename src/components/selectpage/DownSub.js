@@ -42,8 +42,7 @@ const DownSubBlock = styled.div`
     margin-top: 210px;
   }
   cursor: pointer;
-  .it2,
-  .it6,
+  .it3,
   .it11,
   .it17,
   .it18,
@@ -54,11 +53,11 @@ const DownSubBlock = styled.div`
   .it47,
   .it43,
   .it52 {
-    animation: box 30s 7s infinite linear;
+    animation: box 30s 8s infinite linear;
     animation-timing-function: ease;
   }
   .it1,
-  .it4,
+  .it6,
   .it12,
   .it15,
   .it20,
@@ -77,9 +76,6 @@ const DownSubBlock = styled.div`
     0% {
       opacity: 1;
     }
-    60% {
-      opacity: 0.3;
-    }
     100% {
       opacity: 0;
     }
@@ -91,8 +87,7 @@ const DownSubBlock = styled.div`
     }
   }
   @keyframes box1 {
-    0%,
-    60% {
+    0% {
       opacity: 1;
     }
 
