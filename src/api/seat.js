@@ -1,21 +1,20 @@
 import SeatService from "./services/seatservice";
 
-export const GetSeat = async train => {
+export const GetSeat = async train_id => {
   try {
-    const response = await SeatService.getSeat(train);
+    const response = await SeatService.getSeat(train_id);
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "좌석 현황 조회 실패");
   }
 };
 
-export const PatchStation = async (train, id, station, user) => {
+export const PatchStation = async (seat_id, user_id, station) => {
   try {
     const response = await ProposalService.patchStation(
-      train,
-      id,
+      seat_id,
+      user_id,
       station,
-      user,
     );
     return Promise.resolve(response.data);
   } catch (error) {

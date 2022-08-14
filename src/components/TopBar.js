@@ -4,7 +4,7 @@ import warning from "../image/warning.svg";
 import eye from "../image/eye.svg";
 import menu from "../image/menu.svg";
 
-const TopBar = ({ eye }) => {
+const TopBar = ({ eye, warning }) => {
   return (
     <>
       <Navbar>
@@ -15,7 +15,8 @@ const TopBar = ({ eye }) => {
           </EyeBar>
 
           <WarningBar>
-            <p>1</p>
+            <p>20</p>
+            {/* <p>{warning}</p> */}
           </WarningBar>
         </Icons>
       </Navbar>
@@ -43,20 +44,21 @@ const EyeBar = styled.div`
   width: 100px;
   height: 50px;
 
+  /* margin: 21px auto 0 14px; */
 
+  align-items: center;
+  text-align: center;
 
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  color: white;
+
+  p {
     margin: 21px auto 0 14px;
-    margin-left: 54px;
-    margin-top: 23px;
-
     align-items: center;
     text-align: center;
-
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 13px;
-    color: white;
   }
 `;
 const WarningBar = styled.div`
@@ -68,7 +70,7 @@ const WarningBar = styled.div`
 
   p {
     margin-left: 44px;
-    margin-top: 17px;
+    margin-top: 15px;
 
     font-family: "Inter";
     font-style: normal;

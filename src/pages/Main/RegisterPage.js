@@ -8,7 +8,7 @@ import loginImage from "../../image/login.svg";
 import pwImage from "../../image/pw.svg";
 import pwCImage from "../../image/repw.svg";
 // 유저 api
-import { PostUser } from "../../api/user";
+import { PostUser, PatchUserName } from "../../api/user";
 // 리덕스
 import { useAppDispatch } from "../../store/index";
 import { setUser } from "../../store/features/userSlice";
@@ -19,7 +19,7 @@ const RegisterPage = () => {
   const nav = useNavigate();
 
   //이름, 비밀번호, 비밀번호확인, 이름
-  const [id, setId] = useState("");
+  const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [matchPwd, setMatchPwd] = useState("");
   const [username, setUserName] = useState("");
@@ -36,21 +36,22 @@ const RegisterPage = () => {
 
   // 회원가입
   const handleSubmit = async e => {
-    console.log("회원가입 시도");
-
     event.preventDefault();
 
     if (matchPwd !== pwd) {
       return alert("비밀번호와 비밀번호확인은 같아야 합니다.");
     } else {
       setSuccess(true);
+      console.log(email, pwd, username);
+
+      PostUser(email, pwd)
+        .then(data => PatchUserName(username))
+        .then(data => {
+          dispatch(setUser(data));
+          nav("/");
+        })
+        .catch(err => alert("회원 가입 실패"));
     }
-
-    PostUser(id, pwd, username)
-      .then(data => dispatch(setUser(data)))
-      .catch(err => console.log("회원 가입 실패"));
-
-    nav("/");
   };
 
   return (
@@ -67,8 +68,8 @@ const RegisterPage = () => {
             placeholder="아이디"
             type="text"
             autoComplete="off"
-            onChange={e => setId(e.target.value)}
-            value={id}
+            onChange={e => setEmail(e.target.value)}
+            value={email}
             required
           />
         </div>

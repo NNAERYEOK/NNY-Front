@@ -28,7 +28,7 @@ const Modal = ({ LookUp, Share }) => {
           }}
         >
           <p className="text">+1</p>
-          <Eye />
+          <Eye src={whiteeye} />
         </div>
       </CustomModal>
       <CustomModal onClick={LookUp}>
@@ -41,7 +41,7 @@ const Modal = ({ LookUp, Share }) => {
           }}
         >
           <p className="text">-1</p>
-          <Eye />
+          <Eye src={whiteeye} />
         </div>
       </CustomModal>
     </ModalBackground>
@@ -95,8 +95,7 @@ const CustomModal = styled.button`
   }
 `;
 
-const Eye = styled.p`
-  background-image: url(${whiteeye});
+const Eye = styled.img`
   width: 17px;
   height: 13px;
   margin: 1px 0 0 3px;

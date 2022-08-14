@@ -1,20 +1,30 @@
 import UserService from "./services/userservice";
 
-export const GetUser = async (id, password) => {
+// 로그인
+export const GetUser = async (email, password) => {
   try {
-    const response = await UserService.getUser(user);
+    const response = await UserService.getUser(email, password);
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "유저 정보 조회 실패");
   }
 };
-
+// 회원가입
 export const PostUser = async (id, password, username) => {
   try {
     const response = await UserService.postUser(id, password, username);
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "회원가입 실패");
+  }
+};
+// 회원가입(닉네임)
+export const PatchUserName = async username => {
+  try {
+    const response = await UserService.patchUserName(username);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error, "닉네임 수정 실패");
   }
 };
 
