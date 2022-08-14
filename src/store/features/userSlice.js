@@ -5,10 +5,10 @@ import { PURGE } from "redux-persist";
 const name = "UserSlice";
 
 const initialState = {
-  id: 3,
-  username: "다윤",
-  email: "example@gmail.com",
-  eye: 10,
+  id: "",
+  email: "",
+  password: "",
+  username: "",
 };
 
 export const userSlice = createSlice({
@@ -17,15 +17,15 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.id = action.payload.id;
-      state.username = action.payload.username;
       state.email = action.payload.email;
-      state.eye = action.payload.eye;
+      state.password = action.payload.password;
+      state.username = action.payload.username;
     },
     initUser: state => {
       state.id = initialState.id;
-      state.username = initialState.username;
       state.email = initialState.email;
-      state.eye = initialState.eye;
+      state.password = initialState.password;
+      state.username = initialState.username;
     },
   },
   extraReducers: builder => {

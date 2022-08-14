@@ -1,8 +1,27 @@
 import http from "../http";
 
 const UserService = {
-  // 유저 정보 조회 (기본 정보, 현재 eye 개수)
-  getUser: user => http.get("~/user"),
+  // 로그인
+  getUser: (email, password) =>
+    http.get("/nny/login/", {
+      email: email,
+      password: password,
+    }),
+
+  // 회원가입 api
+  postUser: (id, password) =>
+    http.post("/nny/signup/", {
+      id: id,
+      password: password,
+      username: username,
+    }),
+  // 회원가입 : 이름
+  patchUserName: username =>
+    http.patch("/nny/signup/", {
+      username: username,
+    }),
+
+  //
 
   // 유저 경고 기록 조회
   getWarningHistory: user => http.get("/nny/warning/<int:pk>"),
@@ -23,15 +42,7 @@ const UserService = {
       password: password,
     }),
 
-  // 로그인 api /nny/login/
-
-  // 회원가입 api
-  postUser: (id, password) =>
-    http.post("/nny/signup/", {
-      id: id,
-      password: password,
-      username: username,
-    }),
+  //
 };
 
 export default UserService;
