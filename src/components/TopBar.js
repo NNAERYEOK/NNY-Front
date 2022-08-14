@@ -1,10 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import warning from "../image/warning.svg";
 import eye from "../image/eye.svg";
 import menu from "../image/menu.svg";
 
-const TopBar = ({ eye, warning }) => {
+import { GetUser } from "../api/user";
+import { useAppSelector } from "../store";
+const TopBar = () => {
+  const { email, password } = useAppSelector(state => state.user);
+
+  const [eye, setEye] = useState(0);
+  const [warning, setWarning] = useState(0);
+
+  useEffect(() => {
+    GetUser(email, password)
+      .then(data => {
+        setEye(data.eye);
+        setWarning(3);
+      })
+      .catch(err => console.log("eye,warning 조회 실패", err));
+  }, []);
+
   return (
     <>
       <Navbar>
@@ -15,8 +31,7 @@ const TopBar = ({ eye, warning }) => {
           </EyeBar>
 
           <WarningBar>
-            <p>20</p>
-            {/* <p>{warning}</p> */}
+            <p>{warning}</p>
           </WarningBar>
         </Icons>
       </Navbar>
