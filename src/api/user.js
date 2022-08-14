@@ -28,6 +28,17 @@ export const PatchUserName = async username => {
   }
 };
 
+// 경고 주기
+export const PostWarning = async (id, created_at, station) => {
+  try {
+    const response = await UserService.postWarning(id, created_at, station);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error, "경고 주기 실패");
+  }
+};
+
+//
 export const GetWarningHistory = async user => {
   try {
     const response = await UserService.getWarningHistory(user);
@@ -43,15 +54,6 @@ export const PatchEye = async user => {
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "eye 정보 업데이트 실패");
-  }
-};
-
-export const PostWarning = async (user, station) => {
-  try {
-    const response = await UserService.postWarning(user, station);
-    return Promise.resolve(response.data);
-  } catch (error) {
-    return Promise.reject(error, "경고 주기 실패");
   }
 };
 

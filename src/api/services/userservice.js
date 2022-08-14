@@ -21,6 +21,14 @@ const UserService = {
       username: username,
     }),
 
+  // 유저 경고 주기
+  postWarning: (id, created_at, station) =>
+    http.post("/nny/warning/", {
+      user: id,
+      created_at: created_at,
+      station: station,
+    }),
+
   //
 
   // 유저 경고 기록 조회
@@ -31,10 +39,6 @@ const UserService = {
 
   // 사용한 eye
   // 충전한 eye
-
-  // 유저 경고 주기
-  postWarning: (user, station) =>
-    http.post("~", { user: user, station: station }),
 
   // 비번 수정
   patchUserInfo: password =>

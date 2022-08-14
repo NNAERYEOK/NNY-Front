@@ -18,7 +18,7 @@ const Seats = ({ seats, share, SelectSeat, clickWarning }) => {
                   key={seat.id}
                   left={seat.left}
                   top={seat.top}
-                  onClick={() => clickWarning(seat.id, seat.station)}
+                  onClick={() => clickWarning(seat.user, seat.station)}
                   seated
                 >
                   {now - seat.station}
@@ -48,7 +48,7 @@ const Seats = ({ seats, share, SelectSeat, clickWarning }) => {
                   key={seat.id}
                   left={seat.left}
                   top={seat.top}
-                  onClick={() => clickWarning(seat.id, seat.station)}
+                  onClick={() => clickWarning(seat.user, seat.station)}
                   seated
                 >
                   {now - seat.station}

@@ -1,15 +1,25 @@
 export const temp = [
   {
     id: 1,
+    user: 2,
     left: "91px",
     top: "56px",
     seated: true,
     mine: false,
     station: 2,
   },
-  { id: 2, left: "91px", top: "80px", seated: false, mine: false, station: 2 },
+  {
+    id: 2,
+    user: 2,
+    left: "91px",
+    top: "80px",
+    seated: false,
+    mine: false,
+    station: 2,
+  },
   {
     id: 3,
+    user: 2,
     left: "91px",
     top: "103px",
     seated: true,
@@ -18,6 +28,7 @@ export const temp = [
   },
   {
     id: 4,
+    user: 2,
     left: "91px",
     top: "205px",
     seated: false,
@@ -26,6 +37,7 @@ export const temp = [
   },
   {
     id: 5,
+    user: 2,
     left: "91px",
     top: "228px",
     seated: false,
@@ -34,6 +46,7 @@ export const temp = [
   },
   {
     id: 6,
+    user: 2,
     left: "91px",
     top: "251px",
     seated: true,
@@ -42,6 +55,7 @@ export const temp = [
   },
   {
     id: 7,
+    user: 2,
     left: "91px",
     top: "274px",
     seated: false,
@@ -50,6 +64,7 @@ export const temp = [
   },
   {
     id: 8,
+    user: 2,
     left: "91px",
     top: "297px",
     seated: false,
@@ -58,6 +73,7 @@ export const temp = [
   },
   {
     id: 9,
+    user: 2,
     left: "91px",
     top: "320px",
     seated: false,
@@ -66,6 +82,7 @@ export const temp = [
   },
   {
     id: 10,
+    user: 2,
     left: "91px",
     top: "422px",
     seated: false,
@@ -74,6 +91,7 @@ export const temp = [
   },
   {
     id: 11,
+    user: 2,
     left: "91px",
     top: "445px",
     seated: false,
@@ -82,6 +100,7 @@ export const temp = [
   },
   {
     id: 12,
+    user: 2,
     left: "91px",
     top: "468px",
     seated: false,
@@ -90,6 +109,7 @@ export const temp = [
   },
   {
     id: 13,
+    user: 2,
     left: "91px",
     top: "491px",
     seated: false,
@@ -98,6 +118,7 @@ export const temp = [
   },
   {
     id: 14,
+    user: 2,
     left: "91px",
     top: "514px",
     seated: false,
@@ -106,6 +127,7 @@ export const temp = [
   },
   {
     id: 15,
+    user: 2,
     left: "91px",
     top: "537px",
     seated: false,
@@ -114,6 +136,7 @@ export const temp = [
   },
   {
     id: 16,
+    user: 2,
     left: "91px",
     top: "640px",
     seated: false,
@@ -122,6 +145,7 @@ export const temp = [
   },
   {
     id: 17,
+    user: 2,
     left: "91px",
     top: "663px",
     seated: false,
@@ -130,6 +154,7 @@ export const temp = [
   },
   {
     id: 18,
+    user: 2,
     left: "91px",
     top: "686px",
     seated: false,
@@ -139,6 +164,7 @@ export const temp = [
 
   {
     id: 19,
+    user: 2,
     left: "266px",
     top: "58px",
     seated: false,
@@ -147,6 +173,7 @@ export const temp = [
   },
   {
     id: 20,
+    user: 2,
     left: "266px",
     top: "81px",
     seated: false,
@@ -155,6 +182,7 @@ export const temp = [
   },
   {
     id: 21,
+    user: 2,
     left: "266px",
     top: "105px",
     seated: false,
@@ -163,6 +191,7 @@ export const temp = [
   },
   {
     id: 22,
+    user: 2,
     left: "266px",
     top: "205px",
     seated: false,
@@ -171,6 +200,7 @@ export const temp = [
   },
   {
     id: 23,
+    user: 2,
     left: "266px",
     top: "228px",
     seated: false,
@@ -179,6 +209,7 @@ export const temp = [
   },
   {
     id: 24,
+    user: 2,
     left: "266px",
     top: "251px",
     seated: false,
@@ -187,6 +218,7 @@ export const temp = [
   },
   {
     id: 25,
+    user: 2,
     left: "266px",
     top: "274px",
     seated: false,
@@ -195,6 +227,7 @@ export const temp = [
   },
   {
     id: 26,
+    user: 2,
     left: "266px",
     top: "297px",
     seated: false,
@@ -203,6 +236,7 @@ export const temp = [
   },
   {
     id: 27,
+    user: 2,
     left: "266px",
     top: "320px",
     seated: false,
@@ -211,6 +245,7 @@ export const temp = [
   },
   {
     id: 28,
+    user: 2,
     left: "266px",
     top: "422px",
     seated: false,
@@ -219,6 +254,7 @@ export const temp = [
   },
   {
     id: 29,
+    user: 2,
     left: "266px",
     top: "445px",
     seated: false,
@@ -227,6 +263,7 @@ export const temp = [
   },
   {
     id: 30,
+    user: 2,
     left: "266px",
     top: "468px",
     seated: false,
@@ -235,6 +272,7 @@ export const temp = [
   },
   {
     id: 31,
+    user: 2,
     left: "266px",
     top: "491px",
     seated: false,
@@ -243,6 +281,7 @@ export const temp = [
   },
   {
     id: 32,
+    user: 2,
     left: "266px",
     top: "514px",
     seated: false,
@@ -251,6 +290,7 @@ export const temp = [
   },
   {
     id: 33,
+    user: 2,
     left: "266px",
     top: "537px",
     seated: false,
@@ -259,6 +299,7 @@ export const temp = [
   },
   {
     id: 34,
+    user: 2,
     left: "266px",
     top: "641px",
     seated: false,
@@ -267,6 +308,7 @@ export const temp = [
   },
   {
     id: 35,
+    user: 2,
     left: "266px",
     top: "664px",
     seated: false,
@@ -275,6 +317,7 @@ export const temp = [
   },
   {
     id: 36,
+    user: 2,
     left: "266px",
     top: "687px",
     seated: false,

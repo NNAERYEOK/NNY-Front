@@ -14,14 +14,13 @@ import { seatinfo } from "../../data/seatInfo";
 import { temp } from "../../data/temp";
 // api
 import { GetSeat, PatchStation } from "../../api/seat";
-import { GetUser } from "../../api/user";
+import { PostWarning } from "../../api/user";
 // redux
 import { useAppSelector } from "../../store";
 
 const SeatPage = () => {
-  // 유저 아이디 가져오기 redux
-  const { id, eye } = useAppSelector(state => state.user);
-  console.log("유저 아이디", id, eye);
+  const { id } = useAppSelector(state => state.user);
+
   // 전체 좌석 정보
   const [seats, setSeats] = useState(seatinfo);
   // 버튼 모달
@@ -38,7 +37,7 @@ const SeatPage = () => {
   const [getOffStation, setGetOffStation] = useState(null);
 
   //임시
-  const train_id = 3;
+  const train_id = 1;
   const now = 2;
 
   // 내릴역 공유 버튼
@@ -67,28 +66,58 @@ const SeatPage = () => {
 
   // ** 내릴 역 공유 api **
   const postMySeat = (selectedId, id, getOffStation) => {
-    PatchStation(selectedId, id, getOffStation)
-      .then(res => location.reload())
-      .catch(err => console.log("좌석 업데이트 실패", err));
+    PatchStation(id, selectedId, getOffStation)
+      .then(res => {
+        location.reload();
+        console.log("좌석 업데이트 성공");
+      })
+      .catch(err => {
+        console.log("좌석 업데이트 실패", err);
+        setSeats(temp);
+      });
   };
 
   // ** 좌석 정보 get api**
   const getSeats = train_id => {
     GetSeat(train_id)
       .then(data => setSeats(data))
-      .catch(err => setSeats(temp));
+      .catch(err => {
+        setSeats(temp);
+        console.log("실패");
+      });
   };
 
+  const [otherId, setOtherId] = useState(null);
+
   // 신고할 좌석 선택
-  const clickWarning = (seat_id, seat_station) => {
+  const clickWarning = (other_id, seat_station) => {
     if (now - seat_station === 0) {
-      console.log("신고하기");
       setWarningModal(true);
+
+      setOtherId(other_id);
+      setGetOffStation(seat_station);
     }
   };
-  // 신고 api
+
+  // ** 신고 api **
   const postWarning = () => {
-    console.log("신고");
+    console.log("신고 시도");
+
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = ("0" + (today.getMonth() + 1)).slice(-2);
+    var day = ("0" + today.getDate()).slice(-2);
+    var hours = ("0" + today.getHours()).slice(-2);
+    var minutes = ("0" + today.getMinutes()).slice(-2);
+    var created_at =
+      year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
+
+    PostWarning(otherId, created_at, getOffStation)
+      .then(data => console.log("경고 주기 성공"))
+      .catch(err => console.log("경고 주기 실패 "));
+
+    console.log("신고시도 ", otherId, getOffStation);
+
     setWarningModal(false);
   };
 
@@ -96,7 +125,7 @@ const SeatPage = () => {
     <div>
       <Background />
 
-      <TopBar eye={eye} />
+      <TopBar />
 
       {isOpen && <Modal LookUp={() => LookUp()} Share={() => Share()} />}
       {warningModal && (
