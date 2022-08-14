@@ -4,21 +4,38 @@ import warning from "../image/warning.svg";
 import eye from "../image/eye.svg";
 import menu from "../image/menu.svg";
 
-import { GetUser } from "../api/user";
+import { GetCurrentEye, GetWarningHistory } from "../api/user";
 import { useAppSelector } from "../store";
 const TopBar = () => {
-  const { email, password } = useAppSelector(state => state.user);
+  const { id } = useAppSelector(state => state.user);
 
   const [eye, setEye] = useState(0);
   const [warning, setWarning] = useState(0);
 
+  const countHistory = data => {
+    var i;
+
+    data.map(history => {
+      if (history.user === id) {
+        i = i + 1;
+      }
+    });
+
+    return i;
+  };
+
   useEffect(() => {
-    GetUser(email, password)
+    // 현재 eye 값 get
+    GetCurrentEye(id)
+      .then(data => setEye(data))
+      .catch(err => console.log("현재 eye 값 조회 실패"));
+
+    // 현재 누적 경고 개수
+    GetWarningHistory()
       .then(data => {
-        setEye(data.eye);
-        setWarning(3);
+        setWarning(countHistory(data));
       })
-      .catch(err => console.log("eye,warning 조회 실패", err));
+      .catch(err => console.log("경고 히스토리 조회 실패"));
   }, []);
 
   return (
