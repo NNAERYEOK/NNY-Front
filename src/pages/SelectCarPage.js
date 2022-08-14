@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import TopBar from "../components/TopBar";
 import BackBtn from "../components/BackBtn";
-import RealtimeModal from "../components/RealtimeModal";
 
 import car1 from "../image/car1.svg";
 import car2 from "../image/car2.svg";
