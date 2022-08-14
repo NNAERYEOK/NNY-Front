@@ -14,32 +14,25 @@ import { setUser } from "../../store/features/userSlice";
 import { GetUser } from "../../api/user";
 
 const LoginPage = () => {
-  const [id, setId] = useState(null);
+  const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+
+  const navigate = useNavigate();
 
   // 유저 리덕스
   const dispatch = useAppDispatch();
 
-  // 로그인 함수 (미완성)
+  // 로그인 함수
   const Login = () => {
-    console.log("로그인 시도", id, password);
+    console.log("로그인 시도", email, password);
 
-    GetUser(id, password)
-      .then(
-        dispatch(
-          setUser({
-            id: 3,
-            username: "테스트",
-            email: "example@gmail.com",
-            eye: 10,
-          }),
-        ),
-        navigate("/"),
-      )
+    GetUser(email, password)
+      .then(data => {
+        dispatch(setUser(data));
+        navigate("/");
+      })
       .catch(err => console.log("로그인 실패", err));
   };
-
-  const navigate = useNavigate();
 
   const goRegister = () => {
     navigate("/register");
@@ -52,8 +45,8 @@ const LoginPage = () => {
       <Title>로그인</Title>
       <FormField onSubmit={Login}>
         <input
-          value={id}
-          onChange={e => setId(e.target.value)}
+          value={email}
+          onChange={e => setEmail(e.target.value)}
           className="idInput"
           placeholder="아이디"
           type="login"

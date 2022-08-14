@@ -1,13 +1,26 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import X from "../image/X.svg";
-import leftBtn from "../image/leftBtn.svg";
-import rightBtn from "../image/rightBtn.svg";
 
-import { subway } from "../data/subway";
+import X from "../../image/X.svg";
+import leftBtn from "../../image/leftBtn.svg";
+import rightBtn from "../../image/rightBtn.svg";
+
+import { subway } from "../../data/subway";
+("");
+
+import Time from "./Time";
 
 const RealtimeModal = ({ selectSubwayId, isOpen, setRealtimeModal }) => {
-  console.log(selectSubwayId);
+  if (selectSubwayId == 0) {
+    var leftSub = "";
+    var rightSub = subway[selectSubwayId + 1].station;
+  } else if (selectSubwayId < 52) {
+    leftSub = subway[selectSubwayId - 1].station;
+    rightSub = subway[selectSubwayId + 1].station;
+  } else {
+    leftSub = subway[51].station;
+    rightSub = "";
+  }
   return (
     <div>
       <Modal>
@@ -20,35 +33,17 @@ const RealtimeModal = ({ selectSubwayId, isOpen, setRealtimeModal }) => {
             <StationInfo>
               <Left>
                 <img src={leftBtn} />
-                <p>{selectSubwayId - 1}</p>
+                <p>{leftSub}</p>
               </Left>
               <Center>
-                <p>{selectSubwayId}</p>
+                <p>{subway[selectSubwayId].station}</p>
               </Center>
               <Right>
-                <p>{selectSubwayId + 1}</p>
-                <img src={rightBtn} />
+                <p>{rightSub}</p>
+                <img src={rightBtn} id="rightImg" />
               </Right>
             </StationInfo>
-            <Time>
-              <LeftTime>
-                <p>
-                  성수(외선)행 <span> 곧도착</span>
-                </p>
-                <p>
-                  성수(외선)행 <span> 곧도착</span>
-                </p>
-              </LeftTime>
-              <CenterTime></CenterTime>
-              <RightTime>
-                <p>
-                  성수(내선)행 <span> 곧도착</span>
-                </p>
-                <p>
-                  성수(내선)행 <span> 곧도착</span>
-                </p>
-              </RightTime>
-            </Time>
+            <Time />
           </div>
         </div>
       </Modal>
@@ -74,23 +69,10 @@ const Modal = styled.div`
     border-radius: 27px;
     display: flex;
     flex-direction: column;
+    z-index: 10;
   }
   .container.modal-open .modal {
     top: 60%;
-  }
-  p {
-    color: #3f3f3f;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 10px;
-    margin-top: 20px;
-    margin-left: 15px;
-  }
-  span {
-    font-weight: 400;
-    font-size: 10px;
-    color: #ff0000;
-    margin-left: 10px;
   }
 `;
 const Menu = styled.div`
@@ -129,12 +111,14 @@ const Left = styled.div`
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 7px 0 0 7px;
   margin-top: 13px;
+  text-align: left;
   p {
     display: inline;
     font-weight: 700;
     font-size: 10px;
     color: #ffffff;
     margin-top: 5px;
+    margin-left: 3px;
   }
 `;
 const Right = styled.div`
@@ -144,13 +128,13 @@ const Right = styled.div`
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0 7px 7px 0;
   margin-top: 13px;
+  text-align: right;
   p {
     display: inline;
     font-weight: 700;
     font-size: 10px;
     color: #ffffff;
-    margin-left: 65px;
-    margin-right: 10px;
+    margin-right: 3px;
   }
 `;
 const Center = styled.div`
@@ -166,29 +150,4 @@ const Center = styled.div`
     text-align: center;
     margin: 13px auto;
   }
-`;
-const Time = styled.div`
-  display: flex;
-  margin: 25px auto;
-`;
-const LeftTime = styled.div`
-  width: 140px;
-  height: 26px;
-  margin-right: 28px;
-  img {
-    cursor: pointer;
-  }
-`;
-const RightTime = styled.div`
-  width: 148px;
-  height: 26px;
-  margin-left: 28px;
-  img {
-    cursor: pointer;
-  }
-`;
-const CenterTime = styled.div`
-  width: 2px;
-  height: 80px;
-  background: #bfbfbf;
 `;

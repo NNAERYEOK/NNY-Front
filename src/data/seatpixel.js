@@ -1,4 +1,4 @@
-export const seatinfo = [
+export const seatpixel = [
   {
     id: 1,
     left: "91px",

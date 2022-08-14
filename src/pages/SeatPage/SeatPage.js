@@ -8,6 +8,7 @@ import TopBar from "../../components/TopBar";
 import Modal from "../../components/seatpage/Modal";
 import BottomModal from "../../components/seatpage/BottomModal";
 import BackBtn from "../../components/BackBtn";
+import Warning from "../../components/seatpage/Warning";
 //데이터
 import { seatinfo } from "../../data/seatInfo";
 import { temp } from "../../data/temp";
@@ -18,25 +19,29 @@ import { GetUser } from "../../api/user";
 import { useAppSelector } from "../../store";
 
 const SeatPage = () => {
-  // 유저 아이디
+  // 유저 아이디 가져오기 redux
   const { id, eye } = useAppSelector(state => state.user);
   console.log("유저 아이디", id, eye);
-
   // 전체 좌석 정보
   const [seats, setSeats] = useState(seatinfo);
   // 버튼 모달
   const [isOpen, setIsOpen] = useState(true);
   // 바텀 모달
   const [bottomModal, setBottomModal] = useState(false);
+  // 경고 모달
+  const [warningModal, setWarningModal] = useState(false);
   // 좌석 선택하기 버튼
   const [share, setShare] = useState(false);
-
   // 선택된 좌석의 id
   const [selectedId, setSelectedId] = useState(null);
   // 선택된 좌석의 내릴역 id
   const [getOffStation, setGetOffStation] = useState(null);
 
-  // 내릴역 공유하기
+  //임시
+  const train_id = 3;
+  const now = 2;
+
+  // 내릴역 공유 버튼
   const Share = () => {
     setIsOpen(false);
     setShare(true);
@@ -46,7 +51,7 @@ const SeatPage = () => {
   const LookUp = () => {
     setIsOpen(false);
     setShare(false);
-    getSeats();
+    getSeats(train_id);
   };
 
   // 빈자리 클릭하기
@@ -60,21 +65,32 @@ const SeatPage = () => {
     setBottomModal(true);
   };
 
-  // ** 내 자리 + 내릴역 공유하는 api **
-  const PostMySeat = () => {
-    PatchStation();
-    getSeats();
+  // ** 내릴 역 공유 api **
+  const postMySeat = (selectedId, id, getOffStation) => {
+    PatchStation(selectedId, id, getOffStation)
+      .then(res => location.reload())
+      .catch(err => console.log("좌석 업데이트 실패", err));
   };
 
   // ** 좌석 정보 get api**
-  const getSeats = () => {
-    GetSeat()
-      .then(data => setSeats(temp))
+  const getSeats = train_id => {
+    GetSeat(train_id)
+      .then(data => setSeats(data))
       .catch(err => setSeats(temp));
   };
 
-  // ** 유저 eye 정보 get api**
-  useEffect(() => {}, []);
+  // 신고할 좌석 선택
+  const clickWarning = (seat_id, seat_station) => {
+    if (now - seat_station === 0) {
+      console.log("신고하기");
+      setWarningModal(true);
+    }
+  };
+  // 신고 api
+  const postWarning = () => {
+    console.log("신고");
+    setWarningModal(false);
+  };
 
   return (
     <div>
@@ -83,6 +99,9 @@ const SeatPage = () => {
       <TopBar eye={eye} />
 
       {isOpen && <Modal LookUp={() => LookUp()} Share={() => Share()} />}
+      {warningModal && (
+        <Warning setWarningModal={setWarningModal} postWarning={postWarning} />
+      )}
 
       <Wrapper>
         <BackBtn />
@@ -90,7 +109,12 @@ const SeatPage = () => {
 
         <Num>2024</Num>
         <Train>
-          <Seats seats={seats} share={share} SelectSeat={SelectSeat} />
+          <Seats
+            seats={seats}
+            share={share}
+            SelectSeat={SelectSeat}
+            clickWarning={clickWarning}
+          />
         </Train>
       </Wrapper>
 
@@ -98,7 +122,7 @@ const SeatPage = () => {
         isOpen={bottomModal}
         setBottomModal={setBottomModal}
         setGetOffStation={setGetOffStation}
-        PostMySeat={PostMySeat}
+        postMySeat={postMySeat}
       />
     </div>
   );
