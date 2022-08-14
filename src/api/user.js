@@ -38,15 +38,57 @@ export const PostWarning = async (id, created_at, station) => {
   }
 };
 
-//
-export const GetWarningHistory = async user => {
+// eye 사용 히스토리 업데이트
+export const PostUsedEye = async (id, created_at, amount) => {
   try {
-    const response = await UserService.getWarningHistory(user);
+    const response = await UserService.postUsedEye(id, created_at, amount);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error, "eye 사용 히스토리 업뎃 실패");
+  }
+};
+
+// eye 충전 히스토리 업데이트
+export const PostAddEye = async (id, created_at, amount) => {
+  try {
+    const response = await UserService.postAddEye(id, created_at, amount);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error, "eye 충전 히스토리 업뎃 실패");
+  }
+};
+
+// 현재 총 eye 개수 조회 (임시)
+export const GetCurrentEye = async id => {
+  try {
+    const response = await UserService.getCurrentEye(id);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error, "현재 eye 개수 조회 실패");
+  }
+};
+
+// 현재 총 eye 개수 업데이트 (임시)
+export const PatchCurrentEye = async (id, eye) => {
+  try {
+    const response = await UserService.patchCurrentEye(id, eye);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error, "현재 eye 개수 업뎃 실패");
+  }
+};
+
+// 경고 history 조회
+export const GetWarningHistory = async () => {
+  try {
+    const response = await UserService.getWarningHistory();
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "경고 내역 조회 실패");
   }
 };
+
+// ********이 아래론 작업 안됨 ********
 
 export const PatchEye = async user => {
   try {

@@ -29,16 +29,38 @@ const UserService = {
       station: station,
     }),
 
-  //
+  // eye 사용 히스토리 업뎃
+  postUsedEye: (id, created_at, amount) =>
+    http.post("/nny/usedeye/", {
+      user: id,
+      created_at: created_at,
+      amount: amount,
+    }),
+  // eye 충전 히스토리 업뎃
+  postAddEye: (id, created_at, amount) =>
+    http.post("/nny/eye/", {
+      user: id,
+      created_at: created_at,
+      amount: amount,
+    }),
+
+  // 현재 eye 개수 조회
+  getCurrentEye: id =>
+    http.post("???", {
+      user: id,
+    }),
+
+  // 현재 eye 개수 업뎃 (임시)
+  patchCurrentEye: (id, eye) =>
+    http.post("???", {
+      user: id,
+      eye: eye,
+    }),
 
   // 유저 경고 기록 조회
-  getWarningHistory: user => http.get("/nny/warning/<int:pk>"),
+  getWarningHistory: () => http.get("/nny/warning/"),
 
-  // eye 수 업데이트 (조회, 공유, 구매)
-  patchEye: (user, eye) => http.patch("~", { user: user }),
-
-  // 사용한 eye
-  // 충전한 eye
+  // ************ 이 아래는 작업 안됨 **********
 
   // 비번 수정
   patchUserInfo: password =>
