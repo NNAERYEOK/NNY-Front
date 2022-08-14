@@ -46,7 +46,7 @@ const RegisterPage = () => {
       setSuccess(true);
     }
 
-    PostUser(id, password, username)
+    PostUser(id, pwd, username)
       .then(data => dispatch(setUser(data)))
       .catch(err => console.log("회원 가입 실패"));
 
