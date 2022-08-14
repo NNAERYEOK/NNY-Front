@@ -65,7 +65,7 @@ const SeatPage = () => {
   };
 
   // ** 내릴 역 공유 api **
-  const postMySeat = (selectedId, id, getOffStation) => {
+  const postMySeat = (id, selectedId, getOffStation) => {
     PatchStation(id, selectedId, getOffStation)
       .then(res => {
         location.reload();
