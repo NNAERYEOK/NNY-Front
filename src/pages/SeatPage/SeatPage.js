@@ -10,8 +10,8 @@ import BottomModal from "../../components/seatpage/BottomModal";
 import BackBtn from "../../components/BackBtn";
 import Warning from "../../components/seatpage/Warning";
 //데이터
-import { seatinfo } from "../../data/seatInfo";
-import { temp } from "../../data/temp";
+import { base } from "../../data/base";
+import { temp_data } from "../../data/temp_data";
 // api
 import { GetSeat, PatchStation } from "../../api/seat";
 import { PostWarning } from "../../api/user";
@@ -22,7 +22,7 @@ const SeatPage = () => {
   const { id } = useAppSelector(state => state.user);
 
   // 전체 좌석 정보
-  const [seats, setSeats] = useState(seatinfo);
+  const [seats, setSeats] = useState(base);
   // 버튼 모달
   const [isOpen, setIsOpen] = useState(true);
   // 바텀 모달
@@ -55,34 +55,38 @@ const SeatPage = () => {
 
   // 빈자리 클릭하기
   const SelectSeat = id => {
-    setSeats(
-      seats.map(seat =>
-        id === seat.id ? { ...seat, mine: true } : { ...seat, mine: false },
-      ),
-    );
     setSelectedId(id);
+
+    localStorage.setItem("seat_id", id);
+
+    console.log("선택된 자리 ", id);
+
     setBottomModal(true);
   };
 
   // ** 내릴 역 공유 api **
-  const postMySeat = (id, selectedId, getOffStation) => {
-    PatchStation(id, selectedId, getOffStation)
+  const postMySeat = () => {
+    const seat_id = localStorage.getItem("seat_id");
+
+    PatchStation(id, seat_id, getOffStation)
       .then(res => {
         location.reload();
+
         console.log("좌석 업데이트 성공");
       })
       .catch(err => {
+        console.log("좌석 공유 시도", id, seat_id, getOffStation);
         console.log("좌석 업데이트 실패", err);
-        setSeats(temp);
+        setSeats(temp_data);
       });
   };
 
   // ** 좌석 정보 get api**
   const getSeats = train_id => {
     GetSeat(train_id)
-      .then(data => setSeats(data))
+      .then(data => setSeats(data.seat))
       .catch(err => {
-        setSeats(temp);
+        setSeats(temp_data);
         console.log("실패");
       });
   };
@@ -139,9 +143,11 @@ const SeatPage = () => {
         <Num>2024</Num>
         <Train>
           <Seats
+            id={id}
             seats={seats}
             share={share}
             SelectSeat={SelectSeat}
+            selectedId={selectedId}
             clickWarning={clickWarning}
           />
         </Train>

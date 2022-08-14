@@ -7,13 +7,9 @@ import { persistor } from "../";
 import { setUser } from "../store/features/userSlice";
 
 const Authpage = () => {
-  const { id, username, email, eye, warning } = useAppSelector(
-    state => state.user,
-  );
+  const { id, username, email, password } = useAppSelector(state => state.user);
 
   const dispatch = useAppDispatch();
-  // 기본값
-  //dispatch(initUser());
 
   const setUserInfo = () => {
     dispatch(
