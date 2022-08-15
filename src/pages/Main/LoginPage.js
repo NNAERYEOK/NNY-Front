@@ -27,15 +27,18 @@ const LoginPage = () => {
     e.preventDefault();
     console.log("로그인 시도", email, password);
 
-    GetUser(email, password)
+    GetUser(email, password) // 로그인
       .then(data => {
-        GetProfile().then(data => {
-          console.log("프로필 가져옴", data);
-          dispatch(setUser(data));
-        });
-
         console.log("로그인 시도 결과 : ", data);
-        navigate("/");
+
+        GetProfile() // 프로필 가져오기
+          .then(data => {
+            console.log("프로필 가져옴", data);
+            dispatch(setUser(data));
+          })
+          .catch(err => console.log("프로필 가져오기 실패"));
+
+        navigate("/seat");
       })
       .catch(err => console.log("로그인 실패", err));
   };
