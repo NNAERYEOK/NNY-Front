@@ -3,27 +3,31 @@ import styled, { createGlobalStyle } from "styled-components";
 import warning from "../image/warning.svg";
 import eye from "../image/eye.svg";
 import menu from "../image/menu.svg";
-
-
-
 import { GetCurrentEye, GetWarningHistory } from "../api/user";
 import { useAppSelector } from "../store";
 
-import SideBar from "./SideBar/SideModar";
+import SideBar from "./SideBar/SideModal";
 
 const TopBar = () => {
+  const { eyes } = useAppSelector(state => state.user);
+  const [eye, setEye] = useState(0);
+  const [warning, setWarning] = useState(0);
 
-const [SideBarModal, setSideBarModal] = useState(false);
+  useEffect(() => {
+    setEye(eyes);
+    // 현재 누적 경고 개수
+    GetWarningHistory()
+      .then(data => {
+        setWarning(countHistory(data));
+      })
+      .catch(err => console.log("경고 히스토리 조회 실패"));
+  });
+
+  const [SideBarModal, setSideBarModal] = useState(false);
   // 사이드바버튼 클릭하기
   const SelectMenu = () => {
     setSideBarModal(true);
   };
-  
-  const { id } = useAppSelector(state => state.user);
-
-  const [eye, setEye] = useState(0);
-  const [warning, setWarning] = useState(0);
-
   const countHistory = data => {
     var i;
 
@@ -35,21 +39,6 @@ const [SideBarModal, setSideBarModal] = useState(false);
 
     return i;
   };
-
-  useEffect(() => {
-    // 현재 eye 값 get
-    GetCurrentEye(id)
-      .then(data => setEye(data))
-      .catch(err => console.log("현재 eye 값 조회 실패"));
-
-    // 현재 누적 경고 개수
-    GetWarningHistory()
-      .then(data => {
-        setWarning(countHistory(data));
-      })
-      .catch(err => console.log("경고 히스토리 조회 실패"));
-  }, []);
-
 
   return (
     <>
