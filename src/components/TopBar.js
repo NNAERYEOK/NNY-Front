@@ -4,9 +4,21 @@ import warning from "../image/warning.svg";
 import eye from "../image/eye.svg";
 import menu from "../image/menu.svg";
 
+
+
 import { GetCurrentEye, GetWarningHistory } from "../api/user";
 import { useAppSelector } from "../store";
+
+import SideBar from "./SideBar/SideModar";
+
 const TopBar = () => {
+
+const [SideBarModal, setSideBarModal] = useState(false);
+  // 사이드바버튼 클릭하기
+  const SelectMenu = () => {
+    setSideBarModal(true);
+  };
+  
   const { id } = useAppSelector(state => state.user);
 
   const [eye, setEye] = useState(0);
@@ -38,10 +50,11 @@ const TopBar = () => {
       .catch(err => console.log("경고 히스토리 조회 실패"));
   }, []);
 
+
   return (
     <>
       <Navbar>
-        <Menu />
+        <Menu onClick={() => SelectMenu()} />
         <Icons>
           <EyeBar>
             <p>{eye}</p>
@@ -52,6 +65,7 @@ const TopBar = () => {
           </WarningBar>
         </Icons>
       </Navbar>
+      <SideBar isOpen={SideBarModal} setSideBarModal={setSideBarModal} />
     </>
   );
 };
@@ -119,6 +133,7 @@ const Menu = styled.div`
   height: 54px;
 
   margin: 0 0 0 28px;
+  cursor: pointer;
 `;
 
 const Icons = styled.div`
