@@ -1,20 +1,26 @@
 import http from "../http";
 
 const UserService = {
+  // 프로필 조회
+  getProfile: () => http.get("/nny/profile/"),
+
   // 로그인
   getUser: (email, password) =>
-    http.get("/nny/login/", {
+    http.post("/nny/login/", {
       email: email,
       password: password,
     }),
 
+  // 로그아웃
+  getLogout: () => http.get("/nny/logout/"),
+
   // 회원가입 api
-  postUser: (id, password) =>
+  postUser: (email, password) =>
     http.post("/nny/signup/", {
-      id: id,
+      email: email,
       password: password,
-      username: username,
     }),
+
   // 회원가입 : 이름
   patchUserName: username =>
     http.patch("/nny/signup/", {
@@ -44,17 +50,10 @@ const UserService = {
       amount: amount,
     }),
 
-  // 현재 eye 개수 조회
-  getCurrentEye: id =>
-    http.post("???", {
-      user: id,
-    }),
-
-  // 현재 eye 개수 업뎃 (임시)
-  patchCurrentEye: (id, eye) =>
-    http.post("???", {
-      user: id,
-      eye: eye,
+  // 현재 eye 개수 업뎃
+  patchCurrentEye: eye =>
+    http.patch("/nny/profile/", {
+      eyes: eye,
     }),
 
   // 유저 경고 기록 조회

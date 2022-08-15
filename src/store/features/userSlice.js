@@ -6,9 +6,9 @@ const name = "UserSlice";
 
 const initialState = {
   id: "",
-  email: "",
   password: "",
   username: "",
+  eyes: 9,
 };
 
 export const userSlice = createSlice({
@@ -17,15 +17,18 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.id = action.payload.id;
-      state.email = action.payload.email;
       state.password = action.payload.password;
       state.username = action.payload.username;
+      state.eyes = action.payload.eyes;
+    },
+    setEye: (state, action) => {
+      state.eyes = action.payload.eyes;
     },
     initUser: state => {
       state.id = initialState.id;
-      state.email = initialState.email;
       state.password = initialState.password;
       state.username = initialState.username;
+      state.eyes = initialState.eyes;
     },
   },
   extraReducers: builder => {
@@ -33,6 +36,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser, initUser } = userSlice.actions;
+export const { setUser, initUser, setEye } = userSlice.actions;
 
 export default userSlice.reducer;

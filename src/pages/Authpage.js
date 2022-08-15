@@ -7,7 +7,7 @@ import { persistor } from "../";
 import { setUser } from "../store/features/userSlice";
 
 const Authpage = () => {
-  const { id, username, email, password } = useAppSelector(state => state.user);
+  const { id, username, eyes, password } = useAppSelector(state => state.user);
 
   const dispatch = useAppDispatch();
 
@@ -16,8 +16,8 @@ const Authpage = () => {
       setUser({
         id: 11,
         username: "마루",
-        email: "maru@gmail.com",
         password: "~~",
+        eyes: 5,
       }),
     );
   };
@@ -32,7 +32,7 @@ const Authpage = () => {
   return (
     <div>
       <h3>
-        {id}, {username},{email},{password}
+        {id}, {username},{eyes},{password}
       </h3>
       <button onClick={() => setUserInfo()}>변경</button>
       <button onClick={async () => purge()}>로그아웃</button>

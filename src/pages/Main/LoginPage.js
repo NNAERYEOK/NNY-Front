@@ -11,11 +11,11 @@ import pwImage from "../../image/pw.svg";
 // 유저 정보 관련
 import { useAppDispatch } from "../../store/index";
 import { setUser } from "../../store/features/userSlice";
-import { GetUser } from "../../api/user";
+import { GetUser, GetProfile } from "../../api/user";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
@@ -23,13 +23,22 @@ const LoginPage = () => {
   const dispatch = useAppDispatch();
 
   // 로그인 함수
-  const Login = () => {
+  const Login = e => {
+    e.preventDefault();
     console.log("로그인 시도", email, password);
 
-    GetUser(email, password)
+    GetUser(email, password) // 로그인
       .then(data => {
-        dispatch(setUser(data));
-        navigate("/");
+        console.log("로그인 시도 결과 : ", data);
+
+        GetProfile() // 프로필 가져오기
+          .then(data => {
+            console.log("프로필 가져옴", data);
+            dispatch(setUser(data));
+          })
+          .catch(err => console.log("프로필 가져오기 실패"));
+
+        navigate("/seat");
       })
       .catch(err => console.log("로그인 실패", err));
   };
