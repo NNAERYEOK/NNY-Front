@@ -104,9 +104,9 @@ const SeatPage = () => {
   // ** 좌석 정보 get api **
   const getSeats = train_id => {
     GetSeat(train_id)
-      .then(res => {
-        setSeats(res.data.seat);
-        console.log("성고오오옹", res);
+      .then(data => {
+        setSeats(data.seat);
+        console.log("성고오오옹", data);
       })
       .catch(err => {
         setSeats(temp_data);
