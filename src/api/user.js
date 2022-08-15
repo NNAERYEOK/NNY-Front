@@ -1,18 +1,39 @@
 import UserService from "./services/userservice";
 
+// 프로필 조회
+export const GetProfile = async () => {
+  try {
+    const response = await UserService.getProfile();
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error, "프로필 조회 실패");
+  }
+};
+
 // 로그인
 export const GetUser = async (email, password) => {
   try {
     const response = await UserService.getUser(email, password);
     return Promise.resolve(response.data);
   } catch (error) {
-    return Promise.reject(error, "유저 정보 조회 실패");
+    return Promise.reject(error, "로그인 실패");
   }
 };
-// 회원가입
-export const PostUser = async (id, password, username) => {
+
+// 로그아웃
+export const GetLogout = async (email, password) => {
   try {
-    const response = await UserService.postUser(id, password, username);
+    const response = await UserService.getLogout(email, password);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error, "로그아웃 실패");
+  }
+};
+
+// 회원가입
+export const PostUser = async (email, password) => {
+  try {
+    const response = await UserService.postUser(email, password);
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "회원가입 실패");
@@ -58,20 +79,10 @@ export const PostAddEye = async (id, created_at, amount) => {
   }
 };
 
-// 현재 총 eye 개수 조회 (임시)
-export const GetCurrentEye = async id => {
-  try {
-    const response = await UserService.getCurrentEye(id);
-    return Promise.resolve(response.data);
-  } catch (error) {
-    return Promise.reject(error, "현재 eye 개수 조회 실패");
-  }
-};
-
 // 현재 총 eye 개수 업데이트 (임시)
-export const PatchCurrentEye = async (id, eye) => {
+export const PatchCurrentEye = async eye => {
   try {
-    const response = await UserService.patchCurrentEye(id, eye);
+    const response = await UserService.patchCurrentEye(eye);
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "현재 eye 개수 업뎃 실패");
