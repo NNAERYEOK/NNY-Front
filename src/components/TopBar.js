@@ -4,7 +4,7 @@ import warning from "../image/warning.svg";
 import eye from "../image/eye.svg";
 import menu from "../image/menu.svg";
 
-import SideBar from "./SideBar/SideModar";
+import SideBar from "./SideBar/SideModal";
 
 const TopBar = ({ eye, warning }) => {
   const [SideBarModal, setSideBarModal] = useState(false);
