@@ -23,7 +23,9 @@ const SideBar = ({ isOpen, setSideBarModal }) => {
                 <div className="goPaying">충전</div>
               </Link>
             </Eyehistory>
-            <p>회원 수정</p>
+            <Link to="/modifymember">
+              <p>회원 수정</p>
+            </Link>
             <Link to="/eyehistory">
               <p>eye 내역</p>
             </Link>
