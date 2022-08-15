@@ -1,14 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import warning from "../image/warning.svg";
 import eye from "../image/eye.svg";
 import menu from "../image/menu.svg";
 
+import SideBar from "./SideBar/SideModar";
+
 const TopBar = ({ eye, warning }) => {
+  const [SideBarModal, setSideBarModal] = useState(false);
+  // 사이드바버튼 클릭하기
+  const SelectMenu = () => {
+    setSideBarModal(true);
+  };
   return (
     <>
       <Navbar>
-        <Menu />
+        <Menu onClick={() => SelectMenu()} />
         <Icons>
           <EyeBar>
             <p>{eye}</p>
@@ -20,6 +27,7 @@ const TopBar = ({ eye, warning }) => {
           </WarningBar>
         </Icons>
       </Navbar>
+      <SideBar isOpen={SideBarModal} setSideBarModal={setSideBarModal} />
     </>
   );
 };
@@ -87,6 +95,7 @@ const Menu = styled.div`
   height: 54px;
 
   margin: 0 0 0 28px;
+  cursor: pointer;
 `;
 
 const Icons = styled.div`
