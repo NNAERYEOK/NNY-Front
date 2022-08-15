@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 const UpSub = () => {
   const navigate = useNavigate();
-  const goSeatPage = () => {
-    navigate("/seat");
+  const goSelctCarPage = () => {
+    navigate("/selectcar");
   };
   const Img = () => {
     let UpSubImg = [];
@@ -14,7 +14,12 @@ const UpSub = () => {
     for (i = 1; i < 54; i++) {
       var name = "item" + i;
       UpSubImg.push(
-        <img key={name} src={upsub} className={name} onClick={goSeatPage} />,
+        <img
+          key={name}
+          src={upsub}
+          className={name}
+          onClick={goSelctCarPage}
+        />,
       );
     }
     return UpSubImg;

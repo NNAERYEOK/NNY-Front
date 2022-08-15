@@ -171,7 +171,7 @@ const FormField = styled.form`
     background-repeat: no-repeat;
     background-position: right;
   }
-  #password:placeholder-shown {
+  #pwInput:placeholder-shown {
     background-image: url(${pwImage});
     background-repeat: no-repeat;
     background-position: right;

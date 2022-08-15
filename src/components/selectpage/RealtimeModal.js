@@ -6,7 +6,6 @@ import leftBtn from "../../image/leftBtn.svg";
 import rightBtn from "../../image/rightBtn.svg";
 
 import { subway } from "../../data/subway";
-("");
 
 import Time from "./Time";
 
