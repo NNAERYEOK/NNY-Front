@@ -19,14 +19,17 @@ import {
   PostUsedEye,
   PostAddEye,
   PatchCurrentEye,
-  GetCurrentEye,
 } from "../../api/user";
 // redux
-import { useAppSelector } from "../../store";
+import { useAppSelector, useAppDispatch } from "../../store";
+import { setEye } from "../../store/features/userSlice";
 
 const SeatPage = () => {
-  const { id } = useAppSelector(state => state.user);
-  const currentEye = GetCurrentEye();
+  const { id, eyes } = useAppSelector(state => state.user);
+
+  const currentEye = eyes;
+
+  const dispatch = useAppDispatch();
 
   // 전체 좌석 정보
   const [seats, setSeats] = useState(base);
@@ -98,29 +101,34 @@ const SeatPage = () => {
     return created_at;
   };
 
-  // ** 좌석 정보 get api**
+  // ** 좌석 정보 get api **
   const getSeats = train_id => {
     GetSeat(train_id)
-      .then(data => setSeats(data.seat))
+      .then(res => {
+        setSeats(res.data.seat);
+        console.log("성고오오옹", res);
+      })
       .catch(err => {
         setSeats(temp_data);
-        console.log("실패");
+        console.log("좌석 현황 조회 실패", err);
       });
   };
 
   // ** 내릴 역 공유 api **
   const postMySeat = () => {
+    dispatch(setEye({ eyes: 8 }));
     const seat_id = localStorage.getItem("seat_id");
 
-    PatchStation(id, seat_id, getOffStation)
+    console.log("공유 시도", id, seat_id, getOffStation);
+
+    PatchStation(2, seat_id, getOffStation)
       .then(res => {
-        location.reload();
-        console.log("좌석 업데이트 성공");
+        console.log("좌석 업데이트 성공", res);
         addEye(); // eye 획득
+        getSeats(train_id); // 다시 get
       })
       .catch(err => {
-        console.log("좌석 공유 시도", id, seat_id, getOffStation);
-        console.log("좌석 업데이트 실패", err);
+        console.log("좌석 공유 실패", id, seat_id, getOffStation);
         setSeats(temp_data);
       });
   };
@@ -129,11 +137,12 @@ const SeatPage = () => {
   const postWarning = () => {
     console.log("신고 시도");
     const created_at = getTime();
-    PostWarning(otherId, created_at, getOffStation)
-      .then(data => console.log("경고 주기 성공"))
-      .catch(err => console.log("경고 주기 실패 "));
 
-    console.log("신고시도 ", otherId, getOffStation);
+    PostWarning(otherId, created_at, getOffStation)
+      .then(data => console.log("경고 주기 성공", data))
+      .catch(err => console.log("경고 주기 실패", err));
+
+    console.log("신고시도 ", otherId, created_at, getOffStation);
 
     setWarningModal(false);
   };
@@ -143,20 +152,37 @@ const SeatPage = () => {
     const created_at = getTime();
 
     // 1) 총 eye 개수 업뎃
-    var currentEye = 10; // 임시 값
-    PatchCurrentEye(id, currentEye + 1);
+
+    PatchCurrentEye(currentEye + 1)
+      .then(data => {
+        //수정된 eye dispatch
+        dispatch(setEye(data.eyes));
+      })
+      .catch(err => console.log("현재 eye 업뎃 실패", err));
+
     // 2) 충전 내역 히스토리 업뎃
-    PostUsedEye(id, created_at, 1);
+    PostUsedEye(id, created_at, 1)
+      .then(data => console.log("충전 히스토리 성공"))
+      .catch(err => console.log("충전 히스토리 실패", err));
   };
 
   // ** 좌석 조회로 eye -1 **
   const minusEye = () => {
     const created_at = getTime();
+
     // 1) 총 eye 개수 업뎃
-    var currentEye = 10; // 임시 값
-    PatchCurrentEye(id, currentEye - 1);
+
+    PatchCurrentEye(currentEye - 1)
+      .then(data => {
+        //수정된 eye dispatch
+        dispatch(setEye(data.eyes));
+      })
+      .catch(err => console.log("현재 eye 업뎃 실패", err));
+
     // 2) 사용 내역 히스토리 업뎃
-    PostAddEye(id, created_at, -1);
+    PostAddEye(id, created_at, -1)
+      .then(data => console.log("사용 히스토리 성공"))
+      .catch(err => console.log("사용 히스토리 실패", err));
   };
 
   return (
