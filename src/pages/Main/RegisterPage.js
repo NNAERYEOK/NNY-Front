@@ -8,7 +8,7 @@ import loginImage from "../../image/login.svg";
 import pwImage from "../../image/pw.svg";
 import pwCImage from "../../image/repw.svg";
 // 유저 api
-import { PostUser, PatchUserName } from "../../api/user";
+import { PostUser, PatchUserName, GetUser, GetProfile } from "../../api/user";
 // 리덕스
 import { useAppDispatch } from "../../store/index";
 import { setUser } from "../../store/features/userSlice";
@@ -36,7 +36,7 @@ const RegisterPage = () => {
 
   // 회원가입
   const handleSubmit = async e => {
-    event.preventDefault();
+    e.preventDefault();
 
     if (matchPwd !== pwd) {
       return alert("비밀번호와 비밀번호확인은 같아야 합니다.");
@@ -44,13 +44,29 @@ const RegisterPage = () => {
       setSuccess(true);
       console.log(email, pwd, username);
 
-      PostUser(email, pwd)
-        .then(data => PatchUserName(username))
+      PostUser(email, pwd) // 회원가입
         .then(data => {
-          dispatch(setUser(data));
-          nav("/");
+          console.log("성공", data);
+
+          GetUser(email, pwd).then(data => {
+            // 로그인
+            console.log("로그인 성공", data);
+
+            PatchUserName(username) //닉넴 수정
+              .then(data => {
+                console.log("닉네임 수정 완료", data);
+
+                GetProfile()
+                  .then(data => {
+                    dispatch(setUser(data));
+                    nav("/");
+                  })
+                  .catch(err => console.log("프로필 가져오기 실패"));
+              })
+              .catch(err => console.log("닉넴 수정 실패", err));
+          });
         })
-        .catch(err => alert("회원 가입 실패"));
+        .catch(err => console.log(err, "회원 가입 실패"));
     }
   };
 
