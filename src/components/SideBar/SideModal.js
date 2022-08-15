@@ -6,7 +6,19 @@ import Back from "../../image/back.svg";
 import ProfileImg from "../../image/profile.svg";
 import Eye from "../../image/eyeicon.svg";
 
+import { useAppSelector } from "../../store";
+
 const SideBar = ({ isOpen, setSideBarModal }) => {
+  const { username } = useAppSelector(state => state.user);
+  const { eyes } = useAppSelector(state => state.user);
+  const [eye, setEye] = useState(0);
+  const [nickname, setNickname] = useState("");
+
+  useEffect(() => {
+    setEye(eyes);
+    setNickname(username);
+  });
+
   return (
     <div>
       <Modal>
@@ -14,11 +26,11 @@ const SideBar = ({ isOpen, setSideBarModal }) => {
           <div className="modal">
             <Close src={Back} onClick={() => setSideBarModal(false)}></Close>
             <Profile src={ProfileImg}></Profile>
-            <Username>허윤</Username>
+            <Username>{nickname}</Username>
             <Eyehistory>
               <img src={Eye}></img>
               <span>내가 가진 eye</span>
-              <span className="myeye">3</span>
+              <span className="myeye">{eye}</span>
               <Link to="/paying">
                 <div className="goPaying">충전</div>
               </Link>
