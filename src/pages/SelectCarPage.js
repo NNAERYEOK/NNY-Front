@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -25,6 +25,20 @@ export function SelectCarPage() {
   const goSeatPage = () => {
     navigate("/seat");
   };
+  const [trainId, settrainId] = useState(0);
+  //LocalStorage 저장
+  const saveData = trainId => {
+    const userTrain_id = { train_id: trainId };
+    window.localStorage.setItem("train_id", JSON.stringify(userTrain_id));
+    callData();
+    goSeatPage();
+  };
+  // 저장 불러오기
+  const callData = () => {
+    {
+      console.log(window.localStorage.getItem("train_id"));
+    }
+  };
 
   return (
     <>
@@ -41,7 +55,7 @@ export function SelectCarPage() {
         <CarContainer>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car1} onClick={goSeatPage} />
+              <img className="car" src={car1} onClick={() => saveData(1)} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -57,7 +71,7 @@ export function SelectCarPage() {
           </CarBox>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car2} onClick={goSeatPage} />
+              <img className="car" src={car2} onClick={() => saveData(2)} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -73,7 +87,7 @@ export function SelectCarPage() {
           </CarBox>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car3} onClick={goSeatPage} />
+              <img className="car" src={car3} onClick={() => saveData(3)} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -89,7 +103,7 @@ export function SelectCarPage() {
           </CarBox>
           <CarBox>
             <LeftBox>
-              <img className="car" src={car4} onClick={goSeatPage} />
+              <img className="car" src={car4} onClick={() => saveData(4)} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -104,8 +118,8 @@ export function SelectCarPage() {
             </RightBox>
           </CarBox>
           <CarBox>
-            <LeftBox>
-              <img className="car" src={car5} onClick={goSeatPage} />
+            <LeftBox onClick={goSeatPage}>
+              <img className="car" src={car5} onClick={() => saveData(5)} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -120,8 +134,8 @@ export function SelectCarPage() {
             </RightBox>
           </CarBox>
           <CarBox>
-            <LeftBox>
-              <img className="car" src={car6} onClick={goSeatPage} />
+            <LeftBox onClick={goSeatPage}>
+              <img className="car" src={car6} onClick={() => saveData(6)} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -136,8 +150,8 @@ export function SelectCarPage() {
             </RightBox>
           </CarBox>
           <CarBox>
-            <LeftBox>
-              <img className="car" src={car7} onClick={goSeatPage} />
+            <LeftBox onClick={goSeatPage}>
+              <img className="car" src={car7} onClick={() => saveData(7)} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -152,8 +166,8 @@ export function SelectCarPage() {
             </RightBox>
           </CarBox>
           <CarBox>
-            <LeftBox>
-              <img className="car" src={car8} onClick={goSeatPage} />
+            <LeftBox onClick={goSeatPage}>
+              <img className="car" src={car8} onClick={() => saveData(8)} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -168,8 +182,8 @@ export function SelectCarPage() {
             </RightBox>
           </CarBox>
           <CarBox>
-            <LeftBox>
-              <img className="car" src={car9} onClick={goSeatPage} />
+            <LeftBox onClick={goSeatPage}>
+              <img className="car" src={car9} onClick={() => saveData(9)} />
               <img className="carcontour" src={carcontour} />
             </LeftBox>
             <RightBox>
@@ -184,8 +198,8 @@ export function SelectCarPage() {
             </RightBox>
           </CarBox>
           <CarBox>
-            <LeftBox>
-              <img className="car" src={car10} onClick={goSeatPage} />
+            <LeftBox onClick={goSeatPage}>
+              <img className="car" src={car10} onClick={() => saveData(10)} />
             </LeftBox>
             <RightBox>
               <EyeBox>
