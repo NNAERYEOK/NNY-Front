@@ -14,8 +14,8 @@ import { setUser } from "../../store/features/userSlice";
 import { GetUser } from "../../api/user";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const LoginPage = () => {
     GetUser(email, password)
       .then(data => {
         dispatch(setUser(data));
-        navigate("/");
+        navigate("/selectLine");
       })
       .catch(err => console.log("로그인 실패", err));
   };
