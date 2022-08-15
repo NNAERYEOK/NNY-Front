@@ -7,16 +7,13 @@ import BackBtn from "../components/BackBtn";
 import loginImage from "../image/login.svg";
 import pwImage from "../image/pw.svg";
 import pwCImage from "../image/repw.svg";
-// 유저 api
-import { PostUser, PatchUserName } from "../api/user";
+
 // 리덕스
 import { useAppDispatch } from "../store/index";
 import { setUser } from "../store/features/userSlice";
 
 const ModifyPage = () => {
   const dispatch = useAppDispatch(); // 리덕스
-
-  const nav = useNavigate();
 
   //이름, 비밀번호, 비밀번호확인, 이름
   const [email, setEmail] = useState("");
@@ -30,10 +27,6 @@ const ModifyPage = () => {
   } else {
     checkPassword = "";
   }
-
-  //회원정보 수정 성공
-  const [success, setSuccess] = useState(false);
-
   // 회원가입
   const handleSubmit = async e => {
     event.preventDefault();
@@ -41,16 +34,7 @@ const ModifyPage = () => {
     if (matchPwd !== pwd) {
       return alert("비밀번호와 비밀번호확인은 같아야 합니다.");
     } else {
-      setSuccess(true);
       console.log(email, pwd, username);
-
-      PostUser(email, pwd)
-        .then(data => PatchUserName(username))
-        .then(data => {
-          dispatch(setUser(data));
-          nav("/");
-        })
-        .catch(err => alert("회원 정보 수정 실패"));
     }
   };
 
