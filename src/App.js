@@ -15,6 +15,7 @@ import SeatPage from "./pages/SeatPage/SeatPage";
 import WarningPage from "./pages/WarningHistoryPage";
 import ChargingPage from "./pages/ChargingPage";
 import PayingPage from "./pages/PayingPage";
+import ModifyPage from "./pages/ModifyPage";
 // EyeHistoryPage
 import EyeHistoryPage from "./pages/EyeHistoryPage/EyeHistoryPage";
 // Auth
@@ -36,6 +37,7 @@ function App() {
         <Route exact path="/paying" element={<PayingPage />} />
         <Route exact path="/eyehistory" element={<EyeHistoryPage />} />
         <Route exact path="/warninghistory" element={<WarningPage />} />
+        <Route exact path="/modifymember" element={<ModifyPage />} />
       </Routes>
     </BrowserRouter>
   );
