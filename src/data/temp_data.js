@@ -4,8 +4,8 @@ export const temp_data = [
     user: 2,
     train: 1,
     seat_num: 1,
-    is_seated: false,
-    station: null,
+    is_seated: true,
+    station: 2,
   },
   {
     id: 2,
