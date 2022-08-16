@@ -29,7 +29,7 @@ const Seats = ({ seats, share, SelectSeat, selectedId, clickWarning, id }) => {
                   onClick={() => clickWarning(seat.user, seat.station)}
                   seated
                 >
-                  {now - seat.station}
+                  {seat.station - now}
                 </Seat>
               );
             }
@@ -64,7 +64,7 @@ const Seats = ({ seats, share, SelectSeat, selectedId, clickWarning, id }) => {
                   onClick={() => clickWarning(seat.user, seat.station)}
                   seated
                 >
-                  {now - seat.station}
+                  {seat.station - now}
                 </Seat>
               );
             }
