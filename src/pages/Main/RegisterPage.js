@@ -46,7 +46,7 @@ const RegisterPage = () => {
 
       PostUser(email, pwd) // 회원가입
         .then(data => {
-          console.log("성공", data);
+          console.log("회원가입 성공", data);
 
           GetUser(email, pwd).then(data => {
             // 로그인
@@ -59,7 +59,7 @@ const RegisterPage = () => {
                 GetProfile()
                   .then(data => {
                     dispatch(setUser(data));
-                    nav("/");
+                    nav("/selectline"); // 최종 성공
                   })
                   .catch(err => console.log("프로필 가져오기 실패"));
               })

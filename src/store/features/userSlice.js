@@ -8,7 +8,7 @@ const initialState = {
   id: "",
   password: "",
   username: "",
-  eyes: 9,
+  eyes: 3,
 };
 
 export const userSlice = createSlice({

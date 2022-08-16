@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -25,22 +26,33 @@ const LoginPage = () => {
   // 로그인 함수
   const Login = e => {
     e.preventDefault();
-    console.log("로그인 시도", email, password);
 
-    GetUser(email, password) // 로그인
-      .then(data => {
-        console.log("로그인 시도 결과 : ", data);
-
-        GetProfile() // 프로필 가져오기
-          .then(data => {
-            console.log("프로필 가져옴", data);
-            dispatch(setUser(data));
-          })
-          .catch(err => console.log("프로필 가져오기 실패"));
-
-        navigate("/seat");
+    axios.defaults.withCredentials = true;
+    axios
+      .post("http://127.0.0.1:8000/account/login/", {
+        email: "dy6578@naver.com",
+        password: "test1234",
+        withCredentials: true,
       })
-      .catch(err => console.log("로그인 실패", err));
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+
+    // console.log("로그인 시도", email, password);
+
+    // GetUser(email, password) // 로그인
+    //   .then(data => {
+    //     console.log("로그인 시도 결과 : ", data);
+
+    //     GetProfile() // 프로필 가져오기
+    //       .then(data => {
+    //         console.log("프로필 가져옴", data);
+    //         dispatch(setUser(data));
+    //       })
+    //       .catch(err => console.log("프로필 가져오기 실패"));
+
+    //     navigate("/seat");
+    //   })
+    //   .catch(err => console.log("로그인 실패", err));
   };
 
   const goRegister = () => {
