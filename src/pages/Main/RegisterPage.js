@@ -46,8 +46,7 @@ const RegisterPage = () => {
 
       PostUser(email, pwd) // 회원가입
         .then(data => {
-          console.log("성공", data);
-          nav("/selectline");
+          console.log("회원가입 성공", data);
 
           GetUser(email, pwd).then(data => {
             // 로그인
