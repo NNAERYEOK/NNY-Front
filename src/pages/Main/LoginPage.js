@@ -29,11 +29,14 @@ const LoginPage = () => {
 
     axios.defaults.withCredentials = true;
     axios
-      .post("http://127.0.0.1:8000/account/login/", {
-        email: "dy6578@naver.com",
-        password: "test1234",
-        withCredentials: true,
-      })
+      .post(
+        "http://127.0.0.1:8000/account/login/",
+        {
+          email: "dy6578@naver.com",
+          password: "test1234",
+        },
+        { withCredentials: true, crossDomain: true },
+      )
       .then(res => console.log(res))
       .catch(err => console.log(err));
 
