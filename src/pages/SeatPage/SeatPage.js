@@ -116,7 +116,7 @@ const SeatPage = () => {
 
   // ** 내릴 역 공유 api **
   const postMySeat = () => {
-    dispatch(setEye({ eyes: 8 }));
+    dispatch(setEye({ eyes: currentEye + 1 }));
     const seat_id = localStorage.getItem("seat_id");
 
     console.log("공유 시도", id, seat_id, getOffStation);
@@ -149,16 +149,19 @@ const SeatPage = () => {
 
   // ** 내릴역 공유로 eye +1  **
   const addEye = () => {
+    console.log("엥", currentEye);
+
+    dispatch(setEye({ eyes: currentEye + 1 }));
     const created_at = getTime();
 
     // 1) 총 eye 개수 업뎃
 
-    PatchCurrentEye(currentEye + 1)
-      .then(data => {
-        //수정된 eye dispatch
-        dispatch(setEye(data.eyes));
-      })
-      .catch(err => console.log("현재 eye 업뎃 실패", err));
+    // PatchCurrentEye(currentEye + 1)
+    //   .then(data => {
+    //     //수정된 eye dispatch
+    //     dispatch(setEye(data.eyes));
+    //   })
+    //   .catch(err => console.log("현재 eye 업뎃 실패", err));
 
     // 2) 충전 내역 히스토리 업뎃
     PostUsedEye(id, created_at, 1)
@@ -168,16 +171,19 @@ const SeatPage = () => {
 
   // ** 좌석 조회로 eye -1 **
   const minusEye = () => {
+    console.log("sfsdfd");
+
+    dispatch(setEye({ eyes: currentEye - 1 }));
     const created_at = getTime();
 
     // 1) 총 eye 개수 업뎃
 
-    PatchCurrentEye(currentEye - 1)
-      .then(data => {
-        //수정된 eye dispatch
-        dispatch(setEye(data.eyes));
-      })
-      .catch(err => console.log("현재 eye 업뎃 실패", err));
+    // PatchCurrentEye(currentEye - 1)
+    //   .then(data => {
+    //     //수정된 eye dispatch
+    //     dispatch(setEye(data.eyes));
+    //   })
+    //   .catch(err => console.log("현재 eye 업뎃 실패", err));
 
     // 2) 사용 내역 히스토리 업뎃
     PostAddEye(id, created_at, -1)

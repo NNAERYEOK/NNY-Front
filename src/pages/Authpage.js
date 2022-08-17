@@ -16,8 +16,8 @@ const Authpage = () => {
       setUser({
         id: 11,
         username: "마루",
-        password: "~~",
-        eyes: 5,
+        password: "1234",
+        eyes: 0,
       }),
     );
   };
