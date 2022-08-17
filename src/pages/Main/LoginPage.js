@@ -29,7 +29,7 @@ const LoginPage = () => {
 
     axios.defaults.withCredentials = true;
     axios
-      .post("http://127.0.0.1:8000/account/login/", {
+      .post("http://cha2y0ung.pythonanywhere.com/", {
         email: "dy6578@naver.com",
         password: "test1234",
         withCredentials: true,
