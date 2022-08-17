@@ -27,32 +27,20 @@ const LoginPage = () => {
   const Login = e => {
     e.preventDefault();
 
-    axios.defaults.withCredentials = true;
-    axios
-      .post("https://cha2y0ung.pythonanywhere.com/nny/login", {
-        email: "1234@1234.com",
-        password: "1234",
-        withCredentials: true,
+ GetUser(email, password) // 로그인
+      .then(data => {
+        console.log("로그인 시도 결과 : ", data);
+
+        GetProfile() // 프로필 가져오기
+          .then(data => {
+            console.log("프로필 가져옴", data);
+            dispatch(setUser(data));
+          })
+          .catch(err => console.log("프로필 가져오기 실패"));
+
+        navigate("/seat");
       })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-
-    // console.log("로그인 시도", email, password);
-
-    // GetUser(email, password) // 로그인
-    //   .then(data => {
-    //     console.log("로그인 시도 결과 : ", data);
-
-    //     GetProfile() // 프로필 가져오기
-    //       .then(data => {
-    //         console.log("프로필 가져옴", data);
-    //         dispatch(setUser(data));
-    //       })
-    //       .catch(err => console.log("프로필 가져오기 실패"));
-
-    //     navigate("/seat");
-    //   })
-    //   .catch(err => console.log("로그인 실패", err));
+      .catch(err => console.log("로그인 실패", err));
   };
 
   const goRegister = () => {
