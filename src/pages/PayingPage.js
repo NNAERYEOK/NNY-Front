@@ -4,6 +4,7 @@ import App from "../App";
 import { Title } from "./ChargingPage";
 import BackBtn from "../components/BackBtn";
 import EyeBox from "../image/eyebox.svg";
+import { useLocation } from "react-router-dom";
 
 import { PostAddEye, PatchCurrentEye } from "../api/user";
 
@@ -12,6 +13,9 @@ import { useAppSelector, useAppDispatch } from "../store";
 import { setEye } from "../store/features/userSlice";
 
 const Paying = () => {
+  const charging = useLocation();
+  const numEye = charging.state.num;
+  const wonEye = charging.state.won;
   const { id, eyes } = useAppSelector(state => state.user);
 
   const currentEye = eyes;
@@ -58,13 +62,13 @@ const Paying = () => {
       <div className="payInfoBox">
         <img className="eyeBox" src={EyeBox} />
         <div className="text">
-          <span className="countEyeInfo">eye 10개</span> <br />
-          <span className="priceNum">1,000 원</span>
+          <span className="countEyeInfo">eye {numEye}개</span> <br />
+          <span className="priceNum">{wonEye} 원</span>
         </div>
       </div>
       <div className="payInfo">
         <span className="payInfoText">결제금액</span>
-        <span className="payInfoNum">1,000원</span>
+        <span className="payInfoNum">{wonEye}원</span>
       </div>
       <div className="payMethod">
         <span className="payMethodTitle">결제수단</span>
@@ -102,7 +106,7 @@ const Paying = () => {
         style={{ borderRadius: "6px 6px 0 0", boxShadow: "none" }}
       >
         <span className="payInfoText">결제금액</span>
-        <span className="payInfoNum">1,000원</span>
+        <span className="payInfoNum">{wonEye}원</span>
       </div>
       <div
         className="payInfo"
@@ -112,7 +116,7 @@ const Paying = () => {
         }}
       >
         <span className="payInfoText">신용카드</span>
-        <span className="payInfoNum">1,000원</span>
+        <span className="payInfoNum">{wonEye}원</span>
       </div>
       <button className="payingBtn" onClick={e => PayingEye()}>
         결제하기

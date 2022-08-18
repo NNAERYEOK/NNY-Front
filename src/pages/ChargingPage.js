@@ -45,7 +45,11 @@ export const Charging = () => {
         </div>
         <div className="boxRight">
           <PriceBtn>
-            <Link to="/paying" className="link">
+            <Link
+              to="/paying"
+              className="link"
+              state={{ num: 10, won: "1,000" }}
+            >
               ₩ 1,000
             </Link>
           </PriceBtn>
@@ -58,7 +62,11 @@ export const Charging = () => {
         </div>
         <div className="boxRight">
           <PriceBtn>
-            <Link to="/paying" className="link">
+            <Link
+              to="/paying"
+              className="link"
+              state={{ num: 55, won: "4,900" }}
+            >
               ₩ 4,900
             </Link>
           </PriceBtn>
@@ -71,7 +79,11 @@ export const Charging = () => {
         </div>
         <div className="boxRight">
           <PriceBtn>
-            <Link to="/paying" className="link">
+            <Link
+              to="/paying"
+              className="link"
+              state={{ num: 120, won: "9,900" }}
+            >
               ₩ 9,900
             </Link>
           </PriceBtn>
