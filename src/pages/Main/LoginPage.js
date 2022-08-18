@@ -38,7 +38,7 @@ const LoginPage = () => {
           })
           .catch(err => console.log("프로필 가져오기 실패"));
 
-        navigate("/seat");
+        navigate("/selectline");
       })
       .catch(err => console.log("로그인 실패", err));
   };

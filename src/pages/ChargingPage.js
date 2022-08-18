@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import BackBtn from "../components/BackBtn";
 import EyeIcon from "../image/eyeicon.svg";
 
+import { useAppSelector } from "../store";
+import { GetUser, GetProfile } from "../api/user";
+
 export const Charging = () => {
+  GetProfile() // 프로필 가져오기
+    .then(data => {
+      console.log("프로필 가져옴", data);
+      dispatch(setUser(data));
+    })
+    .catch(err => console.log("프로필 가져오기 실패"));
+
+  const { eyes } = useAppSelector(state => state.user);
+  const [eye, setEye] = useState(0);
+
+  useEffect(() => {
+    setEye(eyes);
+  });
   return (
     <>
       <GlobalStyle />
@@ -14,7 +30,7 @@ export const Charging = () => {
         <div className="boxLeft">
           <img className="eyeIcon" src={EyeIcon} />
           <span className="havingEye">내가 가진 eye</span>
-          <span className="countEye">3개</span>
+          <span className="countEye">{eye}개</span>
         </div>
         <div className="boxRight">
           <Link to="/" className="explainEye">

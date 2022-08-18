@@ -31,7 +31,7 @@ const SideBar = ({ isOpen, setSideBarModal }) => {
               <img src={Eye}></img>
               <span>내가 가진 eye</span>
               <span className="myeye">{eye}</span>
-              <Link to="/paying">
+              <Link to="/charging">
                 <div className="goPaying">충전</div>
               </Link>
             </Eyehistory>

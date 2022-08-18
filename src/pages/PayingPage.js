@@ -5,7 +5,51 @@ import { Title } from "./ChargingPage";
 import BackBtn from "../components/BackBtn";
 import EyeBox from "../image/eyebox.svg";
 
+import { PostAddEye, PatchCurrentEye } from "../api/user";
+
+// redux
+import { useAppSelector, useAppDispatch } from "../store";
+import { setEye } from "../store/features/userSlice";
+
 const Paying = () => {
+  const { id, eyes } = useAppSelector(state => state.user);
+
+  const currentEye = eyes;
+
+  const dispatch = useAppDispatch();
+
+  // 시간 구하는 함수
+  const getTime = () => {
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = ("0" + (today.getMonth() + 1)).slice(-2);
+    var day = ("0" + today.getDate()).slice(-2);
+    var hours = ("0" + today.getHours()).slice(-2);
+    var minutes = ("0" + today.getMinutes()).slice(-2);
+    var created_at =
+      year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
+
+    return created_at;
+  };
+
+  // ** 결제로 eye +10  **
+  const PayingEye = e => {
+    console.log("결제 시도");
+    const created_at = getTime();
+
+    // 1) 총 eye 개수 업뎃
+    PatchCurrentEye(currentEye + 10)
+      .then(data => {
+        //수정된 eye dispatch
+        dispatch(setEye(data.eyes));
+      })
+      .catch(err => console.log("현재 eye 업뎃 실패", err));
+
+    // 2) 충전 내역 히스토리 업뎃
+    PostAddEye(id, created_at, 10)
+      .then(res => console.log("충전 히스토리 성공"))
+      .catch(err => console.log("충전 히스토리 실패", err));
+  };
   return (
     <>
       <GlobalStyle />
@@ -70,7 +114,9 @@ const Paying = () => {
         <span className="payInfoText">신용카드</span>
         <span className="payInfoNum">1,000원</span>
       </div>
-      <button className="payingBtn">결제하기</button>
+      <button className="payingBtn" onClick={e => PayingEye()}>
+        결제하기
+      </button>
     </>
   );
 };
