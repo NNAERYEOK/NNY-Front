@@ -2,21 +2,18 @@ import React, { useRef, useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 // 컴포넌트
-import Button from "../../components/Button";
-import BackBtn from "../../components/BackBtn";
-import loginImage from "../../image/login.svg";
-import pwImage from "../../image/pw.svg";
-import pwCImage from "../../image/repw.svg";
-// 유저 api
-import { PostUser, PatchUserName, GetUser, GetProfile } from "../../api/user";
+import Button from "../components/Button";
+import BackBtn from "../components/BackBtn";
+import loginImage from "../image/login.svg";
+import pwImage from "../image/pw.svg";
+import pwCImage from "../image/repw.svg";
+
 // 리덕스
-import { useAppDispatch } from "../../store/index";
-import { setUser } from "../../store/features/userSlice";
+import { useAppDispatch } from "../store/index";
+import { setUser } from "../store/features/userSlice";
 
-const RegisterPage = () => {
+const ModifyPage = () => {
   const dispatch = useAppDispatch(); // 리덕스
-
-  const nav = useNavigate();
 
   //이름, 비밀번호, 비밀번호확인, 이름
   const [email, setEmail] = useState("");
@@ -30,51 +27,21 @@ const RegisterPage = () => {
   } else {
     checkPassword = "";
   }
-
-  //회원가입 성공
-  const [success, setSuccess] = useState(false);
-
   // 회원가입
   const handleSubmit = async e => {
-    e.preventDefault();
+    event.preventDefault();
 
     if (matchPwd !== pwd) {
       return alert("비밀번호와 비밀번호확인은 같아야 합니다.");
     } else {
-      setSuccess(true);
       console.log(email, pwd, username);
-
-      PostUser(email, pwd) // 회원가입
-        .then(data => {
-          console.log("회원가입 성공", data);
-
-          GetUser(email, pwd).then(data => {
-            // 로그인
-            console.log("로그인 성공", data);
-
-            PatchUserName(username) //닉넴 수정
-              .then(data => {
-                console.log("닉네임 수정 완료", data);
-
-                GetProfile()
-                  .then(data => {
-                    dispatch(setUser(data));
-                    nav("/selectline"); // 최종 성공
-                  })
-                  .catch(err => console.log("프로필 가져오기 실패"));
-              })
-              .catch(err => console.log("닉넴 수정 실패", err));
-          });
-        })
-        .catch(err => console.log(err, "회원 가입 실패"));
     }
   };
 
   return (
     <>
-      <Background />
       <BackBtn />
-      <Title>회원가입</Title>
+      <Title>회원 정보 수정</Title>
 
       <FormField onSubmit={handleSubmit}>
         <div>
@@ -128,23 +95,17 @@ const RegisterPage = () => {
           <button id="self">인증하기</button>
         </div>
 
-        <Button type="submit">가입하기</Button>
+        <Button type="submit">저장하기</Button>
       </FormField>
     </>
   );
 };
-export default RegisterPage;
+export default ModifyPage;
 
-const Background = createGlobalStyle`
-  body {
-  background-color: var( --background-black);
-  }
-`;
 const Title = styled.p`
-  color: white;
-  margin-left: 8%;
-  font-weight: 400;
-  font-size: 20px;
+  margin-left: 16%;
+  font-weight: 800;
+  font-size: 24px;
 `;
 const Label = styled.p`
   font-weight: 400;
@@ -154,9 +115,6 @@ const Label = styled.p`
 `;
 
 const FormField = styled.form`
-  background: #ffffff;
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 11px;
   width: 78%;
   margin: 0 auto;
   padding: 6%;
@@ -210,8 +168,4 @@ const FormField = styled.form`
     color: red;
     font-size: 12px;
   }
-`;
-const LogoIcon = styled.img`
-  display: block;
-  margin: 40px auto 0px;
 `;

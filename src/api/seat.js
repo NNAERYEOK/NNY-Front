@@ -9,13 +9,9 @@ export const GetSeat = async train_id => {
   }
 };
 
-export const PatchStation = async (seat_id, user_id, station) => {
+export const PatchStation = async (user_id, seat_id, station) => {
   try {
-    const response = await ProposalService.patchStation(
-      seat_id,
-      user_id,
-      station,
-    );
+    const response = await SeatService.patchStation(user_id, seat_id, station);
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "내릴역 공유 실패");

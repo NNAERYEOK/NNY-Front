@@ -2,8 +2,12 @@ import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../image/logo.svg";
+import { GetLogout } from "../../api/user";
 
 const HomePage = () => {
+  GetLogout()
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
   const navigate = useNavigate();
   const goLoginPage = () => {
     navigate("/login");
