@@ -3,9 +3,15 @@ import styled, { createGlobalStyle } from "styled-components";
 import warning from "../image/warning.svg";
 import eye from "../image/eye.svg";
 import menu from "../image/menu.svg";
+
 import { GetCurrentEye, GetWarningHistory, GetProfile } from "../api/user";
 import { useAppSelector, useAppDispatch } from "../store";
 import { setUser } from "../store/features/userSlice";
+
+
+import { useNavigate } from "react-router-dom";
+
+
 import SideBar from "./SideBar/SideModal";
 
 const TopBar = () => {
@@ -45,16 +51,25 @@ const TopBar = () => {
   const SelectMenu = () => {
     setSideBarModal(true);
   };
+
+  const navigate = useNavigate();
+  const goChargingPage = () => {
+    navigate("/charging");
+  };
+  const goWarningPage = () => {
+    navigate("/warninghistory");
+  };
+
   return (
     <>
       <Navbar>
         <Menu onClick={() => SelectMenu()} />
         <Icons>
-          <EyeBar>
+          <EyeBar onClick={goChargingPage}>
             <p>{eye}</p>
           </EyeBar>
 
-          <WarningBar>
+          <WarningBar onClick={goWarningPage}>
             <p>{warning}</p>
           </WarningBar>
         </Icons>
