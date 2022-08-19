@@ -6,11 +6,11 @@ console.log("토큰", http);
 
 export default http
   ? axios.create({
-      baseURL: "https://dev.caker.shop/",
+      baseURL: "http://cha2y0ung.pythonanywhere.com",
       headers: {
         "X-AUTH-TOKEN": http,
       },
     })
   : axios.create({
-      baseURL: "https://dev.caker.shop/",
+      baseURL: "http://cha2y0ung.pythonanywhere.com",
     });
