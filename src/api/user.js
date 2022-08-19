@@ -133,3 +133,13 @@ export const GetUsedEye = async () => {
     return Promise.reject(error, "사용한 eye 내역 조회 실패");
   }
 };
+
+// 충전한 eye 조회
+export const GetChargedEye = async () => {
+  try {
+    const response = await UserService.getChargedEye();
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error, "충전한 eye 내역 조회 실패");
+  }
+};
