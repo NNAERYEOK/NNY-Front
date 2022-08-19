@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // 컴포넌트
 import { Title } from "./ChargingPage";
 import BackBtn from "../components/BackBtn";
@@ -7,20 +7,43 @@ import { createGlobalStyle } from "styled-components";
 import WarnIcon from "../image/warnicon.svg";
 // API
 import { GetWarningHistory } from "../api/user";
+import { gertWarningHistory } from "../api/services/userservice";
 
 export function WarningPage() {
   // 경고받은 날짜
-  const [warnedDate, setWarnedDate] = useState("");
+  const [warnedDate, setWarnedDate] = useState(null);
   // 경고받은 사유
-  const [warnedReason, setWarnedReason] = useState("");
+  const [warnedReason, setWarnedReason] = useState(null);
+
+  // 시간 구하는 함수
+  const getTime = () => {
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = ("0" + (today.getMonth() + 1)).slice(-2);
+    var day = ("0" + today.getDate()).slice(-2);
+    var hours = ("0" + today.getHours()).slice(-2);
+    var minutes = ("0" + today.getMinutes()).slice(-2);
+    var created_at =
+      year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
+
+    return created_at;
+  };
 
   const getWarningHistories = () => {
-    GetWarningHistory()
-      .then(data => setWarnedDate())
-      .then(data => setWarnedReason())
-      .catch(err => setWarnedDate())
-      .catch(err => setWarnedDate());
+    const created_at = getTime();
+    GetWarningHistory(created_at)
+      .then(data => {
+        setWarnedDate(data.created_at);
+        console.log("성공", data);
+      })
+      .catch(err => {
+        console.log("실패");
+      });
   };
+
+  useEffect(() => {
+    getWarningHistories();
+  }, []);
 
   return (
     <>
