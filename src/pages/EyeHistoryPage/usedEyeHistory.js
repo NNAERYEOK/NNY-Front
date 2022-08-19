@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import { useState } from "react";
@@ -8,16 +8,17 @@ import { EyeHistoryBox } from "./chargedEyeHistory";
 import { GetUsedEye } from "../../api/user";
 
 export function UsedEye() {
-  const [usedDate, setUsedDate] = useState("2022-07-08");
-  const [countUsedEye, setCountUsedEye] = useState(10);
   const [UsedEyes, setUsedEyes] = useState([]);
 
-  GetUsedEye() // 사용한 eye 가져오기
-    .then(data => {
-      console.log("사용한 eye 가져옴", data);
-      setUsedEyes(data);
-    })
-    .catch(err => console.log("사용한 eye 가져오기 실패"));
+  useEffect(() => {
+    console.log("유즈이펙트");
+    GetUsedEye() // 사용한 eye 가져오기
+      .then(data => {
+        console.log("사용한 eye 가져옴", data.data);
+        setUsedEyes(data.data);
+      })
+      .catch(err => console.log("사용한 eye 가져오기 실패"));
+  }, []);
 
   return (
     <>
@@ -26,7 +27,7 @@ export function UsedEye() {
         return (
           <EyeHistoryBox>
             <div className="boxLeft">
-              <div className="date">{post.create_at}</div>
+              <div className="date">{post.created_at.substr(0, 10)}</div>
               <div className="countEye"> -eye {post.amount}개</div>
             </div>
           </EyeHistoryBox>

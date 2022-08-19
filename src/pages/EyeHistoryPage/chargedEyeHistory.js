@@ -1,37 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useState } from "react";
 
 import { GetChargedEye } from "../../api/user";
 
 export function ChargedEye() {
-  const [chargeMethod, setChargeMethod] = useState("정보제공");
+  // const [chargeMethod, setChargeMethod] = useState("정보제공");
   const [ChargedEyes, setChargedEyes] = useState([]);
-  GetChargedEye() // 충전한 eye 가져오기
-    .then(data => {
-      console.log("충전한 eye 가져옴");
-      setChargedEyes(data);
-    })
-    .catch(err => console.log("충전한 eye 가져오기 실패"));
+
+  useEffect(() => {
+    GetChargedEye() // 충전한 eye 가져오기
+      .then(data => {
+        console.log("충전한 eye 가져옴 :", data);
+        setChargedEyes(data.data);
+      })
+      .catch(err => console.log("충전한 eye 가져오기 실패"));
+  }, []);
 
   return (
     <>
       <GlobalStyle />
       {ChargedEyes.map(post => {
+        let text = "";
         if (post.amount < 10) {
-          setChargeMethod("정보제공");
+          text = "정보제공";
         } else {
-          setChargeMethod("결제");
+          text = "결제";
         }
-        <EyeHistoryBox>
-          <div className="boxLeft">
-            <div className="date">{post.create_at}</div>
-            <div className="countEye">eye {post.amount}개</div>
-          </div>
-          <div className="boxRight">
-            <div className="chargeMethod">{chargeMethod}</div>
-          </div>
-        </EyeHistoryBox>;
+
+        return (
+          <EyeHistoryBox>
+            <div className="boxLeft">
+              <div className="date">{post.created_at.substr(0, 10)}</div>
+              <div className="countEye">eye {post.amount}개</div>
+            </div>
+            <div className="boxRight">
+              <div className="chargeMethod">{text}</div>
+            </div>
+          </EyeHistoryBox>
+        );
       })}
     </>
   );
