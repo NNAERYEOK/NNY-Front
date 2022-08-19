@@ -8,14 +8,32 @@ import { EyeHistoryBox } from "./chargedEyeHistory";
 export function UsedEye() {
   const [usedDate, setUsedDate] = useState("2022-07-08");
   const [countUsedEye, setCountUsedEye] = useState(10);
+  const [UsedEyes, setUsedEyes] = useState([]);
+
+  // eye 사용내역조회
+  const getUsedEye = async () => {
+    const response = await axios
+      .get("https://cha2y0ung.pythonanywhere.com/nny/usedeye/")
+      .then(response => {
+        setUsedEyes(response.data);
+      })
+      .catch(error => {
+        console.log("사용 내역 가져오기 실패");
+      });
+  };
+
   return (
     <>
       <GlobalStyle />
       <EyeHistoryBox>
-        <div className="boxLeft">
-          <div className="date">{usedDate}</div>
-          <div className="countEye"> -eye {countUsedEye}개</div>
-        </div>
+        {UsedEyes.map(post => {
+          return (
+            <div className="boxLeft">
+              <div className="date">{post.create_at}</div>
+              <div className="countEye"> -eye {post.amount}개</div>
+            </div>
+          );
+        })}
       </EyeHistoryBox>
     </>
   );

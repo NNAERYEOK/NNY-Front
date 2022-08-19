@@ -44,7 +44,7 @@ const UserService = {
     }),
   // eye 충전 히스토리 업뎃
   postAddEye: (id, created_at, amount) =>
-    http.post("/nny/eye/", {
+    http.patch("/nny/eye/", {
       user: id,
       created_at: created_at,
       amount: amount,
