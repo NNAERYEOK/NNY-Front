@@ -14,11 +14,11 @@ import { setEye } from "../store/features/userSlice";
 
 const Paying = () => {
   const charging = useLocation();
-  const numEye = charging.state.num;
+  const numEye = parseInt(charging.state.num);
   const wonEye = charging.state.won;
   const { id, eyes } = useAppSelector(state => state.user);
 
-  const currentEye = eyes;
+  const currentEye = parseInt(eyes);
 
   const dispatch = useAppDispatch();
 
@@ -46,6 +46,9 @@ const Paying = () => {
       .then(data => {
         //수정된 eye dispatch
         dispatch(setEye({ eyes: data.data.eyes }));
+
+        console.log("충전 성공");
+
       })
       .catch(err => console.log("현재 eye 업뎃 실패", err));
 
