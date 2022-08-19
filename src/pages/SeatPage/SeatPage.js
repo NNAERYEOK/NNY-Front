@@ -236,7 +236,7 @@ const SeatPage = () => {
         <BackBtn />
         {share && <Text>앉아있는 좌석을 선택해주세요</Text>}
 
-        <Num>2024</Num>
+        <Num>Car 1</Num>
         <Train>
           <Seats
             id={userid}
