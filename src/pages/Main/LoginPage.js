@@ -27,7 +27,7 @@ const LoginPage = () => {
   const Login = e => {
     e.preventDefault();
 
- GetUser(email, password) // 로그인
+    GetUser(email, password) // 로그인
       .then(data => {
         console.log("로그인 시도 결과 : ", data);
 
@@ -35,10 +35,9 @@ const LoginPage = () => {
           .then(data => {
             console.log("프로필 가져옴", data);
             dispatch(setUser(data));
+            navigate("/selectline");
           })
           .catch(err => console.log("프로필 가져오기 실패"));
-
-        navigate("/selectline");
       })
       .catch(err => console.log("로그인 실패", err));
   };
