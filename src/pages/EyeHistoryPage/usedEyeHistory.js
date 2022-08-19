@@ -15,7 +15,7 @@ export function UsedEye() {
   GetUsedEye() // 사용한 eye 가져오기
     .then(data => {
       console.log("사용한 eye 가져옴", data);
-      dispatch(setUsedEyes(data));
+      setUsedEyes(data);
     })
     .catch(err => console.log("사용한 eye 가져오기 실패"));
 
