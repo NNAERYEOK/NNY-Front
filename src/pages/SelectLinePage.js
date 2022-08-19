@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 
@@ -15,8 +15,15 @@ import line7 from "../image/line7.svg";
 import line8 from "../image/line8.svg";
 import line9 from "../image/line9.svg";
 
+import { useAppSelector } from "../store";
+
 const LinePage = () => {
-  const user = "허윤";
+  const { username } = useAppSelector(state => state.user);
+  const [nickname, setNickname] = useState("");
+
+  useEffect(() => {
+    setNickname(username);
+  });
   const navigate = useNavigate();
   const goLinePage = () => {
     navigate("/line2");
@@ -28,7 +35,7 @@ const LinePage = () => {
       <BackBtn />
       <Question>
         <p>
-          <UserId>{user}</UserId> 님,
+          <UserId>{nickname}</UserId> 님,
         </p>
         <p>몇 호선에 타고 계시나요?</p>
       </Question>
