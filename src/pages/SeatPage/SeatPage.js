@@ -19,11 +19,12 @@ import {
   PostUsedEye,
   PostAddEye,
   PatchCurrentEye,
+  GetProfile,
 } from "../../api/user";
 import http from "../../api/http";
 // redux
 import { useAppSelector, useAppDispatch } from "../../store";
-import { setEye } from "../../store/features/userSlice";
+import { setEye, setUser } from "../../store/features/userSlice";
 
 const SeatPage = () => {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -31,10 +32,32 @@ const SeatPage = () => {
     ? `Bearer ${token}`
     : null;
 
-  const { id, eyes } = useAppSelector(state => state.user);
-  console.log("유저 정보", id, eyes);
+  const [currentEye, setCurrentEye] = useState(0);
+  const [userid, setId] = useState(null);
 
-  const currentEye = eyes;
+  const { id, eyes } = useAppSelector(state => state.user);
+
+  useEffect(() => {
+    if (eyes === "") {
+      setCurrentEye(0);
+    } else {
+      setCurrentEye(parseInt(eyes));
+    }
+
+    setId(id);
+
+    console.log("currentEye = ", currentEye);
+
+    console.log("유저의 id와 eye : ", userid, currentEye);
+  }, []);
+
+  // GetProfile() // 프로필 가져오기
+  //   .then(data => {
+  //     console.log("프로필 가져옴~!", data);
+  //     dispatch(setEye(data.data.eyes));
+
+  //   })
+  //   .catch(err => console.log("프로필 가져오기 실패"));
 
   const dispatch = useAppDispatch();
 
@@ -126,16 +149,16 @@ const SeatPage = () => {
     dispatch(setEye({ eyes: currentEye + 1 }));
     const seat_id = localStorage.getItem("seat_id");
 
-    console.log("공유 시도", id, seat_id, getOffStation);
+    console.log("공유 시도", userid, seat_id, getOffStation);
 
-    PatchStation(2, seat_id, getOffStation)
+    PatchStation(userid, seat_id, getOffStation)
       .then(res => {
         console.log("좌석 업데이트 성공", res);
         addEye(); // eye 획득
         getSeats(train_id); // 다시 get
       })
       .catch(err => {
-        console.log("좌석 공유 실패", id, seat_id, getOffStation);
+        console.log("좌석 공유 실패", userid, seat_id, getOffStation);
         setSeats(temp_data);
       });
   };
@@ -167,13 +190,13 @@ const SeatPage = () => {
       .then(data => {
         //수정된 eye dispatch
         console.log("현재 eye 수정 완료 : ", data.data.eyes);
-        dispatch(setEye(data.data.eyes));
+        dispatch(setEye({ eyes: data.data.eyes }));
       })
       .catch(err => console.log("현재 eye 업뎃 실패", err));
 
     // 2) 충전 내역 히스토리 업뎃
-    PostUsedEye(id, created_at, 1)
-      .then(data => console.log("충전 히스토리 성공"))
+    PostUsedEye(userid, created_at, 1)
+      .then(data => console.log("충전 히스토리 성공", data))
       .catch(err => console.log("충전 히스토리 실패", err));
   };
 
@@ -190,12 +213,12 @@ const SeatPage = () => {
       .then(data => {
         //수정된 eye dispatch
         console.log("현재 eye 수정 완료 : ", data.data.eyes);
-        dispatch(setEye(data.data.eyes));
+        dispatch(setEye({ eyes: data.data.eyes }));
       })
       .catch(err => console.log("현재 eye 업뎃 실패", err));
 
     // 2) 사용 내역 히스토리 업뎃
-    PostAddEye(id, created_at, -1)
+    PostAddEye(userid, created_at, -1)
       .then(data => console.log("사용 히스토리 성공"))
       .catch(err => console.log("사용 히스토리 실패", err));
   };
@@ -218,7 +241,7 @@ const SeatPage = () => {
         <Num>2024</Num>
         <Train>
           <Seats
-            id={id}
+            id={userid}
             seats={seats}
             share={share}
             SelectSeat={SelectSeat}
