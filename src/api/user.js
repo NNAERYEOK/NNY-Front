@@ -14,6 +14,7 @@ export const GetProfile = async () => {
 export const GetUser = async (email, password) => {
   try {
     const response = await UserService.getUser(email, password);
+    window.localStorage.setItem("token", response.data); // 로컬 스토리지에 토큰 저장
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "로그인 실패");
@@ -24,6 +25,7 @@ export const GetUser = async (email, password) => {
 export const GetLogout = async (email, password) => {
   try {
     const response = await UserService.getLogout(email, password);
+    window.localStorage.removeItem("token"); // 토큰 삭제
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "로그아웃 실패");
