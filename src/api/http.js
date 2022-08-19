@@ -1,23 +1,16 @@
 import axios from "axios";
 
-const http = axios.create({
-  baseURL: "https://cha2y0ung.pythonanywhere.com",
-  withCredentials: true,
-});
+const http = JSON.parse(localStorage.getItem("token"));
 
-// const http = axios.create({
-//   baseURL: "https://cha2y0ung.pythonanywhere.com",
-//   withCredentials: true,
-//   headers: {
-//     "Access-Control-Allow-Origin": "https://cha2y0ung.pythonanywhere.com", // 서버 domain
-//   },
-// });
+console.log("토큰", http);
 
-
-// const http = axios.create(
-//   { baseURL: "https://cha2y0ung.pythonanywhere.com" },
-//   { withCredentials: true, crossDomain: true },
-// );
-// http.defaults.withCredentials = true;
-
-export default http;
+export default http
+  ? axios.create({
+      baseURL: "http://cha2y0ung.pythonanywhere.com",
+      headers: {
+        "X-AUTH-TOKEN": http,
+      },
+    })
+  : axios.create({
+      baseURL: "http://cha2y0ung.pythonanywhere.com",
+    });

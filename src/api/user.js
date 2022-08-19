@@ -14,6 +14,7 @@ export const GetProfile = async () => {
 export const GetUser = async (email, password) => {
   try {
     const response = await UserService.getUser(email, password);
+    window.localStorage.setItem("token", response.data); // 로컬 스토리지에 토큰 저장
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "로그인 실패");
@@ -24,6 +25,7 @@ export const GetUser = async (email, password) => {
 export const GetLogout = async (email, password) => {
   try {
     const response = await UserService.getLogout(email, password);
+    window.localStorage.removeItem("token"); // 토큰 삭제
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "로그아웃 실패");
@@ -121,5 +123,25 @@ export const PatchUserInfo = async (user, station) => {
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "유저 정보 업데이트 실패");
+  }
+};
+
+// 사용한 eye 조회
+export const GetUsedEye = async () => {
+  try {
+    const response = await UserService.getUsedEye();
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error, "사용한 eye 내역 조회 실패");
+  }
+};
+
+// 충전한 eye 조회
+export const GetChargedEye = async () => {
+  try {
+    const response = await UserService.getChargedEye();
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error, "충전한 eye 내역 조회 실패");
   }
 };

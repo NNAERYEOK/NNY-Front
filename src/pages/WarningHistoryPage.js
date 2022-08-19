@@ -32,8 +32,8 @@ export function WarningPage() {
     return created_at;
   };
 
-  const getWarningHistories = () => {
-    const created_at = getTime();
+  const getWarningHistories = created_at => {
+    // const created_at = getTime();
     GetWarningHistory(created_at)
       .then(data => {
         setWarnedDate(data.created_at);
