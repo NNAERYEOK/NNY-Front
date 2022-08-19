@@ -15,6 +15,7 @@ const TopBar = () => {
 
   useEffect(() => {
     setEye(eyes);
+
     // 현재 누적 경고 개수
     GetWarningHistory()
       .then(data => {
