@@ -14,12 +14,17 @@ const TopBar = () => {
   const [warning, setWarning] = useState(0);
 
   useEffect(() => {
-    setEye(eyes);
+    if (eyes === "") {
+      setEye(0);
+    } else {
+      setEye(eyes);
+    }
 
     // 현재 누적 경고 개수
     GetWarningHistory()
       .then(data => {
-        setWarning(countHistory(data));
+        console.log("누적 경고 개수 = ", data.data.length);
+        setWarning(data.data.length);
       })
       .catch(err => console.log("경고 히스토리 조회 실패"));
   });
@@ -29,18 +34,6 @@ const TopBar = () => {
   const SelectMenu = () => {
     setSideBarModal(true);
   };
-  const countHistory = data => {
-    var i;
-
-    data.map(history => {
-      if (history.user === id) {
-        i = i + 1;
-      }
-    });
-
-    return i;
-  };
-
   return (
     <>
       <Navbar>
