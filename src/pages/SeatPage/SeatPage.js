@@ -165,14 +165,12 @@ const SeatPage = () => {
 
   // ** 신고 api **
   const postWarning = () => {
-    console.log("신고 시도");
     const created_at = getTime();
+    console.log("신고시도 ", otherId, created_at, getOffStation);
 
     PostWarning(otherId, created_at, getOffStation)
       .then(data => console.log("경고 주기 성공", data))
       .catch(err => console.log("경고 주기 실패", err));
-
-    console.log("신고시도 ", otherId, created_at, getOffStation);
 
     setWarningModal(false);
   };

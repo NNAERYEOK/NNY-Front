@@ -29,7 +29,7 @@ const UserService = {
 
   // 유저 경고 주기
   postWarning: (id, created_at, station) =>
-    http.post("/nny/warning/", {
+    http.patch("/nny/warning/", {
       user: id,
       created_at: created_at,
       station: station,
