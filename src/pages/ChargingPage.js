@@ -6,12 +6,13 @@ import EyeIcon from "../image/eyeicon.svg";
 
 import { useAppSelector } from "../store";
 import { GetUser, GetProfile } from "../api/user";
+import { setUser } from "../store/features/userSlice";
 
 export const Charging = () => {
   GetProfile() // 프로필 가져오기
     .then(data => {
       console.log("프로필 가져옴", data);
-      dispatch(setUser(data));
+      dispatch(setUser(data.data));
     })
     .catch(err => console.log("프로필 가져오기 실패"));
 

@@ -16,36 +16,15 @@ export function WarningPage() {
   // 경고받은 날짜
   const [warnedDate, setWarnedDate] = useState(null);
   // 경고받은 사유
-  const [warnedReason, setWarnedReason] = useState(null);
-
-  // 시간 구하는 함수
-  const getTime = () => {
-    var today = new Date();
-    var year = today.getFullYear();
-    var month = ("0" + (today.getMonth() + 1)).slice(-2);
-    var day = ("0" + today.getDate()).slice(-2);
-    var hours = ("0" + today.getHours()).slice(-2);
-    var minutes = ("0" + today.getMinutes()).slice(-2);
-    var created_at =
-      year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
-
-    return created_at;
-  };
-
-  const getWarningHistories = created_at => {
-    // const created_at = getTime();
-    GetWarningHistory(created_at)
-      .then(data => {
-        setWarnedDate(data.created_at);
-        console.log("성공", data);
-      })
-      .catch(err => {
-        console.log("실패");
-      });
-  };
+  const [warnedReason, setWarnedReason] = useState([]);
 
   useEffect(() => {
-    getWarningHistories();
+    GetWarningHistory() // 충전한 eye 가져오기
+      .then(data => {
+        console.log("경고 내역 성공 :", data);
+        setWarnedReason(data.data);
+      })
+      .catch(err => console.log("경고 내역 실패"));
   }, []);
 
   return (
@@ -54,14 +33,21 @@ export function WarningPage() {
       <BackBtn />
       <Title>경고내역</Title>
       <EyeHistoryBox>
-        <div className="boxLeft">
-          <img className="warnIcon" src={WarnIcon} />
-          <span className="warnedDate">{warnedDate}</span>
-        </div>
-        <div className="boxRight">
-          <span className="warnedReason">{warnedReason}</span>
-        </div>
+        {warnedReason.map(post => {
+          <div>
+            <div className="boxLeft">
+              <img className="warnIcon" src={WarnIcon} />
+              <span className="warnedDate">
+                {post.created_at.substr(0, 10)}
+              </span>
+            </div>
+            <div className="boxRight">
+              <span className="warnedReason">2호선 미하차</span>
+            </div>
+          </div>;
+        })}
       </EyeHistoryBox>
+      ;
     </>
   );
 }

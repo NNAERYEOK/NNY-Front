@@ -12,14 +12,36 @@ import pwCImage from "../image/repw.svg";
 import { useAppDispatch } from "../store/index";
 import { setUser } from "../store/features/userSlice";
 
+import { useAppSelector } from "../store";
+
+import { PatchUserInfo } from "../api/user";
+
 const ModifyPage = () => {
   const dispatch = useAppDispatch(); // 리덕스
 
-  //이름, 비밀번호, 비밀번호확인, 이름
-  const [email, setEmail] = useState("");
+  const { id } = useAppSelector(state => state.user);
+  const { username } = useAppSelector(state => state.user);
+
+  const [userid, setUserId] = useState("");
+  const [usernickname, setUserName] = useState("");
+
+  useEffect(() => {
+    setUserId(id);
+    setUserName(username);
+  });
+
+  const modifyPw = e => {
+    console.log("비번수정 시도");
+
+    // 2) 충전 내역 히스토리 업뎃
+    PostAddEye(id, created_at, numEye)
+      .then(res => console.log("충전 히스토리 성공"))
+      .catch(err => console.log("충전 히스토리 실패", err));
+  };
+
+  // 비밀번호, 비밀번호확인
   const [pwd, setPwd] = useState("");
   const [matchPwd, setMatchPwd] = useState("");
-  const [username, setUserName] = useState("");
 
   //비밀번호 확인
   if (pwd !== matchPwd) {
@@ -46,15 +68,7 @@ const ModifyPage = () => {
       <FormField onSubmit={handleSubmit}>
         <div>
           <Label>아이디</Label>
-          <input
-            id="idInput"
-            placeholder="아이디"
-            type="text"
-            autoComplete="off"
-            onChange={e => setEmail(e.target.value)}
-            value={email}
-            required
-          />
+          <div id="idInput">{userid}</div>
         </div>
         <div>
           <Label>비밀번호</Label>
@@ -81,20 +95,12 @@ const ModifyPage = () => {
         </div>
         <div>
           <Label>이름</Label>
-          <input
-            type="text"
-            placeholder="이름"
-            id="name"
-            onChange={e => setUserName(e.target.value)}
-            value={username}
-            required
-          />
+          <div id="kickname">{usernickname}</div>
         </div>
         <div>
           <Label>본인인증</Label>
           <button id="self">인증하기</button>
         </div>
-
         <Button type="submit">저장하기</Button>
       </FormField>
     </>
@@ -140,10 +146,34 @@ const FormField = styled.form`
     text-indent: 5px;
   }
 
-  #idInput:placeholder-shown {
+  #idInput {
     background-image: url(${loginImage});
     background-repeat: no-repeat;
     background-position: right;
+    display: block;
+    margin: 0 auto;
+    border: none;
+    border-bottom: 1px solid #4fe0b6;
+    width: 100%;
+    height: 30px;
+    font-weight: 400;
+    font-size: 13px;
+    text-indent: 5px;
+    padding-top: 7px;
+    box-sizing: border-box;
+  }
+  #kickname {
+    display: block;
+    margin: 0 auto;
+    border: none;
+    border-bottom: 1px solid #4fe0b6;
+    width: 100%;
+    height: 30px;
+    font-weight: 400;
+    font-size: 13px;
+    text-indent: 5px;
+    padding-top: 7px;
+    box-sizing: border-box;
   }
   #pwInput:placeholder-shown {
     background-image: url(${pwImage});

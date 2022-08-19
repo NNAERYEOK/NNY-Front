@@ -45,12 +45,12 @@ const Paying = () => {
     PatchCurrentEye(currentEye + numEye)
       .then(data => {
         //수정된 eye dispatch
-        dispatch(setEye(data.eyes));
+        dispatch(setEye({ eyes: data.data.eyes }));
       })
       .catch(err => console.log("현재 eye 업뎃 실패", err));
 
     // 2) 충전 내역 히스토리 업뎃
-    PostAddEye(id, created_at, 10)
+    PostAddEye(id, created_at, numEye)
       .then(res => console.log("충전 히스토리 성공"))
       .catch(err => console.log("충전 히스토리 실패", err));
   };
