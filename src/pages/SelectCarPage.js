@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
-
+// 컴포넌트
 import TopBar from "../components/TopBar";
 import BackBtn from "../components/BackBtn";
-
+// 이미지
 import car1 from "../image/car1.svg";
 import car2 from "../image/car2.svg";
 import car3 from "../image/car3.svg";
@@ -40,6 +40,8 @@ export function SelectCarPage() {
       console.log(window.localStorage.getItem("train_id"));
     }
   };
+  const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
+  console.log(getRandom(1, 10));
 
   const Cars = [car1, car2, car3, car4, car5, car6, car7, car8, car9, car10];
   const CarBox = Cars.map(carN => (
