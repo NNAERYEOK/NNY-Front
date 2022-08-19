@@ -1,13 +1,26 @@
 import React, { useState } from "react";
+// 컴포넌트
 import { Title } from "./ChargingPage";
 import BackBtn from "../components/BackBtn";
 import { EyeHistoryBox } from "./EyeHistoryPage/chargedEyeHistory";
 import { createGlobalStyle } from "styled-components";
 import WarnIcon from "../image/warnicon.svg";
+// API
+import { GetWarningHistory } from "../api/user";
 
 export function WarningPage() {
-  const [warnedDate, setWarnedDate] = useState("2022-07-08");
-  const [warnedReason, setWarnedReason] = useState("2호선 이대역 미정차");
+  // 경고받은 날짜
+  const [warnedDate, setWarnedDate] = useState("");
+  // 경고받은 사유
+  const [warnedReason, setWarnedReason] = useState("");
+
+  const getWarningHistories = () => {
+    GetWarningHistory()
+      .then(data => setWarnedDate())
+      .then(data => setWarnedReason())
+      .catch(err => setWarnedDate())
+      .catch(err => setWarnedDate());
+  };
 
   return (
     <>

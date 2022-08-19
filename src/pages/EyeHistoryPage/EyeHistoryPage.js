@@ -1,10 +1,11 @@
 import React from "react";
 import styled, { createGlobalStyle, css } from "styled-components";
+import { useState } from "react";
+// 컴포넌트
 import BackBtn from "../../components/BackBtn";
 import { Title } from "../ChargingPage";
 import UsedEye from "./usedEyeHistory";
 import ChargedEye from "./chargedEyeHistory";
-import { useState, useEffect } from "react";
 
 export function EyeHistoryPage() {
   const [btnActive, setBtnActive] = useState(true);
@@ -14,7 +15,6 @@ export function EyeHistoryPage() {
       <GlobalStyle />
       <BackBtn />
       <Title>eye 내역</Title>
-      {/* {btnActive ? <historyNavBtn1 /> : <historyNavBtn2 />}{" "} */}
       <div className="historyBox">
         <div className="historyNav">
           <BoxWrapper>

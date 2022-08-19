@@ -25,6 +25,7 @@ export function SelectCarPage() {
   const goSeatPage = () => {
     navigate("/seat");
   };
+
   const [trainId, settrainId] = useState(0);
   //LocalStorage 저장
   const saveData = trainId => {
@@ -40,6 +41,26 @@ export function SelectCarPage() {
     }
   };
 
+  const Cars = [car1, car2, car3, car4, car5, car6, car7, car8, car9, car10];
+  const CarBox = Cars.map(carN => (
+    <CarBoxst>
+      <LeftBox>
+        <img className="car" src={carN} onClick={goSeatPage} />
+        <img className="carcontour" src={carcontour} />
+      </LeftBox>
+      <RightBox>
+        <EyeBox>
+          <img src={eye} />
+          <p>12</p>
+        </EyeBox>
+        <SeatBox>
+          <img src={seat} />
+          <p>7</p>
+        </SeatBox>
+      </RightBox>
+    </CarBoxst>
+  ));
+
   return (
     <>
       <Background />
@@ -52,167 +73,7 @@ export function SelectCarPage() {
           <img src={direction} />
           <img src={direction} />
         </Direction>
-        <CarContainer>
-          <CarBox>
-            <LeftBox>
-              <img className="car" src={car1} onClick={() => saveData(1)} />
-              <img className="carcontour" src={carcontour} />
-            </LeftBox>
-            <RightBox>
-              <EyeBox>
-                <img src={eye} />
-                <p>12</p>
-              </EyeBox>
-              <SeatBox>
-                <img src={seat} />
-                <p>7</p>
-              </SeatBox>
-            </RightBox>
-          </CarBox>
-          <CarBox>
-            <LeftBox>
-              <img className="car" src={car2} onClick={() => saveData(2)} />
-              <img className="carcontour" src={carcontour} />
-            </LeftBox>
-            <RightBox>
-              <EyeBox>
-                <img src={eye} />
-                <p>12</p>
-              </EyeBox>
-              <SeatBox>
-                <img src={seat} />
-                <p>7</p>
-              </SeatBox>
-            </RightBox>
-          </CarBox>
-          <CarBox>
-            <LeftBox>
-              <img className="car" src={car3} onClick={() => saveData(3)} />
-              <img className="carcontour" src={carcontour} />
-            </LeftBox>
-            <RightBox>
-              <EyeBox>
-                <img src={eye} />
-                <p>12</p>
-              </EyeBox>
-              <SeatBox>
-                <img src={seat} />
-                <p>7</p>
-              </SeatBox>
-            </RightBox>
-          </CarBox>
-          <CarBox>
-            <LeftBox>
-              <img className="car" src={car4} onClick={() => saveData(4)} />
-              <img className="carcontour" src={carcontour} />
-            </LeftBox>
-            <RightBox>
-              <EyeBox>
-                <img src={eye} />
-                <p>12</p>
-              </EyeBox>
-              <SeatBox>
-                <img src={seat} />
-                <p>7</p>
-              </SeatBox>
-            </RightBox>
-          </CarBox>
-          <CarBox>
-            <LeftBox onClick={goSeatPage}>
-              <img className="car" src={car5} onClick={() => saveData(5)} />
-              <img className="carcontour" src={carcontour} />
-            </LeftBox>
-            <RightBox>
-              <EyeBox>
-                <img src={eye} />
-                <p>12</p>
-              </EyeBox>
-              <SeatBox>
-                <img src={seat} />
-                <p>7</p>
-              </SeatBox>
-            </RightBox>
-          </CarBox>
-          <CarBox>
-            <LeftBox onClick={goSeatPage}>
-              <img className="car" src={car6} onClick={() => saveData(6)} />
-              <img className="carcontour" src={carcontour} />
-            </LeftBox>
-            <RightBox>
-              <EyeBox>
-                <img src={eye} />
-                <p>12</p>
-              </EyeBox>
-              <SeatBox>
-                <img src={seat} />
-                <p>7</p>
-              </SeatBox>
-            </RightBox>
-          </CarBox>
-          <CarBox>
-            <LeftBox onClick={goSeatPage}>
-              <img className="car" src={car7} onClick={() => saveData(7)} />
-              <img className="carcontour" src={carcontour} />
-            </LeftBox>
-            <RightBox>
-              <EyeBox>
-                <img src={eye} />
-                <p>12</p>
-              </EyeBox>
-              <SeatBox>
-                <img src={seat} />
-                <p>7</p>
-              </SeatBox>
-            </RightBox>
-          </CarBox>
-          <CarBox>
-            <LeftBox onClick={goSeatPage}>
-              <img className="car" src={car8} onClick={() => saveData(8)} />
-              <img className="carcontour" src={carcontour} />
-            </LeftBox>
-            <RightBox>
-              <EyeBox>
-                <img src={eye} />
-                <p>12</p>
-              </EyeBox>
-              <SeatBox>
-                <img src={seat} />
-                <p>7</p>
-              </SeatBox>
-            </RightBox>
-          </CarBox>
-          <CarBox>
-            <LeftBox onClick={goSeatPage}>
-              <img className="car" src={car9} onClick={() => saveData(9)} />
-              <img className="carcontour" src={carcontour} />
-            </LeftBox>
-            <RightBox>
-              <EyeBox>
-                <img src={eye} />
-                <p>12</p>
-              </EyeBox>
-              <SeatBox>
-                <img src={seat} />
-                <p>7</p>
-              </SeatBox>
-            </RightBox>
-          </CarBox>
-          <CarBox>
-            <LeftBox onClick={goSeatPage}>
-              <img className="car" src={car10} onClick={() => saveData(10)} />
-            </LeftBox>
-            <RightBox>
-              <EyeBox>
-                <img src={eye} />
-                <p>12</p>
-              </EyeBox>
-              <SeatBox>
-                <img src={seat} />
-                <p>7</p>
-              </SeatBox>
-            </RightBox>
-          </CarBox>
-        </CarContainer>
+        <CarContainer>{CarBox}</CarContainer>
       </Container>
     </>
   );
@@ -259,7 +120,7 @@ const CarContainer = styled.div`
   }
 `;
 
-const CarBox = styled.div`
+const CarBoxst = styled.div`
   display: flex;
 `;
 
