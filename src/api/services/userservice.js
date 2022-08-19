@@ -37,7 +37,7 @@ const UserService = {
 
   // eye 사용 히스토리 업뎃
   postUsedEye: (id, created_at, amount) =>
-    http.post("/nny/usedeye/", {
+    http.patch("/nny/usedeye/", {
       user: id,
       created_at: created_at,
       amount: amount,
