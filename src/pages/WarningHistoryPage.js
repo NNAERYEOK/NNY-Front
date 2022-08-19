@@ -9,6 +9,9 @@ import WarnIcon from "../image/warnicon.svg";
 import { GetWarningHistory } from "../api/user";
 import { gertWarningHistory } from "../api/services/userservice";
 
+// 경고받은 사유 더미 데이터
+const warnR = ["2호선 이대역 미하차", "2호선 신촌역 미하차"];
+
 export function WarningPage() {
   // 경고받은 날짜
   const [warnedDate, setWarnedDate] = useState(null);
