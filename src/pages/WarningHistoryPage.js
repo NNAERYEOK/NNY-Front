@@ -34,20 +34,21 @@ export function WarningPage() {
       <Title>경고내역</Title>
       <EyeHistoryBox>
         {warnedReason.map(post => {
-          <div>
-            <div className="boxLeft">
-              <img className="warnIcon" src={WarnIcon} />
-              <span className="warnedDate">
-                {post.created_at.substr(0, 10)}
-              </span>
+          return (
+            <div>
+              <div className="boxLeft">
+                <img className="warnIcon" src={WarnIcon} />
+                <span className="warnedDate">
+                  {post.created_at.substr(0, 10)}
+                </span>
+              </div>
+              <div className="boxRight">
+                <span className="warnedReason">2호선 미하차</span>
+              </div>
             </div>
-            <div className="boxRight">
-              <span className="warnedReason">2호선 미하차</span>
-            </div>
-          </div>;
+          );
         })}
       </EyeHistoryBox>
-      ;
     </>
   );
 }
