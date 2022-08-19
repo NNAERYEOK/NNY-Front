@@ -5,36 +5,33 @@ import { useState } from "react";
 import EyeHistory from "./EyeHistoryPage";
 import { EyeHistoryBox } from "./chargedEyeHistory";
 
+import { GetUsedEye } from "../../api/user";
+
 export function UsedEye() {
   const [usedDate, setUsedDate] = useState("2022-07-08");
   const [countUsedEye, setCountUsedEye] = useState(10);
   const [UsedEyes, setUsedEyes] = useState([]);
 
-  // eye 사용내역조회
-  const getUsedEye = async () => {
-    const response = await axios
-      .get("https://cha2y0ung.pythonanywhere.com/nny/usedeye/")
-      .then(response => {
-        setUsedEyes(response.data);
-      })
-      .catch(error => {
-        console.log("사용 내역 가져오기 실패");
-      });
-  };
+  GetUsedEye() // 사용한 eye 가져오기
+    .then(data => {
+      console.log("사용한 eye 가져옴", data);
+      setUsedEyes(data);
+    })
+    .catch(err => console.log("사용한 eye 가져오기 실패"));
 
   return (
     <>
       <GlobalStyle />
-      <EyeHistoryBox>
-        {UsedEyes.map(post => {
-          return (
+      {UsedEyes.map(post => {
+        return (
+          <EyeHistoryBox>
             <div className="boxLeft">
               <div className="date">{post.create_at}</div>
               <div className="countEye"> -eye {post.amount}개</div>
             </div>
-          );
-        })}
-      </EyeHistoryBox>
+          </EyeHistoryBox>
+        );
+      })}
     </>
   );
 }

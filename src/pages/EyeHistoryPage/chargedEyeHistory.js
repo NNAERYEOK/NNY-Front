@@ -2,23 +2,37 @@ import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useState } from "react";
 
+import { GetChargedEye } from "../../api/user";
+
 export function ChargedEye() {
-  const [chargedDate, setChargedDate] = useState("2022-07-08");
-  const [countChargedEye, setCountChargedEye] = useState(10);
   const [chargeMethod, setChargeMethod] = useState("정보제공");
+  const [ChargedEyes, setChargedEyes] = useState([]);
+  GetChargedEye() // 충전한 eye 가져오기
+    .then(data => {
+      console.log("충전한 eye 가져옴");
+      setChargedEyes(data);
+    })
+    .catch(err => console.log("충전한 eye 가져오기 실패"));
 
   return (
     <>
       <GlobalStyle />
-      <EyeHistoryBox>
-        <div className="boxLeft">
-          <div className="date">{chargedDate}</div>
-          <div className="countEye">eye {countChargedEye}개</div>
-        </div>
-        <div className="boxRight">
-          <div className="chargeMethod">{chargeMethod}</div>
-        </div>
-      </EyeHistoryBox>
+      {ChargedEyes.map(post => {
+        if (post.amount < 10) {
+          setChargeMethod("정보제공");
+        } else {
+          setChargeMethod("결제");
+        }
+        <EyeHistoryBox>
+          <div className="boxLeft">
+            <div className="date">{post.create_at}</div>
+            <div className="countEye">eye {post.amount}개</div>
+          </div>
+          <div className="boxRight">
+            <div className="chargeMethod">{chargeMethod}</div>
+          </div>
+        </EyeHistoryBox>;
+      })}
     </>
   );
 }
