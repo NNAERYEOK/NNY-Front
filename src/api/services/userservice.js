@@ -68,10 +68,10 @@ const UserService = {
     }),
 
   //사용한 eye 조회
-  getUsedEye: () => http.get("/nny/usedeye"),
+  getUsedEye: () => http.get("/nny/usedeye/"),
 
   //충전한 eye 조회
-  getChargedEye: () => http.get("/nny/eye"),
+  getChargedEye: () => http.get("/nny/eye/"),
 };
 
 export default UserService;
