@@ -29,6 +29,8 @@ export default Line2Page;
 
 const Wrapper = styled.div`
   display: flex;
+  margin: 0 auto;
+  width: fit-content;
 `;
 const SubImg = styled.img`
   margin-left: 30px;
