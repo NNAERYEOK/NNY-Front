@@ -42,7 +42,7 @@ const Paying = () => {
     const created_at = getTime();
 
     // 1) 총 eye 개수 업뎃
-    PatchCurrentEye(currentEye + 10)
+    PatchCurrentEye(currentEye + numEye)
       .then(data => {
         //수정된 eye dispatch
         dispatch(setEye(data.eyes));
