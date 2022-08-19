@@ -3,23 +3,34 @@ import styled, { createGlobalStyle } from "styled-components";
 import warning from "../image/warning.svg";
 import eye from "../image/eye.svg";
 import menu from "../image/menu.svg";
-import { GetCurrentEye, GetWarningHistory } from "../api/user";
-import { useAppSelector } from "../store";
-
+import { GetCurrentEye, GetWarningHistory, GetProfile } from "../api/user";
+import { useAppSelector, useAppDispatch } from "../store";
+import { setUser } from "../store/features/userSlice";
 import SideBar from "./SideBar/SideModal";
 
 const TopBar = () => {
+  const dispatch = useAppDispatch();
+
   const { eyes } = useAppSelector(state => state.user);
   const [eye, setEye] = useState(0);
   const [warning, setWarning] = useState(0);
 
   useEffect(() => {
+    // GetProfile() // 프로필 가져오기
+    //   .then(data => {
+    //     console.log("프로필 가져옴~!", data);
+    //     dispatch(setEye(data.data.eyes));
+    //   })
+    //   .catch(err => console.log("topbar : eye 가져오기 실패"));
+
     if (eyes === "") {
       setEye(0);
     } else {
       setEye(eyes);
     }
+  }, []);
 
+  useEffect(() => {
     // 현재 누적 경고 개수
     GetWarningHistory()
       .then(data => {
@@ -27,7 +38,7 @@ const TopBar = () => {
         setWarning(data.data.length);
       })
       .catch(err => console.log("경고 히스토리 조회 실패"));
-  });
+  }, []);
 
   const [SideBarModal, setSideBarModal] = useState(false);
   // 사이드바버튼 클릭하기
