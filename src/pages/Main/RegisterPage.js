@@ -13,6 +13,8 @@ import { PostUser, PatchUserName, GetUser, GetProfile } from "../../api/user";
 import { useAppDispatch } from "../../store/index";
 import { setUser } from "../../store/features/userSlice";
 
+import http from "../../api/http";
+
 const RegisterPage = () => {
   const dispatch = useAppDispatch(); // 리덕스
 
@@ -51,6 +53,14 @@ const RegisterPage = () => {
           GetUser(email, pwd).then(data => {
             // 로그인
             console.log("로그인 성공", data);
+            const token = data.data.access_token;
+            console.log("토큰!!!!!!!!!", token);
+
+            window.localStorage.setItem("token", JSON.stringify(token)); // 로컬 스토리지에 토큰 저장
+
+            http.defaults.headers.common["Authorization"] = token
+              ? `Bearer ${token}`
+              : null;
 
             PatchUserName(username) //닉넴 수정
               .then(data => {
@@ -58,7 +68,8 @@ const RegisterPage = () => {
 
                 GetProfile()
                   .then(data => {
-                    dispatch(setUser(data));
+                    console.log("프로필 가져오기 성공", data);
+                    dispatch(setUser(data.data));
                     nav("/selectline"); // 최종 성공
                   })
                   .catch(err => console.log("프로필 가져오기 실패"));

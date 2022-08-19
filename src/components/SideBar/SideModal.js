@@ -15,7 +15,12 @@ const SideBar = ({ isOpen, setSideBarModal }) => {
   const [nickname, setNickname] = useState("");
 
   useEffect(() => {
-    setEye(eyes);
+    if (eyes === "") {
+      setEye(0);
+    } else {
+      setEye(eyes);
+    }
+
     setNickname(username);
   });
 

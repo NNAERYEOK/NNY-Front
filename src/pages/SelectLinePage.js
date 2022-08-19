@@ -19,6 +19,7 @@ import { useAppSelector } from "../store";
 
 const LinePage = () => {
   const { username } = useAppSelector(state => state.user);
+
   const [nickname, setNickname] = useState("");
 
   useEffect(() => {
