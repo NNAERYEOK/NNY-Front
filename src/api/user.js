@@ -14,7 +14,7 @@ export const GetProfile = async () => {
 export const GetUser = async (email, password) => {
   try {
     const response = await UserService.getUser(email, password);
-    window.localStorage.setItem("token", response.data); // 로컬 스토리지에 토큰 저장
+
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error, "로그인 실패");
@@ -81,7 +81,7 @@ export const PostAddEye = async (id, created_at, amount) => {
   }
 };
 
-// 현재 총 eye 개수 업데이트 (임시)
+// 현재 총 eye 개수 업데이트
 export const PatchCurrentEye = async eye => {
   try {
     const response = await UserService.patchCurrentEye(eye);

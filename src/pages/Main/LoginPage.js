@@ -8,7 +8,7 @@ import BackBtn from "../../components/BackBtn";
 
 import loginImage from "../../image/login.svg";
 import pwImage from "../../image/pw.svg";
-
+import http from "../../api/http";
 // 유저 정보 관련
 import { useAppDispatch } from "../../store/index";
 import { setUser } from "../../store/features/userSlice";
@@ -31,10 +31,25 @@ const LoginPage = () => {
       .then(data => {
         console.log("로그인 시도 결과 : ", data);
 
+        const token = data.data.access_token;
+        console.log("토큰❤️", token);
+
+        window.localStorage.setItem("token", JSON.stringify(token)); // 로컬 스토리지에 토큰 저장
+
+        http.defaults.headers.common["Authorization"] = token
+          ? `Bearer ${token}`
+          : null;
+
+        //프로필 가져오기
+        // test
+        //   .get("http://cha2y0ung.pythonanywhere.com/nny/profile/")
+        //   .then(data => console.log("프로필", data))
+        //   .catch(err => console.log("프로필 실패", err));
+
         GetProfile() // 프로필 가져오기
           .then(data => {
-            console.log("프로필 가져옴", data);
-            dispatch(setUser(data));
+            console.log("프로필 가져옴~!", data);
+            dispatch(setUser(data.data));
             navigate("/selectline");
           })
           .catch(err => console.log("프로필 가져오기 실패"));

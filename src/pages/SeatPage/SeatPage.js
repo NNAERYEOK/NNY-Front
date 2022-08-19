@@ -20,12 +20,19 @@ import {
   PostAddEye,
   PatchCurrentEye,
 } from "../../api/user";
+import http from "../../api/http";
 // redux
 import { useAppSelector, useAppDispatch } from "../../store";
 import { setEye } from "../../store/features/userSlice";
 
 const SeatPage = () => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  http.defaults.headers.common["Authorization"] = token
+    ? `Bearer ${token}`
+    : null;
+
   const { id, eyes } = useAppSelector(state => state.user);
+  console.log("유저 정보", id, eyes);
 
   const currentEye = eyes;
 
@@ -156,12 +163,13 @@ const SeatPage = () => {
 
     // 1) 총 eye 개수 업뎃
 
-    // PatchCurrentEye(currentEye + 1)
-    //   .then(data => {
-    //     //수정된 eye dispatch
-    //     dispatch(setEye(data.eyes));
-    //   })
-    //   .catch(err => console.log("현재 eye 업뎃 실패", err));
+    PatchCurrentEye(currentEye + 1)
+      .then(data => {
+        //수정된 eye dispatch
+        console.log("현재 eye 수정 완료 : ", data.data.eyes);
+        dispatch(setEye(data.data.eyes));
+      })
+      .catch(err => console.log("현재 eye 업뎃 실패", err));
 
     // 2) 충전 내역 히스토리 업뎃
     PostUsedEye(id, created_at, 1)
@@ -178,12 +186,13 @@ const SeatPage = () => {
 
     // 1) 총 eye 개수 업뎃
 
-    // PatchCurrentEye(currentEye - 1)
-    //   .then(data => {
-    //     //수정된 eye dispatch
-    //     dispatch(setEye(data.eyes));
-    //   })
-    //   .catch(err => console.log("현재 eye 업뎃 실패", err));
+    PatchCurrentEye(currentEye - 1)
+      .then(data => {
+        //수정된 eye dispatch
+        console.log("현재 eye 수정 완료 : ", data.data.eyes);
+        dispatch(setEye(data.data.eyes));
+      })
+      .catch(err => console.log("현재 eye 업뎃 실패", err));
 
     // 2) 사용 내역 히스토리 업뎃
     PostAddEye(id, created_at, -1)
