@@ -1,7 +1,7 @@
 ## 🚇 너낼역 
 
 ### 서비스 소개 
-- ~
+~~
 
 ### 개발 일정
 
@@ -21,7 +21,7 @@
     </tr>
     <tr width="100%">
        <td  align="center">
-       <p> 좌석 선택 페이지</p>
+        <p> 좌석 선택 & 공유 기능 구현</p>
         <p> 로그인&로그아웃 기능 구현</p></td>
       <td  align="center">미정</td>
       <td  align="center">미정</td>
@@ -37,7 +37,6 @@
 - Package Manager : <img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white">
 - Code Formmater : <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=React&logoColor=white">
 - Depoly : <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=Vercel&logoColor=white">
-- ETC : 미정
 
 </br>
 
@@ -49,7 +48,10 @@
 
 ## 🚇 프로젝트 구조
 
-### 설명
+### 프로젝트 구성
+<이미지 첨부 예정> 
+
+### 폴더 설명
 
 ```
 📂 src
@@ -57,6 +59,8 @@
 ├─ 📂 images  ▶️ svg 파일 모음
 ├─ 📂 pages  ▶️ 조건에 따라 라우팅되는 페이지
 ├─ 📂 styles  ▶️ 공통적으로 사용되는 스타일 값
+├─ 📂 api  ▶️ api 사용을 위한 axios 함수 모음
+├─ 📂 store  ▶️ 로그인 유지를 위한 userSlice
 └─ 📂 _mock  ▶️ 샘플 데이터
 
 ```
