@@ -19,7 +19,6 @@
         <td  align="center"><a href= "">김민주</a></td>
         <td  align="center"><a href= "">허윤</a></td>
     </tr>
-  
     <tr width="100%">
        <td  align="center">
        <p> 좌석 선택 페이지</p>
