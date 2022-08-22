@@ -61,6 +61,6 @@
 ├─ 📂 styles  ▶️ 공통적으로 사용되는 스타일 값
 ├─ 📂 api  ▶️ api 사용을 위한 axios 함수 모음
 ├─ 📂 store  ▶️ 로그인 유지를 위한 userSlice
-└─ 📂 _mock  ▶️ 샘플 데이터
+└─ 📂 data ▶️ 샘플 데이터
 
 ```
