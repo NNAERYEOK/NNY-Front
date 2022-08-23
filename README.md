@@ -18,14 +18,16 @@
 <table border="" cellspacing="0" cellpadding="0" width="100%">
     <tr width="100%">
         <td align="center"><a href= "https://github.com/dy6578ekdbs">정다윤</a></td>
-        <td  align="center"><a href= "">김민주</a></td>
+        <td  align="center"><a href= "https://github.com/miinjoo">김민주</a></td>
         <td  align="center"><a href= "">허윤</a></td>
     </tr>
     <tr width="100%">
        <td  align="center">
         <p> 좌석 선택 & 공유 기능 구현</p>
         <p> 로그인&로그아웃 기능 구현</p></td>
-      <td  align="center">미정</td>
+      <td  align="center">
+      <p> eye 충전&사용 기능 구현</p>
+        </td>
       <td  align="center">미정</td>
    </tr>
 </table>
